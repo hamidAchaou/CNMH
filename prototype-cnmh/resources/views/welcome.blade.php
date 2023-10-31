@@ -116,7 +116,40 @@
         </div>
     </div>
 </section>
-
+      <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Tasks</h3>
+                            </div>
+                            <div class="box-body">
+                                <ul class="todo-list">
+                                    <li>
+                                        <!-- List item with checkbox -->
+                                        <input type="checkbox">
+                                        <span class="text">Task 1</span>
+                                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 4 hours</small>
+                                        <div class="tools">
+                                            <!-- Remove button -->
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li>
+                                    <!-- Add more list items here -->
+                                </ul>
+                            </div>
+                            <div class="box-footer">
+                                <div class="input-group">
+                                    <input type="text" id="new-task" class="form-control" placeholder="Add a new task">
+                                    <span class="input-group-btn">
+                                        <button id="add-task" class="btn btn-primary">Add</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
