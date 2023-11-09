@@ -133,10 +133,49 @@
 
   <!--================================ content Project ============================================= -->
     <section class="content-wrapper">
-      <h2 class="py-3 container">Liste des projets</h2>
+<div class="content pt-4 container">
+  <div class="mt-4 container row justify-content-around">
+    <div class="form-group col-md-4">
+      <h4 class="container">Projets</h4>
+    </div>
+
+    <div class="input-group form-group col-md-4">
+      <input type="text" id="searchInput" class="form-control" placeholder="Rechercher">
+      <div class="input-group-append">
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+    
+    <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
+      <a href="create.html" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau Project</a>
+    </div>
+  </div>
+</div>
+<div class="content container">
+  <!-- <div class="d-flex container">
+    <div class="form-group">
+      <select class="custom-select">
+        <option value="" selected>Choisir le project</option>
+        <option value="">Projet de cnmh</option>
+        <option value="">Projet de cnmh</option>
+      </select>
+    </div>
+  </div> -->
+<!-- </div> -->
         <div class="content container">
-          <div class="card container">
-            <div class="mt-4 d-flex container">
+          <div class="card container pt-3">
+            <div class="content container">
+              <div class="d-flex container">
+                <div class="form-group">
+                  <select class="custom-select">
+                    <option value="" selected>Choisir le project</option>
+                    <option value="">Projet de cnmh</option>
+                    <option value="">Projet de cnmh</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="mt-4 d-flex container">
               <div class="form-group">
                 <select class="custom-select">
                   <option value="" selected>Choisir le project</option>
@@ -155,7 +194,7 @@
               <div class="w-50 d-flex flex-row-reverse form-group">
                 <a href="create.html" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau Project</a>
               </div>
-            </div>
+            </div> -->
             <div class="">
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
