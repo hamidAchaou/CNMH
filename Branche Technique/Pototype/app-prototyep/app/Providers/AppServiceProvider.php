@@ -7,6 +7,7 @@ use App\Repositories\Interfaces\InterfaceProjects;
 use App\Repositories\Interfaces\InterfaceTask;
 use App\Repositories\ProjectRepository;
 use App\Repositories\TaskRepository;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrap();
     }
 }

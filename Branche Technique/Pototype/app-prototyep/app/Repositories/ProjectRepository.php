@@ -8,9 +8,9 @@ use App\Models\Project;
 use App\Models\Task;
 
 class ProjectRepository implements InterfaceProjects {
-    public function getAll() {
-        $projects = Project::with('tasks')->get();
-        return $projects;
+    public function getAll($perPage = 6) {
+        // Use the with method to eager load the 'tasks' relationship
+        return Project::with('tasks')->paginate($perPage);
     }
 
     // find One Project

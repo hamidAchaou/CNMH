@@ -18,7 +18,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = $this->projects->getAll();
+        $projects = $this->projects->getAll(); // No need to paginate here
+
         return view('projects.index', compact('projects'));
     }
     /**
