@@ -8,23 +8,23 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../adminLTE/lugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../adminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../adminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <link rel="stylesheet" href="../adminLTE/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../adminLTE/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../adminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="../adminLTE/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="../adminLTE/plugins/summernote/summernote-bs4.min.css">
   <script
   src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
   referrerpolicy="origin"
@@ -82,7 +82,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link">
-      <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="../adminLTE/dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Gestion Project</span>
     </a>
 
@@ -91,7 +91,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user.png" class="img-circle elevation-2" alt="User Image">
+          <img src="../adminLTE/dist/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Hamid AChaou</a>
@@ -104,8 +104,9 @@
             <li class="nav-item menu-open">
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link">
-                          <i class="fas fa-chart-bar"></i>                            <p>
+                        <a href="index.html" class="nav-link active">
+                          <i class="fas fa-chart-bar"></i>                            
+                          <p>
                                 Gestion Projects
                             </p>
                         </a>
@@ -115,7 +116,7 @@
             <li class="nav-item menu-open">
               <ul class="nav nav-treeview">
                   <li class="nav-item">
-                      <a href="index.html" class="nav-link">
+                      <a href="../members/index.html" class="nav-link">
                           <i class="nav-icon fas fa-users"></i>
                           <p>
                               Members
@@ -132,31 +133,30 @@
 
   <!--================================ content Project ============================================= -->
     <section class="content-wrapper">
-        <section class="content container py-4">
-            <h2>Liste des projets</h2>
-            <!-- <input type="text" id="searchInput" class="form-control w-100" placeholder="Rechercher"> -->
-            <div class="mr-4 d-flex flex-row-reverse pt-4 mt-2 form-group">
-              <a href="create.html" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau projet</a>
+      <h2 class="py-3 container">Liste des projets</h2>
+        <div class="content container">
+          <div class="card container">
+            <div class="mt-4 d-flex container">
+              <div class="form-group">
+                <select class="custom-select">
+                  <option value="" selected>Choisir le project</option>
+                  <option value="">Projet de cnmh</option>
+                  <option value="">Projet de cnmh</option>
+                </select>
+              </div>
+              <div class="input-group w-50 ml-3">
+                <input
+                  type="text"
+                  id="searchInput"
+                  class="form-control"
+                  placeholder="Rechercher"
+                />
+              </div>
+              <div class="w-50 d-flex flex-row-reverse form-group">
+                <a href="create.html" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau Project</a>
+              </div>
             </div>
-
-            <div class="row gp-3 container">
-                <div class="form-group col-md-6">
-                    <label>Filtre</label>
-                    <div class="row gap-3">
-                      <select class="custom-select col-md mr-2">
-                          <option value="" selected>Choisir le nom</option>
-                          <option value=""></option>
-                      </select>
-                      <select class="custom-select col-md mr-2">
-                          <option value="" selected>Sort</option>
-                          <option value="ancienne">Ancienne date</option>
-                          <option value="derniere">Derniere date</option>
-                      </select>
-                      <input type="text" id="searchInput" class="form-control form-group  col-md" placeholder="Rechercher">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
+            <div class="">
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -180,15 +180,13 @@
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
                             </td>
-                            <td>
-                              <div>
-                                <button type="submit" class="btn btn-primary">
-                                  <i class="fas fa-edit"></i> Editer
+                            <td class="d-flex">
+                                <button type="submit" class="btn btn-primary mr-2">
+                                  <i class="fas fa-edit"></i>
                                 </button>
-                                <button type="submit" class="btn btn-danger">
-                                  <i class="fas fa-trash-alt"></i> Delete
+                                <button type="submit" class="btn btn-danger mr-2">
+                                  <i class="fas fa-trash-alt"></i>
                                 </button>
-                              </div>
                             </td>
                         </tr>
                         
@@ -198,60 +196,63 @@
                           <td>2023-10-12</td>
                           <td>2023-10-16</td>
                           <td>
-                              <a href="tasks.html" class="nav-link text-center">
+                              <a href="tasks/tasks.html" class="nav-link text-center">
                                   <i class="fa-solid fa-eye"></i>
                               </a>
                           </td>
-                          <td>
-                            <div>
-                              <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-edit"></i> Editer
-                              </button>
-                              <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Delete
-                              </button>
-                            </div>
-                          </td>
+                          <td class="d-md-flex">
+                            <button type="submit" class="btn btn-primary mr-2">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="submit" class="btn btn-danger mr-2">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
                       </tr>
                     
                     </tbody>
                 </table>
-                <!-- Pagination Links -->
-                <div class="d-flex justify-content-center" id="pagination-links">
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-                <!-- export and import  -->
-                <div class="p-4">                
+
+                <div class="d-md-flex justify-content-between">
+                  <!-- export and import  -->
+                  <div class="">                
                     <div class="d-flex">
                         <form action="" method="post">
-                        
-                            <button type="submit" class="btn btn-success">Exporter</button>
+                  
+                            <button type="submit" class="btn">Exporter</button>
                         </form>
                 
                         <form class="ml-1" action="" method="post" id="importForm"
                             enctype="multipart/form-data">
                         
                             <input type="file" id="fileInputImporter" name="file" style="display: none;">
-                            <button type="button" class="btn btn-warning" id="chooseFileButtonImporter">Importer</button>
+                            <button type="button" class="btn" id="chooseFileButtonImporter">Importer</button>
                         </form>
                 
                     </div>
                 </div>
+  
+                  <!-- Pagination Links -->
+                  <div class="d-flex justify-content-center" id="pagination-links">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <li class="page-item">
+                          <a class="page-link" href="#">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
 
             </div>
-        </section>
+          </div>
+        </div>
     </section>
 <!-- =========================================== end content Project ============================================== -->
   
@@ -278,31 +279,31 @@
 </script>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
  <!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="../adminLTE/plugins/chart.js/Chart.min.js"></script>
  <!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
+<script src="../adminLTE/plugins/sparklines/sparkline.js"></script>
  <!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="../adminLTE/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="../adminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
  <!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="../adminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
  <!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../adminLTE/plugins/moment/moment.min.js"></script>
+<script src="../adminLTE/plugins/daterangepicker/daterangepicker.js"></script>
  <!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../adminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
  <!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<script src="../adminLTE/plugins/summernote/summernote-bs4.min.js"></script>
  <!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../adminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
  <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<script src="../adminLTE/dist/js/adminlte.js"></script>
  <!-- AdminLTE for demo purposes -->
- <script src="dist/js/demo.js"></script>
+ <script src="../adminLTE/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+<script src="../adminLTE/dist/js/pages/dashboard.js"></script>
 
 <script
 src="https://kit.fontawesome.com/3c520e368e.js"
