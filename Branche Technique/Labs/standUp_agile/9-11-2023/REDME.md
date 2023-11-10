@@ -2,17 +2,17 @@
 
 ## Introduction
 
-Ce rapport d'avancement quotidien offre un aperçu de mes activités récentes. Hier,  j'ai conçu la maquette du prototype CNMH. Aujourd'hui,, élaboré le CRUD du projet et le CRUD des tâches. En ce qui concerne les problèmes, je n'en ai pas rencontré.
+Ce rapport d'avancement quotidien offre un aperçu de mes activités récentes. Hier, j'ai finalisé la maquette du prototype CNMH et affiché tous les projets dans le prototype. Aujourd'hui, j'ai travaillé sur l'élaboration du CRUD du projet ainsi que sur le CRUD des tâches. En ce qui concerne les problèmes, je n'en ai pas rencontré.
 
 ## Activités
 
 ### Réalisations d'hier
 
- j'ai conçu la maquette du prototype CNMH.
+j'ai finalisé la maquette du prototype CNMH et affiché tous les projets
 
 ### Plan du Jour
 
- élaboré le CRUD du projet et le CRUD des tâches### Problèmes
+J'ai travaillé sur l'élaboration du CRUD du projet et du CRUD des tâches.
 
 ### problèmes
 Quant aux problèmes, je n'en ai pas rencontré.
