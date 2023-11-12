@@ -51,7 +51,7 @@
                             </thead>
                             <tbody id="tableBody">
 
-                                            {{-- get Projets --}}
+                            {{-- get Projets --}}
                               @foreach ($projects as $project)
                                 <tr>
                                     <td>{{ $project->name}}</td>
