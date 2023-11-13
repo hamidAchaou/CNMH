@@ -7,12 +7,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Name
+    | Nom de l'application
     |--------------------------------------------------------------------------
     |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
+    | Cette valeur est le nom de votre application. Elle est utilisée lorsque
+    | le framework doit placer le nom de l'application dans une notification
+    | ou tout autre endroit requis par l'application ou ses packages.
     |
     */
 
@@ -20,12 +20,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Environment
+    | Environnement de l'application
     |--------------------------------------------------------------------------
     |
-    | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
+    | Cette valeur détermine l'"environnement" dans lequel votre application
+    | s'exécute actuellement. Cela peut déterminer la manière dont vous préférez
+    | configurer les différents services utilisés par l'application. Définissez cela dans votre fichier ".env".
     |
     */
 
@@ -33,12 +33,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Debug Mode
+    | Mode de débogage de l'application
     |--------------------------------------------------------------------------
     |
-    | When your application is in debug mode, detailed error messages with
-    | stack traces will be shown on every error that occurs within your
-    | application. If disabled, a simple generic error page is shown.
+    | Lorsque votre application est en mode débogage, des messages d'erreur détaillés avec
+    | des traces de la pile seront affichés pour chaque erreur survenue dans votre
+    | application. S'il est désactivé, une simple page d'erreur générique sera affichée.
     |
     */
 
@@ -46,12 +46,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application URL
+    | URL de l'application
     |--------------------------------------------------------------------------
     |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | your application so that it is used when running Artisan tasks.
+    | Cette URL est utilisée par la console pour générer correctement les URL lors de l'utilisation
+    | de l'outil de ligne de commande Artisan. Vous devriez définir cela à la racine
+    | de votre application afin qu'il soit utilisé lors de l'exécution des tâches Artisan.
     |
     */
 
@@ -61,12 +61,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Fuseau horaire de l'application
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. We have gone
-    | ahead and set this to a sensible default for you out of the box.
+    | Ici, vous pouvez spécifier le fuseau horaire par défaut pour votre application, qui
+    | sera utilisé par les fonctions de date et d'heure de PHP. Nous avons pris
+    | l'initiative de définir cela sur une valeur par défaut sensée.
     |
     */
 
@@ -74,51 +74,55 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Locale Configuration
+    | Configuration de la langue par défaut de l'application
     |--------------------------------------------------------------------------
     |
-    | The application locale determines the default locale that will be used
-    | by the translation service provider. You are free to set this value
-    | to any of the locales which will be supported by the application.
-    |
-    */
-
-    'locale' => 'en',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Fallback Locale
-    |--------------------------------------------------------------------------
-    |
-    | The fallback locale determines the locale to use when the current one
-    | is not available. You may change the value to correspond to any of
-    | the language folders that are provided through your application.
+    | La langue de l'application détermine la langue par défaut qui sera utilisée
+    | par le fournisseur de services de traduction. Vous êtes libre de définir cette valeur
+    | sur l'une des langues qui seront prises en charge par l'application.
     |
     */
 
-    'fallback_locale' => 'en',
+    'locale' => 'fr',
+    'languages' => [
+        'fr' => 'french',
+        'en' => 'English'
+    ],
 
     /*
     |--------------------------------------------------------------------------
-    | Faker Locale
+    | Langue de secours de l'application
     |--------------------------------------------------------------------------
     |
-    | This locale will be used by the Faker PHP library when generating fake
-    | data for your database seeds. For example, this will be used to get
-    | localized telephone numbers, street address information and more.
+    | La langue de secours détermine la langue à utiliser lorsque celle en cours
+    | n'est pas disponible. Vous pouvez changer la valeur pour correspondre à l'un des
+    | dossiers de langues fournis par votre application.
     |
     */
 
-    'faker_locale' => 'en_US',
+    'fallback_locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
-    | Encryption Key
+    | Langue Faker
     |--------------------------------------------------------------------------
     |
-    | This key is used by the Illuminate encrypter service and should be set
-    | to a random, 32 character string, otherwise these encrypted strings
-    | will not be safe. Please do this before deploying an application!
+    | Cette langue sera utilisée par la bibliothèque Faker PHP lors de la génération de données
+    | factices pour vos graines de base de données. Par exemple, cela sera utilisé pour obtenir
+    | des numéros de téléphone localisés, des informations d'adresse et plus encore.
+    |
+    */
+
+    'faker_locale' => 'fr_FR',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Clé d'encryption
+    |--------------------------------------------------------------------------
+    |
+    | Cette clé est utilisée par le service de chiffrement Illuminate et doit être définie
+    | sur une chaîne aléatoire de 32 caractères, sinon ces chaînes chiffrées
+    | ne seront pas sécurisées. Merci de faire cela avant de déployer une application !
     |
     */
 
@@ -128,14 +132,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Maintenance Mode Driver
+    | Pilote du mode de maintenance
     |--------------------------------------------------------------------------
     |
-    | These configuration options determine the driver used to determine and
-    | manage Laravel's "maintenance mode" status. The "cache" driver will
-    | allow maintenance mode to be controlled across multiple machines.
+    | Ces options de configuration déterminent le pilote utilisé pour déterminer et
+    | gérer le statut de "mode de maintenance" de Laravel. Le pilote "cache" permettra
+    | de contrôler le mode de maintenance sur plusieurs machines.
     |
-    | Supported drivers: "file", "cache"
+    | Pilotes pris en charge : "file", "cache"
     |
     */
 
@@ -146,22 +150,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
+    | Fournisseurs de services préchargés
     |--------------------------------------------------------------------------
     |
-    | The service providers listed here will be automatically loaded on the
-    | request to your application. Feel free to add your own services to
-    | this array to grant expanded functionality to your applications.
+    | Les fournisseurs de services énumérés ici seront automatiquement chargés lors de la
+    | demande vers votre application. N'hésitez pas à ajouter vos propres services à
+    | cette liste pour accorder des fonctionnalités étendues à vos applications.
     |
     */
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
-         * Package Service Providers...
+         * Fournisseurs de services de packages...
          */
 
         /*
-         * Application Service Providers...
+         * Fournisseurs de services d'application...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -172,12 +176,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Class Aliases
+    | Aliases de classe
     |--------------------------------------------------------------------------
     |
-    | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | Cet tableau d'alias de classe sera enregistré lorsque cette application
+    | est démarrée. Cependant, n'hésitez pas à enregistrer autant que vous le souhaitez
+    | car les alias sont chargés "à la demande" afin de ne pas nuire aux performances.
     |
     */
 

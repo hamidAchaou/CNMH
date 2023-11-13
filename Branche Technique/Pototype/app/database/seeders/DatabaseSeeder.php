@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'cnmh',
-                'description' => 'Le centre CNMH (Centre National Mohammed VI des Handicapés) gére ses patients de façon traditionnelle en utilisant des documents papier, mais cela a créé des difficultés pour recueillir des données précises sur les statistiques du centre. Ils nous ont demandé de travailler actuellement à la digitalisation des documents pour résoudre ce problème.',
+                'description' => 'Le centre CNMH (Centre National Mohammed VI des Handicapés) gére ses patients de façon traditionnelle en utilisant des documents papier, mais cela a créé des difficultés.',
                 'startDate' => '2023-10-04',
                 'endDate' => '2023-3-08',
             ],
