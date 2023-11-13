@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-
+use App\Repositories\Interfaces\InterfaceMembers;
 use App\Repositories\Interfaces\InterfaceProjects;
 use App\Repositories\Interfaces\InterfaceTask;
+use App\Repositories\membersRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\TaskRepository;
 use Illuminate\Pagination\Paginator;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(InterfaceProjects::class, ProjectRepository::class);
         $this->app->bind(InterfaceTask::class, TaskRepository::class);
+        $this->app->bind(InterfaceMembers::class, membersRepository::class);
     }
 
     /**

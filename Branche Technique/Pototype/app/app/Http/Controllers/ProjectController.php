@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\InterfaceProjects;
+use Illuminate\Support\Facades\Gate;
+
+// use Illuminate\Auth\Access\Gate;
 
 class ProjectController extends Controller
 {
@@ -18,15 +21,18 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = $this->projects->getAll(); // No need to paginate here
+        $projects = $this->projects->getAll();
+        $projectsName = $this->projects->getNameProjects(); 
 
-        return view('projects.index', compact('projects'));
+        return view('projects.index', compact('projects', 'projectsName'));
     }
     /**
      * Show the form for creating a new Project.
      */
     public function create()
     {
+        // Gate::authorize('view', new Project);
+        $this->authorize('create', new Project);
         return view("projects.create");
         
     }
@@ -36,15 +42,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', new Project);
         // Inputs validation
         $request->validate([
-            'Name' => 'required|string|max:255',
-            'description' => 'required|string|max:400',
+            'name' => 'required|string|max:255|unique:projects,name',
             'startDate' => 'required|date',
             'endDate' => 'required|date',
         ]);
+        // dd($request);
     
-        $name = strip_tags($request->input('Name'));
+        $name = strip_tags($request->input('name'));
         $description = strip_tags($request->input('description'));
         $startDate = strip_tags($request->input('startDate'));
         $endDate = strip_tags($request->input('endDate'));
@@ -64,16 +71,20 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        //
+        $project = $this->projects->find($id);
+        $tasks = $this->projects->getTasksPaginated($id, 4);
+    
+        return view('projects.show', compact('project', 'tasks'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
-     */
+    */
     public function edit(Project $project)
     {
+        $this->authorize('update', new Project);
         return view("projects.edit", compact('project'));
     }
 
@@ -83,8 +94,7 @@ class ProjectController extends Controller
     public function update(Request $request,  string $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:400',
+            'name' => 'required|string|max:255|unique:projects,name',
             'startDate' => 'required|date',
             'endDate' => 'required|date',
         ]);
@@ -120,5 +130,18 @@ class ProjectController extends Controller
         }
     
         return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
+    }
+
+    // function search
+    public function searchProject(Request $request)
+    {
+        $datasearch = $request->input('search');
+    
+        $results = $this->projects->search($datasearch);
+    
+        return response()->json([
+            'data' => $results->items(),
+            'links' => $results->links()->toHtml(),
+        ]);
     }
 }

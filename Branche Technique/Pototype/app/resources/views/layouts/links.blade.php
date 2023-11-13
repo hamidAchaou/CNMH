@@ -1,12 +1,3 @@
-<!-- Include the jQuery library first -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-<!-- Rest of your scripts -->
-<script src="{{asset("dist/js/bootstrap.bundle.min.js")}}"></script>
-<script src="{{asset("dist/js/adminlte.js")}}"></script>
-<script src="{{asset("dist/js/demo.js")}}"></script>
-<script src="{{asset("dist/js/pages/dashboard.js")}}"></script>
-<!-- Rest of your scripts -->
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
 
@@ -36,16 +27,11 @@
 
 <!-- Summernote -->
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-<script
-src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
-referrerpolicy="origin"
-></script>
 <script>
-tinymce.init({
-  selector: "#mytextarea",
-});
-
-tinymce.init({
-  selector: "#descriptionTask",
-});
+    $(document).ready(function() {
+      // Make an unordered list sortable
+      $("#sortable-list").sortable();
+    });
+  </script>

@@ -8,15 +8,26 @@ use App\Models\Project;
 use App\Models\Task;
 
 class ProjectRepository implements InterfaceProjects {
-    public function getAll($perPage = 6) {
-        // Use the with method to eager load the 'tasks' relationship
+    // get All projects
+    public function getAll($perPage = 3) {
         return Project::with('tasks')->paginate($perPage);
     }
 
-    // find One Project
-    public function find($id){
-        $project = Project::findOrFail($id);
-        return $project;
+    // get All Name Projects
+    public function getNameProjects() {
+        return Project::select('id', 'name')->get();
+    }
+    
+    // Project find
+    public function find($id)
+    {
+        return Project::with('tasks')->find($id);
+    }
+
+    // get Tasks Pagination
+    public function getTasksPaginated($id, $perPage = 4)
+    {
+        return Project::findOrFail($id)->tasks()->paginate($perPage);
     }
 
     // create new Project
@@ -36,7 +47,7 @@ class ProjectRepository implements InterfaceProjects {
     }
 
     // delete Project
-    public function delete(string $id) {
+    public function delete($id) {
         $project = $this->find($id);;
 
         if($project) {
@@ -44,6 +55,15 @@ class ProjectRepository implements InterfaceProjects {
             return true;
         }
         return false;
+    }
+
+    // search Projects
+    public function search($dataSearch) {
+
+        $results = Project::where('Name', 'like', '%' . $dataSearch . '%')
+        ->orWhere('Code', 'like', '%' . $dataSearch . '%')
+        ->paginate(4);
+        return $results;
     }
 
 }

@@ -15,19 +15,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\MemberController;
 
-// Projects
-Route::resource('projects', ProjectController::class);
-Route::delete("/destroy", [ProjectController::class, 'destroy'])->name('projectsDelete');
+// // member route
+// Route::middleware(['auth'])->group(function () {
+    
+//     Route::get("/members", [MemberController::class, 'index'])->name('members.index'); // get all members
+//     Route::resource("members", MemberController::class); 
+//     Route::get('members', [MemberController::class, 'store'])->name('members.store');
+//     Route::get('members/search', [MemberController::class, 'search'])->name('members.search');
 
-// Route::delete('/destroy/{id}', [ProjectController::class, 'destroy'])->name("projects.destroy");
 
-// Task
-Route::post("/store", [TaskController::class, 'store'])->name('createTask');
-Route::get("tasks/edit/{id}", [TaskController::class, 'edit'])->name('tasks.edit');
-Route::post("/task/update/{id}", [TaskController::class, 'update'])->name('tasks.update');
-Route::post("/destroy", [TaskController::class, 'destroy'])->name('task.delete');
-Route::post("/tasks/{id}/status", [TaskController::class, 'addStatusTask'])->name('tasks.addStatusTask'); // Status Tasks
+
+// });
 
 
 
@@ -50,3 +50,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/projects.php';

@@ -14,7 +14,7 @@
           <img src="{{ asset("dist/img/user.png")}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Hamid AChaou</a>
+          <a href="{{ route('profile.edit') }}" class="d-block">{{ Auth::user()->firstName }} {{ Auth::user()->lastName }}</a>
         </div>
       </div>
 
@@ -24,7 +24,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="index.html" class="nav-link active">
+                <a href="{{ route('projects.index')}}" class="nav-link {{ Request::is('projects*') ? 'active' : '' }}">
                   <i class="fas fa-chart-bar"></i>
                   <p>
                     Gestion Projects
@@ -33,18 +33,34 @@
               </li>
             </ul>
           </li>
+          @if(auth()->check() && auth()->user()->role == 'chefProjet')
           <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../members/index.html" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                    Members
-                  </p>
-                </a>
-              </li>
-            </ul>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('members.index') }}" class="nav-link {{ Request::is('members*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-users"></i>
+                          <p>
+                              Members
+                          </p>
+                      </a>
+                  </li>
+              </ul>
           </li>
+      @endif
+      
+
+            <!-- Logout Button -->
+            <li class="nav-item text-center mt-5 d-flex justify-content-center">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link btn  btn-danger">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>
+                        Logout
+                    </p>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
         </ul>
       </nav>
     </div>
