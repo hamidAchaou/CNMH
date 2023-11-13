@@ -6,9 +6,12 @@
     <section class="">
         <div class="content pt-4 container">
           @if(session('success'))
-            <div class="alert alert-success mt-3">
-              {{ session('success') }}
-            </div>
+          <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            <i class="fas fa-check-circle me-2"></i> <!-- Font Awesome check-circle icon -->
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
           @endif
           <div class="mt-4 container row justify-content-around">
             <div class="form-group col-md-4">

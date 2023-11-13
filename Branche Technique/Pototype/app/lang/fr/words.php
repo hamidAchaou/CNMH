@@ -1,6 +1,12 @@
 <?php
 
 return [
+    // page welcome
+    'welcome_to_your_app' => 'Bienvenue sur votre application',
+    'get_started_with_amazing_features' => 'Commencez avec nos fonctionnalités étonnantes.',
+    'log_in' => 'Connexion',
+
+    'new_task' => 'Nouveau Task',
     'brand_text' => 'Gestion de Projet',
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',
@@ -34,12 +40,49 @@ return [
     'description' => 'Description',
     'required_field' => 'Ce champ est obligatoire',
     'add' => 'Ajouter',
-
     'edit_project' => 'Modifier Projet',
-    'name' => 'Nom',
-    'start_date' => 'Date de début',
-    'end_date' => 'Date de fin',
-    'description' => 'Description',
-    'required_field' => 'Ce champ est obligatoire',
     'update' => 'Modifier',
+    // modal delete Projects
+    'delete_title' => 'Supprimer le projet',
+    'delete_confirmation' => 'Êtes-vous sûr de vouloir supprimer ce projet ?',
+    'cancel' => 'Annuler',
+    'delete' => 'Supprimer',
+    // page index member
+    'members_list' => 'Liste des Members',
+    'success' => 'Succès',
+    'new_members' => 'Nouveaux Members',
+    'first_name' => 'Prénom',
+    'last_name' => 'Nom de famille',
+    'email' => 'Email',
+    'action' => 'Action',
+    'edit' => 'Modifier',
+    'delete' => 'Supprimer',
+    'add_new_member' => 'Ajouter Nouveau Member',
+    'pagination_links' => 'Liens de pagination',
+        // page member edit
+        'update_members' => 'Modifier Membres',
+        'first_name' => 'Prénom',
+        'last_name' => 'Nom de famille',
+        'email' => 'Email',
+        'password' => 'Mot de passe',
+        'confirm_password' => 'Confirmer le mot de passe',
+        'enter_first_name' => 'Entrer le prénom',
+        'enter_last_name' => 'Entrer le nom de famille',
+        'enter_email' => 'Entrer l\'adresse e-mail',
+        'enter_password' => 'Entrer le mot de passe',
+        'confirm_password_placeholder' => 'Confirmer le mot de passe',
+        'update_member' => 'Mettre à jour le membre',
+
+        'task_title' => 'Titre de la tâche',
+        'description' => 'Description',
+        // edit Task
+        'edit_task' => 'Modifier la tâche',
+        'modify_task' => 'Modifier la tâche',
+        'title' => 'Titre',
+        'description' => 'Description',
+        'update' => 'Modifier',
+        'add_field_please' => 'Ajouter ce champ s\'il vous plaît',
+        // create Task
+        'home_page' => 'Page d\'accueil',
+        'add_task' => 'Ajouter une tâche',
 ];

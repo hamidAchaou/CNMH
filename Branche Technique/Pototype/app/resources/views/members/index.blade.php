@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h2 class="py-2 container">Liste des Members</h2>
+        <h2 class="py-2 container">{{ __('words.members_list') }}</h2>
         @if (session('success'))
             <div class="alert alert-success mt-3">
                 {{ session('success') }}
@@ -13,21 +13,16 @@
         <div class="content">
             <div class="card container">
                 <div class="d-flex card-header">
-                    {{-- <div class="input-group w-50 ml-3">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher" />
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        <div class="input-group-prepend">
-                        </div>
-                    </div> --}}
                     <div class="input-group mb-3 w-50">
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="{{ __('words.search_placeholder') }}"
+                            aria-label="{{ __('words.search_placeholder') }}" aria-describedby="basic-addon1">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
                         </div>
-                      </div>
-                    
+                    </div>
                     <div class="w-50 d-flex flex-row-reverse form-group">
-                        <a href="{{ route('members.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau Members</a>
+                        <a href="{{ route('members.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
+                            {{ __('words.new_members') }}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -35,10 +30,10 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last name</th>
-                                <th>Email</th>
-                                <th>Action</th>
+                                <th>{{ __('words.first_name') }}</th>
+                                <th>{{ __('words.last_name') }}</th>
+                                <th>{{ __('words.email') }}</th>
+                                <th>{{ __('words.action') }}</th>
                             </tr>
                         </thead>
                         <tbody id="searchResults">
@@ -49,13 +44,17 @@
                                     <td>{{ $member->lastName }}</td>
                                     <td>{{ $member->email }}</td>
                                     <td class="d-flex">
-                                        <button type="submit" class="btn btn-primary mr-2 text-primary">
-                                            <i class="fas fa-edit"></i>
+                                        {{-- btn edit Members --}}
+                                        <a href="{{ route('members.edit', ['member' => $member->id]) }}" type="submit"
+                                            class="btn btn-primary mr-2 text-primary">
+                                            <i class="fas fa-edit"></i> {{ __('words.edit') }}
+                                        </a>
+                                        {{-- btn delete Members --}}
+                                        <button type="button" class="btn btn-sm btn-default bg-danger"
+                                            onclick="AddIdMember({{ $member->id }})" data-toggle="modal"
+                                            data-target="#modalDeleteMember">
+                                            <i class="fa-solid fa-trash"></i> {{ __('words.delete') }}
                                         </button>
-                            {{-- btn delete Member --}}
-                            <button type="button" class="btn btn-sm btn-default bg-danger" onclick="AddIdMember({{$member->id}})" data-toggle="modal" data-target="#modalDeleteMember"><i
-                                class="fa-solid fa-trash"></i>
-                            </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,69 +70,71 @@
         </div>
     </div>
 
-            {{-- modal Delete Tasks --}}
-            @component('components.projects.modal-delete-member')
-            @endcomponent
 
-{{-- Script for searching members --}}
-<script>
-    $(document).ready(function () {
-        $('#searchInput').on('input', function () {
-            let query = $(this).val();
+    {{-- modal Delete Tasks --}}
+    @component('components.projects.modal-delete-member')
+    @endcomponent
 
-            if (query.length >= 3) {
-                // Perform AJAX request to the search route using named route
-                $.ajax({
-                    url: '{{ route('members.search') }}',
-                    method: 'GET',
-                    data: {
-                        query: query,
-                        _token: '{{ csrf_token() }}' // Add the _token parameter
-                    },
-                    success: function (data) {
-                        // Update the search results container
-                        displaySearchResults(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', xhr.responseText);
-                    }
-                    console.console.log('data');
-                });
-            } else {
-                // Clear the search results container if the input is less than 3 characters
-                $('#searchResults').empty();
+    {{-- // Script for searching members --}}
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                let query = $(this).val();
+
+                if (query.length >= 3) {
+                    // Perform AJAX request to the search route using named route
+                    $.ajax({
+                        url: '{{ route('members.search') }}',
+                        method: 'GET',
+                        data: {
+                            query: query,
+                            _token: '{{ csrf_token() }}' // Add the _token parameter
+                        },
+                        success: function(data) {
+                            // Update the search results container
+                            displaySearchResults(data);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', xhr.responseText);
+                        }
+                        console.log('data'); // Fix the typo here
+                    });
+                } else {
+                    // Clear the search results container if the input is less than 3 characters
+                    $('#searchResults').empty();
+                }
+            });
+
+            // Function to display search results
+            function displaySearchResults(results) {
+                console.log(results); // Fix the typo here
+
+                let resultsContainer = $('#searchResults');
+                resultsContainer.empty();
+
+                if (results.length > 0) {
+                    $.each(results, function(index, result) {
+                        // Append the results to table rows
+                        resultsContainer.append('<tr>' +
+                            '<td>' + result.firstName + '</td>' +
+                            '<td>' + result.lastName + '</td>' +
+                            '<td>' + result.email + '</td>' +
+                            '<td class="d-flex">' +
+                            '<button type="submit" class="btn btn-primary mr-2 text-primary">' +
+                            '<i class="fas fa-edit"></i>' +
+                            '</button>' +
+                            '<button type="submit" class="btn btn-danger mr-2 text-danger">' +
+                            '<i class="fas fa-trash-alt"></i>' +
+                            '</button>' +
+                            '</td>' +
+                            '</tr>');
+                    });
+                } else {
+                    resultsContainer.append('<tr><td colspan="4">No results found</td></tr>');
+                }
             }
         });
+    </script>
 
-        // Function to display search results
-        function displaySearchResults(results) {
-            console.console.log(data);
-
-            let resultsContainer = $('#searchResults');
-            resultsContainer.empty();
-
-            if (results.length > 0) {
-                $.each(results, function (index, result) {
-                    // Append the results to table rows
-                    resultsContainer.append('<tr>' +
-                        '<td>' + result.firstName + '</td>' +
-                        '<td>' + result.lastName + '</td>' +
-                        '<td>' + result.email + '</td>' +
-                        '<td class="d-flex">' +
-                        '<button type="submit" class="btn btn-primary mr-2 text-primary">' +
-                        '<i class="fas fa-edit"></i>' +
-                        '</button>' +
-                        '<button type="submit" class="btn btn-danger mr-2 text-danger">' +
-                        '<i class="fas fa-trash-alt"></i>' +
-                        '</button>' +
-                        '</td>' +
-                        '</tr>');
-                });
-            } else {
-                resultsContainer.append('<tr><td colspan="4">No results found</td></tr>');
-            }
-        }
-    });
-</script>
 
 @endsection
