@@ -10,26 +10,26 @@
               {{ session('success') }}
             </div>
           @endif
-            <div class="mt-4 container row justify-content-around">
-                <div class="form-group col-md-4">
-                    <h4 class="container font-weight-bold">Les Projets</h4>
-                </div>
-
-                <div class="input-group form-group col-md-4">
-                    <input type="text" id="search-input" class="form-control" placeholder="Rechercher">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-
-                {{-- button add projects  --}}
-                @can('view', new App\Models\Project)
-                    <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
-                        <a href="{{ route('projects.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau
-                            Project</a>
-                    </div>
-                @endcan
+          <div class="mt-4 container row justify-content-around">
+            <div class="form-group col-md-4">
+                <h4 class="container font-weight-bold">{{ __('words.projects') }}</h4>
             </div>
+        
+            <div class="input-group form-group col-md-4">
+                <input type="text" id="search-input" class="form-control" placeholder="{{ __('words.search_placeholder') }}">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        
+            {{-- button add projects  --}}
+            @can('view', new App\Models\Project)
+                <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
+                    <a href="{{ route('projects.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> {{ __('words.new_project_button') }}</a>
+                </div>
+            @endcan
+        </div>
+        
         </div>
         <div class="content container">
             <!-- </div> -->
@@ -103,21 +103,16 @@
                             <div class="">
                                 <div class="d-flex">
                                     <form action="" method="post">
-
-                                        <button type="submit" class="btn"><i
-                                                class="fa-solid fa-download"></i>Exporter</button>
+                                        <button type="submit" class="btn"><i class="fa-solid fa-download"></i>{{ __('words.export') }}</button>
                                     </form>
-
-                                    <form class="ml-1" action="" method="post" id="importForm"
-                                        enctype="multipart/form-data">
-
+                            
+                                    <form class="ml-1" action="" method="post" id="importForm" enctype="multipart/form-data">
                                         <input type="file" id="fileInputImporter" name="file" style="display: none;">
-                                        <button type="button" class="btn" id="chooseFileButtonImporter"><i
-                                                class="fa-solid fa-file-export"></i> Importer</button>
+                                        <button type="button" class="btn" id="chooseFileButtonImporter"><i class="fa-solid fa-file-export"></i>{{ __('words.import') }}</button>
                                     </form>
-
                                 </div>
                             </div>
+                            
 
                             <!-- Pagination Links -->
                             <div class="d-flex justify-content-center mb-4" id="pagination-links">
