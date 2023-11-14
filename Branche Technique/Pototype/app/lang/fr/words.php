@@ -7,7 +7,7 @@ return [
     'log_in' => 'Connexion',
 
     'new_task' => 'Nouveau Task',
-    'brand_text' => 'Gestion de Projet',
+    'brand_text' => 'SoliCoders',
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',
     'projects' => 'Gestion des Projets',

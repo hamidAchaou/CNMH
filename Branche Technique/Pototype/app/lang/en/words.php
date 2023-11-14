@@ -6,7 +6,7 @@ return [
     'get_started_with_amazing_features' => 'Get started with our amazing features.',
     'log_in' => 'Log in',
 
-    'brand_text' => 'Project Management',
+    'brand_text' => 'SoliCoders',
     'user_image_alt' => 'User Image',
     'profile_link' => 'Profile',
     'projects' => 'Project Management',
@@ -45,7 +45,7 @@ return [
     // page index member
     'members_list' => 'Members List',
     'success' => 'Success',
-    'search_placeholder' => 'Username',
+    'search_placeholder' => 'searche',
     'new_members' => 'New Members',
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
