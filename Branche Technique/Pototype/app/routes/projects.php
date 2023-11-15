@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'CheckChefProjet'])->group(function () {
     Route::get('members/search', [MemberController::class, 'search'])->name('members.search');
+    Route::get('members/{id}/edit', [MemberController::class, 'edit'])->name('members.edit');
+    Route::put('members/{id}/update', [MemberController::class, 'update'])->name('members.update');
     Route::resource('members', MemberController::class);
     Route::post("members/destroy", [MemberController::class, 'destroy'])->name('membersDelete');
     

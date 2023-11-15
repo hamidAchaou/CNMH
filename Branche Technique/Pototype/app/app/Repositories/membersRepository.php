@@ -13,22 +13,49 @@ class MembersRepository implements InterfaceMembers
         return User::where('role', '=', 'member')->paginate($perPage);
     }
 
-        // find One members
-        public function find($id) {
-            $members = User::findOrFail($id);
-            return $members;
-        }
+    /**
+     * Find one member by ID.
+     */
+    public function find($id)
+    {
+        $member = User::findOrFail($id);
+        return $member;
+    }
     // create Members
-    public function create(array $data) {
+    public function create(array $data)
+    {
         User::create($data);
     }
 
+    // update Members
+    public function update(array $data, $id)
+    {
+        // $dataProject = Project::findOrFail($id);
+        $dataMember = $this->find($id);
+        if ($dataMember) {
+            $dataMember->update($data);
+            return true;
+        }
+        return abort(403);
+    }
+
     // delete Member
-    public function delete($id) {
+    public function delete($id)
+    {
         $members = $this->find($id);
 
-        if($members) {
+        if ($members) {
             $members->delete();
         }
+    }
+
+    // search Projects
+    public function search($dataSearch)
+    {
+
+        $results = User::where('Name', 'like', '%' . $dataSearch . '%')
+            ->orWhere('Code', 'like', '%' . $dataSearch . '%')
+            ->paginate(4);
+        return $results;
     }
 }

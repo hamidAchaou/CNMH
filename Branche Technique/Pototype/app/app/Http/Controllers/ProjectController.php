@@ -91,10 +91,10 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:projects,name',
+            'name' => 'required|string|max:255',
             'startDate' => 'required|date',
             'endDate' => 'required|date',
         ]);

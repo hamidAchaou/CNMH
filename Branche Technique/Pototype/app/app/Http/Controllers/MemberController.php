@@ -79,20 +79,44 @@ class MemberController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Member $member)
-    {
-        //
-    }
+/**
+ * Show the form for editing the specified resource.
+ */
+public function edit($id)
+{
+    $member = $this->membersRepository->find($id);
+    return view('members.edit', compact('member'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Member $member)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'email' => ['string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['confirmed', Rules\Password::defaults()],
+        ]);
+
+        $firstName = strip_tags($request->input('firstName'));
+        $lastName = strip_tags($request->input('lastName'));
+        $email = strip_tags($request->input('email'));
+        $password = Hash::make($request->password);
+        $role = 'member';
+    
+        $data = [
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'password' => $password,
+            'role' => $role,
+        ];
+    
+        $this->membersRepository->update($data, $id);
+    
+        return redirect()->route('members.index')->with('success', 'Project added successfully');
     }
 
     /**
@@ -108,15 +132,16 @@ class MemberController extends Controller
 
     }
 
+    // function search
     public function search(Request $request)
     {
-        $query = $request->input('query');
-
-        // Perform the search in your database
-        $results = User::where('firstName', 'like', "%$query%")
-            ->orWhere('lastName', 'like', "%$query%")
-            ->get();
-
-        return response()->json($results);
+        $datasearch = $request->input('search');
+    
+        $results = $this->membersRepository->search($datasearch);
+    
+        return response()->json([
+            'data' => $results->items(),
+            'links' => $results->links()->toHtml(),
+        ]);
     }
 }

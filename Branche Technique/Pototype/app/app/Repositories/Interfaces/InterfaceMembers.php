@@ -7,8 +7,8 @@ interface InterfaceMembers {
     // public function getNameProjects();
     public function find($id);
     public function create(array $data);
-    // public function update(array $data, $id);
+    public function update(array $data, $id);
     public function delete($id);
-    // public function search($dataSearch);
+    public function search($dataSearch);
 }
 ?>
