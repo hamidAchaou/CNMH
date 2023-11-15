@@ -1,4 +1,4 @@
-<table id="example2" class="table table-bordered table-hover">
+<table id="example2" class="table table-streped table-hover">
     <thead>
         <tr>
             <th>{{ __('words.project_name') }}</th>

@@ -7,7 +7,7 @@
         <div class="content pt-4 container">
           @if(session('success'))
           <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            <i class="fas fa-check-circle me-2"></i> <!-- Font Awesome check-circle icon -->
+            <i class="fas fa-check-circle me-2"></i>
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -52,28 +52,30 @@
                     <div class="">
                         <div class="card-body table-responsive p-0">
                         {{-- Table Projects --}}
-                        @include('projects.test')
+                        @include('projects.table')
                         </div>
 
-                        <div class="d-md-flex justify-content-between">
-                            <!-- export and import  -->
-                            <div class="">
-                                <div class="d-flex">
-                                    <form action="" method="post">
-                                        <button type="submit" class="btn"><i class="fa-solid fa-download"></i>{{ __('words.export') }}</button>
-                                    </form>
-                            
-                                    <form class="ml-1" action="" method="post" id="importForm" enctype="multipart/form-data">
-                                        <input type="file" id="fileInputImporter" name="file" style="display: none;">
-                                        <button type="button" class="btn" id="chooseFileButtonImporter"><i class="fa-solid fa-file-export"></i>{{ __('words.import') }}</button>
-                                    </form>
+                        <div class="card-footer">
+                            <div class="d-md-flex justify-content-between">                                
+                                <!-- export and import  -->
+                                <div class="card-header ">
+                                    <div class="d-flex">
+                                        <form action="" method="post">
+                                            <button type="submit" class="btn"><i class="fa-solid fa-download"></i>{{ __('words.export') }}</button>
+                                        </form>
+                                
+                                        <form class="ml-1" action="" method="post" id="importForm" enctype="multipart/form-data">
+                                            <input type="file" id="fileInputImporter" name="file" style="display: none;">
+                                            <button type="button" class="btn" id="chooseFileButtonImporter"><i class="fa-solid fa-file-export"></i>{{ __('words.import') }}</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            
-
-                            <!-- Pagination Links -->
-                            <div class="d-flex justify-content-center mb-4" id="pagination-links">
-                              {{ $projects->links() }}
+                                
+    
+                                <!-- Pagination Links -->
+                                <div class="d-flex justify-content-center mb-4" id="pagination-links">
+                                  {{ $projects->links() }}
+                                </div>
                             </div>
                         </div>
 

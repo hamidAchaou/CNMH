@@ -40,7 +40,6 @@ return [
     'required_field' => 'Ce champ est obligatoire',
     'add' => 'Ajouter',
     'edit_project' => 'Modifier Projet',
-<<<<<<< HEAD
     'name' => 'Nom',
     'start_date' => 'Date de début',
     'end_date' => 'Date de fin',
@@ -48,50 +47,4 @@ return [
     'update' => 'Modifier',
     // fooetr
     'copyright' => 'Droits d\'auteur',
-=======
-    'update' => 'Modifier',
-    // modal delete Projects
-    'delete_title' => 'Supprimer le projet',
-    'delete_confirmation' => 'Êtes-vous sûr de vouloir supprimer ce projet ?',
-    'cancel' => 'Annuler',
-    'delete' => 'Supprimer',
-    // page index member
-    'members_list' => 'Liste des Members',
-    'success' => 'Succès',
-    'new_members' => 'Nouveaux Members',
-    'first_name' => 'Prénom',
-    'last_name' => 'Nom de famille',
-    'email' => 'Email',
-    'action' => 'Action',
-    'edit' => 'Modifier',
-    'delete' => 'Supprimer',
-    'add_new_member' => 'Ajouter Nouveau Member',
-    'pagination_links' => 'Liens de pagination',
-        // page member edit
-        'update_members' => 'Modifier Membres',
-        'first_name' => 'Prénom',
-        'last_name' => 'Nom de famille',
-        'email' => 'Email',
-        'password' => 'Mot de passe',
-        'confirm_password' => 'Confirmer le mot de passe',
-        'enter_first_name' => 'Entrer le prénom',
-        'enter_last_name' => 'Entrer le nom de famille',
-        'enter_email' => 'Entrer l\'adresse e-mail',
-        'enter_password' => 'Entrer le mot de passe',
-        'confirm_password_placeholder' => 'Confirmer le mot de passe',
-        'update_member' => 'Mettre à jour le membre',
-
-        'task_title' => 'Titre de la tâche',
-        'description' => 'Description',
-        // edit Task
-        'edit_task' => 'Modifier la tâche',
-        'modify_task' => 'Modifier la tâche',
-        'title' => 'Titre',
-        'description' => 'Description',
-        'update' => 'Modifier',
-        'add_field_please' => 'Ajouter ce champ s\'il vous plaît',
-        // create Task
-        'home_page' => 'Page d\'accueil',
-        'add_task' => 'Ajouter une tâche',
->>>>>>> 86c8191043df9f4e9fcd753e50885c753d0faa7d
 ];
