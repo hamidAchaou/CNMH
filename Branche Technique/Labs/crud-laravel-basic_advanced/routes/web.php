@@ -24,3 +24,4 @@ Route::put('/update/{id}', [CompetencesController::class, 'update'])->name("comp
 Route::delete('/destroy', [CompetencesController::class, 'destroy'])->name("competences.destroy");
 
 Route::post('/search-competences', [CompetencesController::class, 'searchCompetences'])->name('search.competences');
+Route::get('/search-competences', [CompetencesController::class, 'searchCompetences'])->name('search.competences');

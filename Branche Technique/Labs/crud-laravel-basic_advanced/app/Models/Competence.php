@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Competence extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'Name',
-        'Code',
-        'Reference ',
-        'Description'
-    ];
+    protected $fillable = ['Reference', 'Code', 'Name', 'Description'];
+
 }

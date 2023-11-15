@@ -5,14 +5,18 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
+
+use App\Repositories\CompetencesRepository;
+use App\Repositories\Interfaces\InterfaceCompetences;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
-    public function register(): void
+    public function register()
     {
-        $this->app->bind(CompetencesRepository::class, CompetencesEloquent::class);
+        $this->app->bind(InterfaceCompetences::class, CompetencesRepository::class);
     }
 
     /**

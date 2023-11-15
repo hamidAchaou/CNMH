@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competence;
+use App\Repositories\Interfaces\InterfaceCompetences;
 use Illuminate\Http\Request;
 
 class CompetencesController extends Controller
 {
+    private $competences;
+
+    public function __construct(InterfaceCompetences $competences)
+    {
+        $this->competences = $competences;
+    }
     
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $competences = Competence::latest()->paginate(4);
+        $competences = $this->competences->getAll();
         return view('competences.index', ['competences' => $competences]);
     }
 
@@ -30,24 +37,17 @@ class CompetencesController extends Controller
      */
     public function store(Request $request)
     {
+        // validation input
         $request->validate([
             'reference' => 'required|unique:competences,Reference',
             'code' => 'required',
             'nom' => 'required',
             'description' => 'required'
         ]);
-
-        $competences = new Competence();
-
-        $competences->Reference = strip_tags($request->input('reference'));
-        $competences->Code = strip_tags($request->input('code'));
-        $competences->Name = strip_tags($request->input('nom'));
-        $competences->Description = strip_tags($request->input('description'));
-
-        $competences->save();
-
-        return redirect()->route('competences.index')->with('success', 'competences added successfully');
-
+        
+        $data = $request->only(['reference', 'code', 'nom', 'description']); // store data input in array data
+        $this->competences->create($data); // send data in class Competences Repositories
+        return redirect()->route('competences.index')->with('success', 'competences added successfully'); // redirect in page index
     }
 
     /**
@@ -72,23 +72,23 @@ class CompetencesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $competence = Competence::findOrFail($id);
         $request->validate([
-            'reference' => 'required|unique:competences,Reference,' . $competence->id,
+            'reference' => 'required|unique:competences,Reference',
             'code' => 'required',
             'nom' => 'required',
             'description' => 'required',
         ]);
     
-        $competence->Reference = strip_tags($request->input('reference'));
-        $competence->Code = strip_tags($request->input('code'));
-        $competence->Name = strip_tags($request->input('nom'));
-        $competence->Description = strip_tags($request->input('description'));
+        $data = $request->only(['reference', 'code', 'nom', 'description']);
+        $result = $this->competences->update($id, $data);
     
-        $competence->update();
-        
-        return redirect()->route('competences.index')->with('success', 'Updated successfully');
+        if ($result) {
+            return redirect()->route('competences.index')->with('success', 'Updated successfully');
+        }
+    
+        return redirect()->route('competences.index')->with('danger', 'This competence does not exist');
     }
+    
     
 
     /**
@@ -96,23 +96,21 @@ class CompetencesController extends Controller
      */
     public function destroy(Request $request)
     {
-        $competence = Competence::findOrFail($request->input('id'));
-        $competence->delete();
-        // Competence::where()->delete();
+        $id = strip_tags($request->input('id'));
+        $this->competences->delete($id);
+
         return redirect()->route('competences.index')->with('danger', 'your competences Deleted');
     }
 
     public function searchCompetences(Request $request)
     {
-        $searchQuery = $request->input('search');
+        $datasearch = $request->input('search');
     
-        $results = Competence::where('Name', 'like', '%' . $searchQuery . '%')
-            ->orWhere('Code', 'like', '%' . $searchQuery . '%')
-            ->paginate(4, ['*'], 'page', 1);
+        $results = $this->competences->search($datasearch);
     
         return response()->json([
             'data' => $results->items(),
-            'links' => $results->links('pagination::bootstrap-5')->toHtml(),
+            'links' => $results->links()->toHtml(),
         ]);
     }
     
