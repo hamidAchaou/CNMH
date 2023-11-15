@@ -5,7 +5,6 @@ return [
     'user_image_alt' => 'User Image',
     'profile_link' => 'Profile',
     'projects' => 'Project Management',
-    'chart_bar_icon' => 'fas fa-chart-bar',
     'members' => 'Members',
     'logout' => 'Logout',
     'logout_icon' => 'fas fa-sign-out-alt',
@@ -32,4 +31,6 @@ return [
     'required_field' => 'This field is required',
     'add' => 'Add',
     'update' => 'Update',
+    // footer
+    'copyright' => 'Copyright',
 ];

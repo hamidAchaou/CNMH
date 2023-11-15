@@ -5,7 +5,6 @@ return [
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',
     'projects' => 'Gestion des Projets',
-    'chart_bar_icon' => 'fas fa-chart-bar',
     'members' => 'Membres',
     'logout' => 'Déconnexion',
     'logout_icon' => 'fas fa-sign-out-alt',
@@ -39,7 +38,8 @@ return [
     'name' => 'Nom',
     'start_date' => 'Date de début',
     'end_date' => 'Date de fin',
-    'description' => 'Description',
     'required_field' => 'Ce champ est obligatoire',
     'update' => 'Modifier',
+    // fooetr
+    'copyright' => 'Droits d\'auteur',
 ];

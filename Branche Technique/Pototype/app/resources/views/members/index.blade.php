@@ -49,7 +49,7 @@
                                     <td>{{ $member->lastName }}</td>
                                     <td>{{ $member->email }}</td>
                                     <td class="d-flex">
-                                        <button type="submit" class="btn btn-primary mr-2 text-primary">
+                                        <button type="submit" class="btn btn-default  mr-2">
                                             <i class="fas fa-edit"></i>
                                         </button>
                             {{-- btn delete Member --}}

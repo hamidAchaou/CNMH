@@ -24,7 +24,7 @@
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
                           <a href="{{ route('projects.index')}}" class="nav-link {{ Request::is('projects*') ? 'active' : '' }}">
-                              <i class="{{ __('words.chart_bar_icon') }}"></i>
+                              <i class="fas fa-chart-bar"></i>
                               <p>{{ __('words.sidebar_projects') }}</p>
                           </a>
                       </li>
