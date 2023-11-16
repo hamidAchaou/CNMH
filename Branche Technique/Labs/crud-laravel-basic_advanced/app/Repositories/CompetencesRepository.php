@@ -5,6 +5,7 @@ use App\Repositories\Interfaces\InterfaceCompetences;
 
 use App\Models\Competence;
 
+
 class CompetencesRepository implements InterfaceCompetences  {
     public function getAll() {
         $competences = Competence::latest()->paginate(4);
