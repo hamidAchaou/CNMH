@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProjectExport;
 use App\Models\Project;
 use App\Models\Task;
 use App\Repositories\Interface\ProjectInterface;
 use App\Repositories\Interface\TaskInterface;
 use Illuminate\Http\Request;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
 {
@@ -122,5 +125,11 @@ class ProjectController extends Controller
         $this->projectInterface->delete($id);
 
         return redirect()->route('projects.index')->with('success', 'Project deleted successfully');
+    }
+
+    // export Project 
+    public function export() 
+    {
+        return Excel::download(new ProjectExport, 'projects.xlsx');
     }
 }

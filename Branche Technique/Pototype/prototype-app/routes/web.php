@@ -30,7 +30,8 @@ Route::prefix('projects')->middleware('auth')->group(function () {
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::post('/{id}/update', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
-    
+    // export pojects
+    Route::get('export/', [ProjectController::class, 'export']);
     
     // task
     Route::get('/task/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
@@ -40,6 +41,7 @@ Route::prefix('projects')->middleware('auth')->group(function () {
     Route::post('/tasks/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
 
 });
+
 
 // home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

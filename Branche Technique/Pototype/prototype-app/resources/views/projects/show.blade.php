@@ -80,7 +80,7 @@
         </section>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
     <script>
       $(document).ready(function () {
           function fetchData(page, searchValue) {

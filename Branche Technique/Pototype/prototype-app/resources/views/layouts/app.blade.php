@@ -14,6 +14,20 @@
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
+                    {{-- langages --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fas fa-globe"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right p-0" style="left: inherit; right: 0px;">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a class="dropdown-item {{ ($localeCode == LaravelLocalization::getCurrentLocale()) ? 'active' : '' }}" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    {{-- user --}}
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
