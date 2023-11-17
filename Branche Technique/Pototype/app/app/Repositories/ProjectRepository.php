@@ -60,8 +60,8 @@ class ProjectRepository implements InterfaceProjects {
     // search Projects
     public function search($dataSearch) {
 
-        $results = Project::where('Name', 'like', '%' . $dataSearch . '%')
-        ->orWhere('Code', 'like', '%' . $dataSearch . '%')
+        $results = Project::where('name', 'like', '%' . $dataSearch . '%')
+        ->orWhere('description', 'like', '%' . $dataSearch . '%')
         ->paginate(4);
         return $results;
     }

@@ -8,4 +8,6 @@ interface ProjectInterface {
     public function find($id);
     public function show($id);
     public function Update(array $data, $id);
+    public function delete($id);
+    public function search(string $searchValue);
 }

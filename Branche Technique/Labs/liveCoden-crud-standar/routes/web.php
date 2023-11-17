@@ -22,7 +22,12 @@ Route::get('/create', [ProjectController::class, 'create'])->name('projects.crea
 Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
 Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
 Route::post('/{id}/update', [ProjectController::class, 'update'])->name('projects.update');
+Route::delete('/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
+
 
 // task
 Route::get('/task/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
 Route::post('/task/{id}/store', [TaskController::class, 'store'])->name('tasks.store');
+Route::delete('/task/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
+Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::post('tasks/{id}/update', [TaskController::class, 'update'])->name('tasks.update');

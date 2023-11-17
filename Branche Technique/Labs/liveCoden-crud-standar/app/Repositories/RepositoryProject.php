@@ -43,5 +43,21 @@ public function update(array $data, $id)
 
     abort(404);
 }
+// delte project
+public function delete($id)
+{
+  $project = $this->find($id);
+  $project->delete();
+}
+
+// project search
+public function search(string $searchValue) {
+  $projects = Project::query()
+      ->where('name', 'LIKE', '%' . $searchValue . '%')
+      ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
+      ->paginate(4);
+
+  return $projects;
+}
 
 }

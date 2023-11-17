@@ -14,6 +14,9 @@ Route::middleware('auth')->group(function () {
     Route::get("projects/{id}/edit", [ProjectController::class, 'edit'])->name('projects.edit');
     Route::delete("/destroy", [ProjectController::class, 'destroy'])->name('projectsDelete');
     Route::post('/search-projects', [ProjectController::class, 'searchProjects'])->name('search-projects');
+    // export && emport
+    Route::get('/Projects/export-excel', [ProjectController::class, 'export']);
+    Route::get('/Projects/import-excel', [ProjectController::class, 'import']);
 
     // Task
     Route::get('tasks/create/{id}', [TaskController::class, 'create'])->name('create.task');

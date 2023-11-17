@@ -22,8 +22,8 @@
                       <label for="inputDescription">Description</label>
                       <textarea name="description" id="inputDescription" class="form-control" oninvalid="this.setCustomValidity('Ajouter ce champ s\'il vous plaît')" oninput="setCustomValidity('')">{{ old('description')}}</textarea>
                       @error('description')
-                      <div class="invalide-feedback text-danger">{{ $message }}</div>
-                  @enderror
+                        <div class="invalide-feedback text-danger">{{ $message }}</div>
+                      @enderror
                     </div>
         
                     <button type="submit" class="btn btn-primary mb-2">Ajouter</button>

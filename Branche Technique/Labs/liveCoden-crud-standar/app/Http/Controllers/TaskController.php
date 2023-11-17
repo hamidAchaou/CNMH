@@ -25,10 +25,10 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        $project = $this->repositoryTask->find($id);
-        return view('projects.tasks.create', );
+        // $project = $this->repositoryTask->find($id);
+        return view('projects.tasks.create', ['id' => $id]);
     }
 
     /**
@@ -46,7 +46,7 @@ class TaskController extends Controller
         
         $this->repositoryTask->create($data);
 
-        redirect()->route('projects.show', ['id' => $id]);
+        return redirect()->route('projects.show', ['id' => $id])->with('success', 'Task added successfully');
     }
 
     /**
@@ -60,24 +60,38 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit($id)
     {
-        //
+        $tasks = $this->repositoryTask->find($id);
+        return view('projects.tasks.edit', compact('tasks'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'require|max:34',
+            'name' => 'nullable|max:555',
+        ]);
+
+        $data = $request->only('name', 'description');
+        $this->repositoryTask->update($data, $id);
+
+        $project_Id = request()->input('project_Id');
+        return redirect()->route('projects.show', ['id' => $project_Id])->with('success', 'Task updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(Request $request)
     {
-        //
+        $task_Id = $request->input('task_Id');
+        $this->repositoryTask->delete($task_Id);
+
+        $project_Id = request()->input('project_Id');
+        return redirect()->route('projects.show', ['id' => $project_Id])->with('success', 'Task deleted successfully');
     }
 }

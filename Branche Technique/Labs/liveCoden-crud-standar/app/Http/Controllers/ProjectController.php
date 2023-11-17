@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use App\Repositories\Interface\ProjectInterface;
+use App\Repositories\Interface\TaskInterface;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -17,8 +19,19 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        // get data with search
+        if($request->ajax())
+        {
+            $searchValue = $request->get("searchValue");
+            $searchValue = str_replace(' ', '%' , $searchValue);
+            $projects = $this->projectInterface->search($searchValue);
+            return view('projects.search', compact('projects'))->render();
+        }
+
+        // get data
         $projects = $this->projectInterface->getAll();
         return view('projects.index', compact('projects'));
     }
@@ -51,8 +64,24 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        if($request->ajax()) 
+        {
+            $searchValue = $request->input('searchValue');
+            $searchValue = str_replace(' ', '%' , $searchValue );
+    
+            $projects = Task::query()
+                ->where('project_Id', $id) 
+                ->where(function ($query) use ($searchValue) {
+                    $query->where('name', 'LIKE', '%' . $searchValue . '%')
+                          ->orWhere('description', 'LIKE', '%' . $searchValue . '%');
+                })
+                ->get();
+    
+            return view('projects.tasks.search', compact('projects'))->render();
+        }
+    
         $project = $this->projectInterface->show($id);
         return view('projects.show', compact('project'));
     }
@@ -73,8 +102,9 @@ class ProjectController extends Controller
     {
         $request->validate([
             'name' => 'required|max:33',
-            'description' => 'nullable|max455',
+            'description' => 'nullable|max:455',
         ]);
+        
 
         $data = $request->only(['name', 'description']);
         $this->projectInterface->update($data, $id);
@@ -85,8 +115,12 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('project_id');
+
+        $this->projectInterface->delete($id);
+
+        return redirect()->route('projects.index')->with('success', 'Project deleted successfully');
     }
 }

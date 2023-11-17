@@ -8,7 +8,6 @@
       <div class="container card col-md-8">
           <h2 class="card-header">Ajouter Task</h2>
             <div class="card-body">
-              @dd($id)
                 <form method="post" action="{{route('tasks.store', ['id' => $id])}}">
                    @csrf
                     <input type="hidden" name="id_user">

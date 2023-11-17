@@ -12,19 +12,7 @@
         @endif
         <div class="content">
             <div class="card container">
-                <div class="d-flex card-header">
-                    <div class="input-group mb-3 w-50">
-                        <input type="text" class="form-control" placeholder="{{ __('words.search_placeholder') }}"
-                            aria-label="{{ __('words.search_placeholder') }}" aria-describedby="basic-addon1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                        </div>
-                    </div>
-                    <div class="w-50 d-flex flex-row-reverse form-group">
-                        <a href="{{ route('members.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
-                            {{ __('words.new_members') }}</a>
-                    </div>
-                </div>
+ 
                 <div class="card-body">
                     <!-- Table and Pagination -->
                     <table id="example2" class="table table-bordered table-hover">
