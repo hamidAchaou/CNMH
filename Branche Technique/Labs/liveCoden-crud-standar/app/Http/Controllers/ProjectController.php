@@ -68,7 +68,7 @@ class ProjectController extends Controller
     {
         if($request->ajax()) 
         {
-            $searchValue = $request->input('searchValue');
+            $searchValue = $request->get('searchValue');
             $searchValue = str_replace(' ', '%' , $searchValue );
     
             $projects = Task::query()
