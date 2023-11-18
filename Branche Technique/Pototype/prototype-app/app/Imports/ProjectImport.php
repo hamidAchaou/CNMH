@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Project;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class ProjectImport implements ToModel
@@ -16,12 +17,12 @@ class ProjectImport implements ToModel
     {
         try {
             return new Project([
-                'name'     => $row["nom"],
-                'description'    => $row["description"],
+                'name' => $row["name"],
+                'description' => $row["description"],
             ]);
-        } catch (\ErrorException  $e) {
-            return redirect()->route('projects.index')->withError('Quelque chose s\'est mal passé, vérifiez votre fichier');
+        } catch (\Throwable $e) {
+            Log::error($e);
+            return null;
         }
-
     }
 }
