@@ -18,11 +18,12 @@ class RepositoryProject implements ProjectInterface {
       return $project;
     }
 
-    // show One Project
+    // show One Project    
     public function show($id)
     {
-      $project = Project::with('task')->$this->find($id)->paginate(4);
-      return $project;
+        // Assuming Project is your Eloquent model
+        $project = Project::findOrFail($id);
+        return $project;
     }
 
   // create new Projects

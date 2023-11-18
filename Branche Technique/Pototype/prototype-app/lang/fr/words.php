@@ -7,6 +7,7 @@ return [
     'log_in' => 'Connexion',
 
     'new_task' => 'Nouveau Task',
+    'Tasks' => 'Tâches',
     'brand_text' => 'SoliCoders',
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',
@@ -16,7 +17,7 @@ return [
     'sidebar_toggle_icon' => 'fas fa-bars',
     'toggle_navigation' => 'Basculer la navigation',
     'sidebar_projects' => 'Gestion des Projets',
-    'sidebar_members' => 'Membres',
+    'sidebar_members' => 'les Membres',
     'sidebar_logout' => 'Déconnexion',
     'navbar_home' => 'Accueil',
     'project_name' => 'Nom du projet',

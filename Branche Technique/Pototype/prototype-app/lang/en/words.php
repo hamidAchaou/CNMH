@@ -6,6 +6,7 @@ return [
     'get_started_with_amazing_features' => 'Get started with our amazing features.',
     'log_in' => 'Log in',
 
+    'Tasks' => 'Tasks',
     'brand_text' => 'SoliCoders',
     'user_image_alt' => 'User Image',
     'profile_link' => 'Profile',
@@ -15,7 +16,7 @@ return [
     'sidebar_toggle_icon' => 'fas fa-bars',
     'toggle_navigation' => 'Toggle Navigation',
     'sidebar_projects' => 'Project Management',
-    'sidebar_members' => 'Members',
+    'sidebar_members' => 'the members',
     'sidebar_logout' => 'Logout',
     'navbar_home' => 'Home',
     'project_name' => 'Project Name',

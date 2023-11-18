@@ -1,17 +1,32 @@
-<!-- need to remove -->
+<!-- Home -->
 <li class="nav-item">
     <a href="{{ route('home') }}" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
-        <p>Home</p>
+        <p>{{ __('words.navbar_home') }}</p>
     </a>
 </li>
 <li class="nav-item">
     <a href="{{ route('projects.index') }}" class="nav-link {{ Request::is('projects.index') ? 'active' : '' }}">
         <i class="nav-icon fas fa-chart-bar"></i>
-        <p>Gestion Projects</p>
+        <p>{{ __('words.projects_management') }}</p>
     </a>
 </li>
-@if(auth()->check() && auth()->user()->role == 'chefProjet')
+
+{{-- tasks --}}
+{{-- @can('create', App\Models\Member::class) --}}
+<li class="nav-item menu-open">
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('members.index') }}" class="nav-link {{ Request::is('members*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-tasks"></i>
+                <p>{{ __('words.project_tasks') }}</p>
+            </a>
+        </li>
+    </ul>
+</li>
+{{-- @endcan --}}
+{{-- links member --}}
+@can('create', App\Models\Member::class)
 <li class="nav-item menu-open">
     <ul class="nav nav-treeview">
         <li class="nav-item">
@@ -22,4 +37,4 @@
         </li>
     </ul>
 </li>
-@endif
+@endcan

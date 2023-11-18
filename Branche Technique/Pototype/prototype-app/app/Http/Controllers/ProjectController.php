@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ProjectExport;
-use App\Models\Project;
 use App\Models\Task;
 use App\Repositories\Interfaces\ProjectInterface;
 use App\Repositories\Interfaces\TaskInterface;
 use Illuminate\Http\Request;
-use App\Exports\UsersExport;
 use App\Imports\ProjectImport;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,10 +14,12 @@ use Maatwebsite\Excel\Facades\Excel;
 class ProjectController extends Controller
 {
     private $projectInterface;
+    private $taskInterface;
 
-    public function __construct(ProjectInterface $projectInterface)
+    public function __construct(ProjectInterface $projectInterface, TaskInterface $taskInterface)
     {
-        return $this->projectInterface = $projectInterface;
+        $this->projectInterface = $projectInterface;
+        $this->taskInterface = $taskInterface;
     }
     /**
      * Display a listing of the resource.
@@ -71,6 +71,7 @@ class ProjectController extends Controller
      */
     public function show(Request $request, $id)
     {
+        // get data why search
         if($request->ajax()) 
         {
             $searchValue = $request->get('searchValue');
@@ -87,8 +88,10 @@ class ProjectController extends Controller
             return view('projects.tasks.search-tasks', compact('projects'))->render();
         }
     
+        // get tasks this project
+        $tasks = $this->taskInterface->getAll($id);
         $project = $this->projectInterface->show($id);
-        return view('projects.show', compact('project'));
+        return view('projects.show', compact('project', 'tasks'));
     }
 
     /**

@@ -10,6 +10,13 @@ class RepositoryTask implements TaskInterface {
     Task::create($data);
   }
 
+  // get all tasks
+  public function getAll($idProject)
+  {
+    $tasks = Task::where('project_Id', $idProject)->paginate(4);
+    return $tasks;
+  }
+
 // find One tasks
 public function find($id)
 {

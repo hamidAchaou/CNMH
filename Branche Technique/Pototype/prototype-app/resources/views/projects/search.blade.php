@@ -3,9 +3,10 @@
     <tr>
         <td>{{ $project->name }}</td>
         <td>{{ $project->description }}</td>
-        <td class="d-md-flex">
-            <a href="{{ route('projects.show', ['id' => $project->id]) }}" class="btn btn-default text-center">
-                <i class="fa-solid fa-eye"></i>
+        <td class="d-md-flex justify-content-center">
+            <a href="{{ route('projects.show', ['id' => $project->id]) }}" class="btn btn-primary text-center mr-2">
+                <i class="fa-solid fa-eye"></i> 
+                 {{ __('words.Tasks')}}
             </a>
             @can('update', App\Models\Member::class)
                 <!-- btn edit  -->
@@ -15,7 +16,7 @@
             @endcan
             @can('delete', App\Models\Member::class)
                 <!-- btn delete  -->
-                <button type="submit" class="btn btn-default mr-2" onclick="deleetProject({{ $project->id }})" data-toggle="modal" data-target="#exampleModal">
+                <button type="submit" class="btn btn-danger mr-2" onclick="deleetProject({{ $project->id }})" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-trash-alt"></i>
                 </button>
             @endcan
@@ -23,7 +24,27 @@
     </tr>
 @endforeach
 <tr>
-    <td colspan="3" align="center" >
+    <td>
+        <div class="d-flex align-items-center">
+            @can('create', App\Models\Member::class)
+                <form action="{{ route('projects.import') }}" method="post"
+                    enctype="multipart/form-data" id="importForm">
+                    @csrf
+                    <label for="upload" class="btn btn-default  mb-0 font-weight-normal">
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        {{ __('words.import') }}
+                    </label>
+                    <input type="file" id="upload" name="file" style="display:none;" />
+                </form>
+            @endcan
+            <a href="{{ route('projects.export') }}" class="btn  btn-default  mt-0 mx-2">
+                <i class="fa-solid fa-file-export"></i>
+                {{ __('words.export') }}
+            </a>
+        </div>
+    </td>
+    <td></td>
+    <td colspan="3" class="d-flex flex-row-reverse bd-highlight">
         {!! $projects->links() !!}
     </td>
 </tr>

@@ -44,6 +44,9 @@ Route::prefix('projects')->middleware('auth')->group(function () {
         Route::delete('/task/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
         Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
         Route::post('/tasks/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
+            // export pojects
+        Route::get('tasks/export/', [TaskController::class, 'export'])->name('tasks.export');
+        Route::post('tasks/import/', [TaskController::class, 'import'])->name('tasks.import');
     });
     
 

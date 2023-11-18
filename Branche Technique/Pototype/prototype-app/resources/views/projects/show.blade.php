@@ -7,10 +7,10 @@
                 <div class="mt-4 container row justify-content-between">
                     <div class="form-group col-md-4">
                         <h4 class="container">{{ $project->name }}</h4>
-                        <input type="hidden" id="projectId" value="{{$project->id}}">
+                        <input type="hidden" id="projectId" value="{{ $project->id }}">
                     </div>
                     {{-- neveau Task --}}
-                    @can('view', new App\Models\Member)
+                    @can('view', new App\Models\Member())
                         <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
                             <a href="{{ route('tasks.create', ['id' => $project->id]) }}" class="btn btn-primary"><i
                                     class="fas fa-plus"></i> Nouveau Tache</a>
@@ -34,11 +34,11 @@
                                 </div>
                             @endif
                             @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                {{ session('error') }}.
-                            </div>
-                        @endif
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ session('error') }}.
+                                </div>
+                            @endif
                         </div>
                         <div class="card">
                             <div class="card-header col-md-12 d-flex justify-content-between">
@@ -81,27 +81,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            {{-- <div class="card-footer ">
-                                <div class="d-flex justify-content-between align-items-center p-2">
-                                    <div class="d-flex align-items-center">
-                                        {{-- @can('create', App\Models\Member::class)
-                                        <form action="{{ route('projects.import') }}" method="post" enctype="multipart/form-data" id="importForm">
-                                            @csrf
-                                            <label for="upload" class="btn btn-default btn-sm mb-0 font-weight-normal">
-                                                <i class="fa-solid fa-file-arrow-down"></i>
-                                                {{ __('IMPORTER') }}
-                                            </label>
-                                            <input type="file" id="upload" name="file" style="display:none;" onchange="submitForm()"/>
-                                        </form>
-                                        @endcan --}}
-                                        <a href="{{route('projects.export')}}" class="btn  btn-default btn-sm mt-0 mx-2">
-                                            <i class="fa-solid fa-file-export"></i>
-                                            {{ __('EXPORTER') }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,55 +92,54 @@
     <script>
         $(document).ready(function() {
 
-          function fetchData(page, searchValue) {
-              let projectId = $('#projectId').val();
-              $.ajax({
-                  url: '/projects/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
-                  success: function(data) {
-                      $('tbody').html("");
-                      $('tbody').html(data);
-                  }
-              });
-          }
+            function fetchData(page, searchValue) {
+                let projectId = $('#projectId').val();
+                $.ajax({
+                    url: '/projects/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
+                    success: function(data) {
+                        $('tbody').html("");
+                        $('tbody').html(data);
+                    }
+                });
+            }
 
-          $('body').on('keyup', '#inputSearch-tasks', function() {
-              let page = $('#pageNumber').val();
-              let searchValue = $('#inputSearch-tasks').val();
-              fetchData(page, searchValue);
-          });
-      });
-
-
+            $('body').on('keyup', '#inputSearch-tasks', function() {
+                let page = $('#pageNumber').val();
+                let searchValue = $('#inputSearch-tasks').val();
+                fetchData(page, searchValue);
+            });
+        });
 
 
 
 
-    //   $(document).ready(function () {
-    //     // get data
-    //     function fetchData(page searchValue) {
-    //         let projectId = $('#projectId').val();
-    //         $.ajax([
-    //             url: '/projects/' + projectId + '&searchValue=' + page;
-    //             success: function (data) 
-    //             {
-    //               $('tbody').html("");
-    //               $('tbody').html(data);
-    //             } 
-    //         ]) 
-    //     }
 
-    //     // search 
-    //     $('body').on('keyup', '#inputSearch-tasks', function () {
-    //         let page = $('#pageNumber').val;
-    //         let searchValue = $('#inputSearch-tasks').val;
 
-    //         fetchData(page searchValue);
-    //     })
-    //   })
+        //   $(document).ready(function () {
+        //     // get data
+        //     function fetchData(page searchValue) {
+        //         let projectId = $('#projectId').val();
+        //         $.ajax([
+        //             url: '/projects/' + projectId + '&searchValue=' + page;
+        //             success: function (data) 
+        //             {
+        //               $('tbody').html("");
+        //               $('tbody').html(data);
+        //             } 
+        //         ]) 
+        //     }
+
+        //     // search 
+        //     $('body').on('keyup', '#inputSearch-tasks', function () {
+        //         let page = $('#pageNumber').val;
+        //         let searchValue = $('#inputSearch-tasks').val;
+
+        //         fetchData(page searchValue);
+        //     })
+        //   })
     </script>
 
     {{-- modal Delete Tasks --}}
     @component('component.modal-delete-tasks')
     @endcomponent
-
 @endsection

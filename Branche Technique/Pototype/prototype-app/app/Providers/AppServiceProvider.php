@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Repositories\Interfaces\InterfaceMembers;
 use App\Repositories\membersRepository;
 use App\Repositories\Interfaces\ProjectInterface;
-use App\Repositories\Interface\TaskInterface;
+use App\Repositories\Interfaces\TaskInterface;
 use App\Repositories\RepositoryProject;
 use App\Repositories\RepositoryTask;
 use Illuminate\Pagination\Paginator;use Illuminate\Support\ServiceProvider;

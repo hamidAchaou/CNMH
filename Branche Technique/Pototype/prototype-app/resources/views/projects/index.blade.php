@@ -40,9 +40,9 @@
                             @endif
                         </div>
                         <div class="card">
-                            <div class="card-header col-md-12">
+                            <div class="card-header col-md-12 d-flex flex-row-reverse bd-highlight">
                                 {{-- search --}}
-                                <div class="input-group input-group-sm  col-md-3 p-0">
+                                <div class="input-group input-group  col-md-3 p-0">
                                     <input type="text" id="inputSearch" class="form-control float-right"
                                         placeholder="Search">
                                     <div class="input-group-append">
@@ -60,7 +60,7 @@
                                         <tr>
                                             <th>Nom de projet</th>
                                             <th>Description</th>
-                                            <th>Action</th>
+                                            <th class="d-flex justify-content-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
@@ -71,32 +71,6 @@
                                 <input type="hidden" id="pageNumber" value="1">
                             </div>
                             <div class="card-footer ">
-                                <div class="d-flex justify-content-between align-items-center p-2">
-                                    <div class="d-flex align-items-center">
-                                        @can('create', App\Models\Member::class)
-                                            <form action="{{ route('projects.import') }}" method="post"
-                                                enctype="multipart/form-data" id="importForm">
-                                                @csrf
-                                                <label for="upload" class="btn btn-default btn-sm mb-0 font-weight-normal">
-                                                    <i class="fa-solid fa-file-arrow-down"></i>
-                                                    {{ __('IMPORTER') }}
-                                                </label>
-                                                <input type="file" id="upload" name="file" style="display:none;" />
-                                            </form>
-
-                                            <script>
-                                                document.getElementById('upload').addEventListener('change', function() {
-                                                    document.getElementById('importForm').submit();
-                                                });
-                                            </script>
-                                        @endcan
-                                        <a href="{{ route('projects.export') }}" class="btn  btn-default btn-sm mt-0 mx-2">
-                                            <i class="fa-solid fa-file-export"></i>
-                                            {{ __('EXPORTER') }}
-                                        </a>
-                                    </div>
-                                </div>
-
 
                             </div>
                         </div>
@@ -105,6 +79,15 @@
         </section>
     </div>
 
+    {{-- script import Project --}}
+    
+    <script>
+        document.getElementById('upload').addEventListener('change', function() {
+            document.getElementById('importForm').submit();
+        });
+    </script>
+    
+    {{-- link ajax --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
