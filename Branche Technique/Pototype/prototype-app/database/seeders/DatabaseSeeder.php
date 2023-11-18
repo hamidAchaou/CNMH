@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -54,28 +55,28 @@ class DatabaseSeeder extends Seeder
                 'firstName' => 'AChaou',
                 'lastName' => 'Hamid',
                 'email' => 'hamid@gmail.com',
-                'password' => '$2y$12$e80ITC5S0HOD7JY95GuBrukneqN/8vlxGMC5zAiLvZY/u1Et8LTk.',
+                'password' => Hash::make('hamid@gmail.com'),
                 'role' => 'chefProjet',
             ],
             [
                 'firstName' => 'AChaou',
                 'lastName' => 'khalid',
                 'email' => 'khalid@gmail.com',
-                'password' => '$2y$12$7sXmPx2VQmsZDn9csOKTCedEU2FEI2KhXTvrjS/bfxx4F.gCWqfIe',
+                'password' => Hash::make('khalid@gmail.com'),
                 'role' => 'member',
             ],
             [
                 'firstName' => 'ADNAN',
                 'lastName' => 'ADNANO',
                 'email' => 'adnan@gmail.com',
-                'password' => '$2y$12$VtYQ/ZleIrKNKf.S.6LqLejUoS.YvBlVUVKyBlko4nTSNzqtaBQ2K',
+                'password' => Hash::make('adnan@gmail.com'),
                 'role' => 'member',
             ],
             [
                 'firstName' => 'Betrji',
                 'lastName' => 'Jalil',
                 'email' => 'jalil@gmail.com',
-                'password' => '$2y$12$0FbShrjlTCJ7dUvdnUsCQeaEztepI0S.0BRhl.2AWU2rU9jd5ZIb.',
+                'password' => Hash::make('jalil@gmail.com'),
                 'role' => 'member',
             ]
         ]);

@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Repositories\Interfaces\InterfaceMembers;
 use App\Repositories\Interfaces\InterfaceProjects;
 use App\Repositories\Interfaces\InterfaceTask;
+use App\Repositories\Interfaces\InterfaceMembers;
 use App\Repositories\membersRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\TaskRepository;

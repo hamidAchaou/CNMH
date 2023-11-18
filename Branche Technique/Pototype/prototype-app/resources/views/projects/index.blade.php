@@ -8,10 +8,13 @@
                     <div class="form-group col-md-4">
                         <h4 class="container">{{ __('words.projects') }}</h4>
                     </div>
-                    <div class="d-flex flex-row-reverse form-group col-md-4">
-                        <a href="{{ route('projects.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> 
-                            {{ __('words.new_project_button') }}</a>
-                    </div>
+                    {{-- create Project --}}
+                     @can('create', App\Models\Member::class)
+                        <div class="d-flex flex-row-reverse form-group col-md-4">
+                            <a href="{{ route('projects.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> 
+                                {{ __('words.new_project_button') }}</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -29,29 +32,29 @@
                                     </h5>
                                 </div>
                             @endif
+                            @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                {{ session('error') }}.
+                            </div>
+                        @endif
                         </div>
                         <div class="card">
-                            <div class="card-header col-md-12 d-flex justify-content-between">
-                                <div>
-                                    <select class="custom-select">
-                                        @foreach ($projects as $project)
-                                            <option value="" selected>{{ $project->name }}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                {{-- search --}}
-                                <div class="input-group input-group-sm  col-md-3 p-0">
-                                    <input type="text" id="inputSearch" class="form-control float-right"
-                                        placeholder="{{ __('words.search_placeholder') }}">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                            <div class="card-header col-md-12">
+                                {{-- serarch --}}
+                                <div class=" p-0">
+                                    <div class="input-group input-group-sm float-sm-right col-md-3 p-0">
+                                        <input type="text" id="inputSearch-tasks"
+                                            class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                {{-- </div> --}}
                             </div>
+
 
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped text-nowrap">
@@ -59,7 +62,6 @@
                                         <tr>
                                             <th>Nom de projet</th>
                                             <th>Description</th>
-                                            <th>Tache</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -70,7 +72,25 @@
 
                                 <input type="hidden" id="pageNumber" value="1">
                             </div>
-
+                            <div class="card-footer ">
+                                <div class="d-flex justify-content-between align-items-center p-2">
+                                    <div class="d-flex align-items-center">
+                                        @can('create', App\Models\Member::class)
+                                        <form action="{{ route('projects.import') }}" method="post" enctype="multipart/form-data" id="importForm">
+                                            @csrf
+                                            <label for="upload" class="btn btn-default btn-sm mb-0 font-weight-normal">
+                                                <i class="fa-solid fa-file-arrow-down"></i>
+                                                {{ __('IMPORTER') }}
+                                            </label>
+                                            <input type="file" id="upload" name="file" style="display:none;" onchange="submitForm()"/>
+                                        </form>
+                                        @endcan
+                                        <a href="{{route('projects.export')}}" class="btn  btn-default btn-sm mt-0 mx-2">
+                                            <i class="fa-solid fa-file-export"></i>
+                                            {{ __('EXPORTER') }}
+                                        </a>
+                                    </div>
+                                </div>
 
 
                         </div>

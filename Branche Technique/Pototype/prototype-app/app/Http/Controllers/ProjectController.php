@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Exports\ProjectExport;
 use App\Models\Project;
 use App\Models\Task;
-use App\Repositories\Interface\ProjectInterface;
+use App\Repositories\Interfaces\ProjectInterface;
 use App\Repositories\Interface\TaskInterface;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
+use App\Imports\ProjectImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
@@ -131,5 +132,28 @@ class ProjectController extends Controller
     public function export() 
     {
         return Excel::download(new ProjectExport, 'projects.xlsx');
+    }
+
+    // Import Projects
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+    
+        try {
+            // Import data from the file using ProjectImport class
+            $data = Excel::import(new ProjectImport, $request->file('file'));
+    
+            // Process the imported data (assuming ProjectImport handles processing)
+            $result = $this->projectInterface->create($data);
+    
+            return redirect()->route('projects.index')->with('success', 'Projet ajouté avec succès');
+        } catch (\Throwable $e) {
+            // Log the error for further investigation if needed
+            // Log::error($e);
+    
+            return redirect()->route('projects.index')->withError('Quelque chose s\'est mal passé, vérifiez votre fichier');
+        }
     }
 }

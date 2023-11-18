@@ -11,7 +11,6 @@ return [
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',
     'projects_management' => 'Gestion des Projets',
-    'members' => 'Membres',
     'logout' => 'Déconnexion',
     'logout_icon' => 'fas fa-sign-out-alt',
     'sidebar_toggle_icon' => 'fas fa-bars',
@@ -47,4 +46,23 @@ return [
     'update' => 'Modifier',
     // fooetr
     'copyright' => 'Droits d\'auteur',
+
+    // member
+    'members_title' => 'Les Membres',
+    'add_member' => 'Ajouter Member',
+    'members_FirstName' => 'Nom',
+    'members_lasttName' => 'Prénom',
+    'email' => 'Email',
+    'first_name' => 'Nom',
+    'last_name' => 'Prénom',
+    'edit_member' => 'modifier Member',
+    'enter_first_name' => 'entrez votre prénom',
+
+    'current_password' => 'Current Password',
+    'enter_current_password' => 'Enter current password',
+    'password' => 'Password',
+    'enter_password' => 'Enter password',
+    'confirm_password' => 'Confirm Password',
+    'confirm_password_placeholder' => 'Confirm password',
+
 ];

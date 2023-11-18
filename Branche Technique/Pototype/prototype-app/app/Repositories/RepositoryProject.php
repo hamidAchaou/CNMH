@@ -2,7 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Project;
-use App\Repositories\Interface\ProjectInterface;
+use App\Repositories\Interfaces\ProjectInterface;
 
 class RepositoryProject implements ProjectInterface {
   public function getAll()
@@ -19,7 +19,7 @@ class RepositoryProject implements ProjectInterface {
     }
 
   // create new Projects
-  public function create(array $data) 
+  public function create($data) 
   {
     Project::create($data);
   }

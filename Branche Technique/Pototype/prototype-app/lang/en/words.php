@@ -10,7 +10,6 @@ return [
     'user_image_alt' => 'User Image',
     'profile_link' => 'Profile',
     'projects_management' => 'Project Management',
-    'members' => 'Members',
     'logout' => 'Logout',
     'logout_icon' => 'fas fa-sign-out-alt',
     'sidebar_toggle_icon' => 'fas fa-bars',
@@ -38,4 +37,24 @@ return [
     'update' => 'Update',
     // footer
     'copyright' => 'Copyright',
+
+    // member
+    'add_member' => 'Add Member',
+    'members_title' => 'Members',
+    'members_Firstname' => 'First Name',
+    'members_lasttname' => 'Last Name',
+    'email' => 'Email',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'edit_member' => 'edit Member',
+    'enter_first_name' => 'enter first name',
+
+    'current_password' => 'Current Password',
+    'enter_current_password' => 'Enter current password',
+    'password' => 'Password',
+    'enter_password' => 'Enter password',
+    'confirm_password' => 'Confirm Password',
+    'confirm_password_placeholder' => 'Confirm password',
+
+
 ];

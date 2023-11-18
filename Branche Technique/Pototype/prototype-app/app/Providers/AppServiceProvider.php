@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use App\Repositories\Interface\ProjectInterface;
+use App\Repositories\Interfaces\InterfaceMembers;
+use App\Repositories\membersRepository;
+use App\Repositories\Interfaces\ProjectInterface;
 use App\Repositories\Interface\TaskInterface;
 use App\Repositories\RepositoryProject;
 use App\Repositories\RepositoryTask;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(ProjectInterface::class, RepositoryProject::class);
         $this->app->bind(TaskInterface::class, RepositoryTask::class);
+        $this->app->bind(InterfaceMembers::class, membersRepository::class);
     }
 
     /**
