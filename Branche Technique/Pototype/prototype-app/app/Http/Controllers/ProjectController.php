@@ -6,7 +6,7 @@ use App\Exports\ProjectExport;
 use App\Models\Project;
 use App\Models\Task;
 use App\Repositories\Interfaces\ProjectInterface;
-use App\Repositories\Interface\TaskInterface;
+use App\Repositories\Interfaces\TaskInterface;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
 use App\Imports\ProjectImport;
@@ -84,7 +84,7 @@ class ProjectController extends Controller
                 })
                 ->get();
     
-            return view('projects.tasks.search', compact('projects'))->render();
+            return view('projects.tasks.search-tasks', compact('projects'))->render();
         }
     
         $project = $this->projectInterface->show($id);

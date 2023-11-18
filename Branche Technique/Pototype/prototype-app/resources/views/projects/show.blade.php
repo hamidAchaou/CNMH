@@ -51,7 +51,8 @@
                                 </div>
                                 {{-- search --}}
                                 <div class="input-group input-group-sm  col-md-3 p-0">
-                                    <input type="text" id="inputSearch" class="form-control float-right"
+                                    <input type="hidden" value="1" id="pageNumber">
+                                    <input type="text" id="inputSearch-tasks" class="form-control float-right"
                                         placeholder="{{ __('words.search_placeholder') }}">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -99,7 +100,7 @@
                                             {{ __('EXPORTER') }}
                                         </a>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,15 +109,14 @@
         </section>
     </div>
 
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
-      $(document).ready(function () {
+        $(document).ready(function() {
+
           function fetchData(page, searchValue) {
               let projectId = $('#projectId').val();
-              console.log(projectId);
-              console.log(data);
               $.ajax({
-                  url: '/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
+                  url: '/projects/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
                   success: function(data) {
                       $('tbody').html("");
                       $('tbody').html(data);
@@ -130,6 +130,34 @@
               fetchData(page, searchValue);
           });
       });
+
+
+
+
+
+
+    //   $(document).ready(function () {
+    //     // get data
+    //     function fetchData(page searchValue) {
+    //         let projectId = $('#projectId').val();
+    //         $.ajax([
+    //             url: '/projects/' + projectId + '&searchValue=' + page;
+    //             success: function (data) 
+    //             {
+    //               $('tbody').html("");
+    //               $('tbody').html(data);
+    //             } 
+    //         ]) 
+    //     }
+
+    //     // search 
+    //     $('body').on('keyup', '#inputSearch-tasks', function () {
+    //         let page = $('#pageNumber').val;
+    //         let searchValue = $('#inputSearch-tasks').val;
+
+    //         fetchData(page searchValue);
+    //     })
+    //   })
     </script>
 
     {{-- modal Delete Tasks --}}

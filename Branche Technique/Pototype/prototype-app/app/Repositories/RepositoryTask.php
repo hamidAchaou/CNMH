@@ -2,7 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Task;
-use App\Repositories\Interface\TaskInterface;
+use App\Repositories\Interfaces\TaskInterface;
 
 class RepositoryTask implements TaskInterface {
   public function create(array $data)

@@ -21,6 +21,10 @@
                 </button>
             @endcan
         </td>
-
     </tr>
 @endforeach
+<tr>
+    <td colspan="3" align="center" >
+        {!! $projects->links() !!}
+    </td>
+</tr>

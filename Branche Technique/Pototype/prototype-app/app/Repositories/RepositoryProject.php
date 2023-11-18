@@ -11,10 +11,17 @@ class RepositoryProject implements ProjectInterface {
     return $projects;
   }
 
+    // find One Project
+    public function find($id)
+    {
+      $project = Project::findOrFail($id);
+      return $project;
+    }
+
     // show One Project
     public function show($id)
     {
-      $project = Project::with('task')->findOrFail($id);
+      $project = Project::with('task')->$this->find($id)->paginate(4);
       return $project;
     }
 
@@ -24,12 +31,6 @@ class RepositoryProject implements ProjectInterface {
     Project::create($data);
   }
 
-  // find One Project
-  public function find($id)
-  {
-    $project = Project::findOrFail($id);
-    return $project;
-  }
 
 // Update Projects
 public function update(array $data, $id)
