@@ -68,10 +68,10 @@
                                 <table class="table table-striped text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Titrte</th>
-                                            <th>Description</th>
+                                            <th>{{ __('words.task_title') }}</th>
+                                            <th>{{ __('words.description') }}</th>
                                             @can('view', App\Models\Member::class)
-                                                <th>Action</th>
+                                              <th>{{ __('words.action') }}</th>
                                             @endcan
                                         </tr>
                                     </thead>

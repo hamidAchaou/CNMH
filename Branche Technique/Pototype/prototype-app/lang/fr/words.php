@@ -8,6 +8,7 @@ return [
 
     'new_task' => 'Nouveau Task',
     'Tasks' => 'Tâches',
+    'task_title' => 'Titre',
     'brand_text' => 'SoliCoders',
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
@@ -26,11 +27,22 @@ class MemberController extends Controller
     /**
      * Display All Projects.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $searchValue = $request->input('searchValue');
+            $searchValue = str_replace(' ', '%', $searchValue);
+    
+            $dataSearch = $this->membersRepository->search($searchValue);
+    
+            return view('members.data', compact('dataSearch'))->render();
+        }
+    
+        // load all members
         $members = $this->membersRepository->getAll();
         return view('members.index', compact('members'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -147,5 +159,21 @@ public function edit($id)
             'data' => $results->items(),
             'links' => $results->links()->toHtml(),
         ]);
+    }
+
+    // Export member
+    public function export() 
+    {
+        return Excel::download(new Member(), 'member.xlsx');
+    }
+
+    // Emport
+    public function import() 
+    {
+        Excel::import(new Member(), 'users.xlsx');
+        
+        // return redirect('/')->with('success', 'All good!');
+        return redirect()->route('members.index')->with('success', 'All good!');
+
     }
 }

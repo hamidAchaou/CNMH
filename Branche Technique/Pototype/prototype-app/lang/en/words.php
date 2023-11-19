@@ -7,6 +7,7 @@ return [
     'log_in' => 'Log in',
 
     'Tasks' => 'Tasks',
+    'task_title' => 'Titel',
     'brand_text' => 'SoliCoders',
     'user_image_alt' => 'User Image',
     'profile_link' => 'Profile',

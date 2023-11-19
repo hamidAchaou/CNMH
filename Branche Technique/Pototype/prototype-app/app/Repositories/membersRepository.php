@@ -51,13 +51,13 @@ class MembersRepository implements InterfaceMembers
         }
     }
 
-    // search Projects
+    // search data
     public function search($dataSearch)
     {
-
-        $results = User::where('Name', 'like', '%' . $dataSearch . '%')
-            ->orWhere('Code', 'like', '%' . $dataSearch . '%')
-            ->paginate(4);
-        return $results;
+        $results = User::where('firstName', 'like', '%' . $dataSearch . '%')
+                        ->orWhere('lastName', 'like', '%' . $dataSearch . '%')
+                        ->paginate(4);
+    
+        return view('members.data', compact('results'))->render();
     }
 }

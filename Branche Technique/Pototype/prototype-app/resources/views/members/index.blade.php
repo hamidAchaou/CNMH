@@ -22,9 +22,9 @@
                         </div>
                         @endif
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 ">
                         <div class="float-sm-right">
-                            <a href="{{ route('members.create') }}" class="btn btn-sm btn-primary"><i
+                            <a href="{{ route('members.create') }}" class="btn btn-primary"><i
                                     class="fas fa-plus"></i>{{ __('words.add_member') }}</a>
                         </div>
                     </div>
@@ -39,8 +39,10 @@
                         <div class="card">
                             <div class="card-header col-md-12">
                                 <div class=" p-0">
+                                    {{-- search --}}
                                     <div class="input-group input-group-sm float-sm-right col-md-3 p-0">
-                                        <input type="text" name="table_search" class="form-control float-right"
+                                        <input type="hidden" id="pageNumber" value="1">
+                                        <input type="text" id="inputSearch" name="inputSearch" class="form-control float-right"
                                             placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
@@ -52,6 +54,7 @@
                             </div>
 
                             <div class="card-body table-responsive p-0">
+                                {{-- table members --}}
                                 <table class="table table-striped text-nowrap">
                                     <thead>
                                         <tr>
@@ -62,35 +65,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($members as $member)
-                                            <tr>
-                                                <td>{{ $member->firstName }}</td>
-                                                <td>
-                                                    {{ $member->lastName }}
-                                                </td>
-                                                <td>
-                                                    {{ $member->email }}
-                                                </td>
-                                                <td>
-                                                    {{-- btn edit --}}
-                                                    <a href="{{ route('members.edit', ['member' => $member->id]) }}"
-                                                        class="btn btn-sm btn-default">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    {{-- btn delete --}}
-                                                    <button type="button" class="btn btn-sm btn-danger"
-                                                        onclick="AddIdMembers({{ $member->id }})" data-toggle="modal"
-                                                        data-target="#modalDeleteMember"><i
-                                                            class="fa-solid fa-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        @include('members.data')
 
                                     </tbody>
                                 </table>
                             </div>
                             <div class="card-footer clearfix">
-                                {{ $members->links() }}
+                                {{-- {{ $members->links() }} --}}
                             </div>
                         </div>
 
@@ -105,63 +86,31 @@
 
     </div>
     {{-- // Script for searching members --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#searchInput').on('input', function() {
-                let query = $(this).val();
-
-                if (query.length >= 3) {
-                    // Perform AJAX request to the search route using named route
-                    $.ajax({
-                        url: '{{ route('members.search') }}',
-                        method: 'GET',
-                        data: {
-                            query: query,
-                            _token: '{{ csrf_token() }}' // Add the _token parameter
-                        },
-                        success: function(data) {
-                            // Update the search results container
-                            displaySearchResults(data);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error:', xhr.responseText);
-                        }
-                        console.log('data'); // Fix the typo here
-                    });
-                } else {
-                    // Clear the search results container if the input is less than 3 characters
-                    $('#searchResults').empty();
-                }
-            });
-
-            // Function to display search results
-            function displaySearchResults(results) {
-                console.log(results); // Fix the typo here
-
-                let resultsContainer = $('#searchResults');
-                resultsContainer.empty();
-
-                if (results.length > 0) {
-                    $.each(results, function(index, result) {
-                        // Append the results to table rows
-                        resultsContainer.append('<tr>' +
-                            '<td>' + result.firstName + '</td>' +
-                            '<td>' + result.lastName + '</td>' +
-                            '<td>' + result.email + '</td>' +
-                            '<td class="d-flex">' +
-                            '<button type="submit" class="btn btn-primary mr-2 text-primary">' +
-                            '<i class="fas fa-edit"></i>' +
-                            '</button>' +
-                            '<button type="submit" class="btn btn-danger mr-2 text-danger">' +
-                            '<i class="fas fa-trash-alt"></i>' +
-                            '</button>' +
-                            '</td>' +
-                            '</tr>');
-                    });
-                } else {
-                    resultsContainer.append('<tr><td colspan="4">No results found</td></tr>');
-                }
+        $(document).ready(function () {
+            // function fetch data
+            function fetchData(page, searchValue) {
+                $.ajax({
+                    url: '/members?page=' + page + '&searchValue=' + searchValue,
+                    success: function(data) {
+                        $('tbody').html('');
+                        $('tbody').html(data);
+                        console.log(data)
+                    },
+                        error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                })
             }
-        });
+
+            $('body').on('keyup', '#inputSearch', function () {
+                let page = $('#pageNumber').val();
+                let searchValue = $('#inputSearch').val();
+
+                console.log(page);
+                fetchData(page, searchValue);
+            })
+        })
     </script>
 @endsection
