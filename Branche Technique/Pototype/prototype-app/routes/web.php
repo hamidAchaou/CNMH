@@ -39,11 +39,12 @@ Route::prefix('projects')->middleware('auth')->group(function () {
         Route::delete('/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
         
         // task
+        Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
         Route::get('/task/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
         Route::post('/task/{id}/store', [TaskController::class, 'store'])->name('tasks.store');
         Route::delete('/task/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
         Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-        Route::post('/tasks/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
+        Route::post('/task/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
             // export pojects
         Route::get('tasks/export/', [TaskController::class, 'export'])->name('tasks.export');
         Route::post('tasks/import/', [TaskController::class, 'import'])->name('tasks.import');

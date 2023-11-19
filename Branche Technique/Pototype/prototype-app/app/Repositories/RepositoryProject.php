@@ -10,6 +10,22 @@ class RepositoryProject implements ProjectInterface {
     $projects = Project::paginate(4);
     return $projects;
   }
+  
+  public function getProjectsNameId()
+  {
+      // $projects = Project::select('id', 'name')->get();
+      $projects = Project::all();
+      return $projects;
+  }
+
+  public function getFirstProject()
+  {
+      $firstProject = Project::first();
+      return $firstProject;
+  }
+  
+  
+  
 
     // find One Project
     public function find($id)

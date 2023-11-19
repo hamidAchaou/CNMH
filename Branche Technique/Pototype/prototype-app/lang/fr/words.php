@@ -7,6 +7,7 @@ return [
     'log_in' => 'Connexion',
 
     'new_task' => 'Nouveau Task',
+    'cancel' => 'Annuler',
     'Tasks' => 'Tâches',
     'task_title' => 'Titre',
     'brand_text' => 'SoliCoders',
@@ -34,6 +35,7 @@ return [
     'export' => 'Exporter',
     'import' => 'Importer',
     'add_project' => 'Ajouter Projet',
+    'edit_project' => 'Modifier le projet',
     'name' => 'Nom',
     'start_date' => 'Date de début',
     'end_date' => 'Date de fin',
@@ -46,6 +48,8 @@ return [
     'end_date' => 'Date de fin',
     'required_field' => 'Ce champ est obligatoire',
     'update' => 'Modifier',
+    'Submit' => 'Submit',
+    'inputName_placeholder' => 'Entrez le nom',
     // fooetr
     'copyright' => 'Droits d\'auteur',
 

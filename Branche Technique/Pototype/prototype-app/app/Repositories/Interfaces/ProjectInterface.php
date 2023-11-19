@@ -10,4 +10,6 @@ interface ProjectInterface {
     public function Update(array $data, $id);
     public function delete($id);
     public function search(string $searchValue);
+    public function getFirstProject();
+    public function getProjectsNameId();
 }

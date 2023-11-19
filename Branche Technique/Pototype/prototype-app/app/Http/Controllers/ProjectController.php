@@ -71,13 +71,15 @@ class ProjectController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $projects = $this->projectInterface->getProjectsNameId($id);
+        
         // get data why search
         if($request->ajax()) 
         {
             $searchValue = $request->get('searchValue');
             $searchValue = str_replace(' ', '%' , $searchValue );
     
-            $projects = Task::query()
+            $tasks = Task::query()
                 ->where('project_Id', $id) 
                 ->where(function ($query) use ($searchValue) {
                     $query->where('name', 'LIKE', '%' . $searchValue . '%')
@@ -85,13 +87,13 @@ class ProjectController extends Controller
                 })
                 ->get();
     
-            return view('projects.tasks.search-tasks', compact('projects'))->render();
+            return view('projects.tasks.search-tasks', compact('tasks'))->render();
         }
     
         // get tasks this project
         $tasks = $this->taskInterface->getAll($id);
         $project = $this->projectInterface->show($id);
-        return view('projects.show', compact('project', 'tasks'));
+        return view('projects.show', compact('project', 'tasks', 'projects'));
     }
 
     /**

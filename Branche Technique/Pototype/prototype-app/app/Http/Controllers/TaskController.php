@@ -3,23 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use App\Repositories\RepositoryTask;
+use App\Repositories\Interfaces\ProjectInterface;
+use App\Repositories\Interfaces\TaskInterface;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
 
-    private $repositoryTask;
-    public function __construct(RepositoryTask $repositoryTask)
+    private $taskInterface;
+    private $projectInterface;
+    public function __construct(TaskInterface $taskInterface, ProjectInterface $projectInterface)
     {
-        $this->repositoryTask = $repositoryTask;
+        $this->taskInterface = $taskInterface;
+        $this->projectInterface = $projectInterface;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $project = $this->projectInterface->getFirstProject();
+        $id = $project->id;
+
+        $tasks = $this->taskInterface->getAll($id);
+        $projects = $this->projectInterface->getProjectsNameId($id);
+
+        if($request->ajax()) {
+            $project_Id = $request->get('project');
+            $tasks = $this->taskInterface->getAll($project_Id);
+
+            // return view('projects.tasks.search-tasks', compact('tasks'))->render();
+            
+            // return response()->json(['tasks'=>$project]);
+            return response()->json(['tasks' => $tasks]);
+        }       
+
+        return view('projects.tasks.index', compact('project', 'tasks', 'projects'));
+
     }
 
     /**
@@ -27,7 +47,7 @@ class TaskController extends Controller
      */
     public function create($id)
     {
-        // $project = $this->repositoryTask->find($id);
+        // $project = $this->taskInterface->find($id);
         return view('projects.tasks.create', ['id' => $id]);
     }
 
@@ -44,7 +64,7 @@ class TaskController extends Controller
         // dd($request->project_Id);
         $data = $request->only('name', 'description', 'project_Id');
         
-        $this->repositoryTask->create($data);
+        $this->taskInterface->create($data);
 
         return redirect()->route('projects.show', ['id' => $id])->with('success', 'Task added successfully');
     }
@@ -62,7 +82,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $tasks = $this->repositoryTask->find($id);
+        $tasks = $this->taskInterface->find($id);
         return view('projects.tasks.edit', compact('tasks'));
     }
 
@@ -78,7 +98,7 @@ class TaskController extends Controller
         
 
         $data = $request->only('name', 'description');
-        $this->repositoryTask->update($data, $id);
+        $this->taskInterface->update($data, $id);
 
         $project_Id = request()->input('project_Id');
         return redirect()->route('projects.show', ['id' => $project_Id])->with('success', 'Task updated successfully');
@@ -90,9 +110,27 @@ class TaskController extends Controller
     public function destroy(Request $request)
     {
         $task_Id = $request->input('task_Id');
-        $this->repositoryTask->delete($task_Id);
+        $this->taskInterface->delete($task_Id);
 
         $project_Id = request()->input('project_Id');
         return redirect()->route('projects.show', ['id' => $project_Id])->with('success', 'Task deleted successfully');
     }
+
+    // filter task 
+    // public function filterTasks(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $projectId = $request->get('projectId');
+
+    //         // Assuming you have a Task model with a relationship to projects
+    //         $tasks = Task::where('project_id', $projectId)->get();
+
+    //         // return view('tasks.filtered_tasks', compact('tasks'))->render();
+    //         return view('projects.tasks.search-tasks', compact('tasks'))->render();
+
+    //     }
+
+    //     // Return an error message or handle non-ajax requests differently if needed
+    //     return response()->json(['error' => 'Invalid request']);
+    // }
 }
