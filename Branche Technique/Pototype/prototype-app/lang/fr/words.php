@@ -6,7 +6,9 @@ return [
     'get_started_with_amazing_features' => 'Commencez avec nos fonctionnalités étonnantes.',
     'log_in' => 'Connexion',
 
-    'new_task' => 'Nouveau Task',
+    'new_task' => 'Nouveau Tâche',
+    'edit_task' => 'Edit Tâche',
+    'add_task' => 'Add Tâche',
     'cancel' => 'Annuler',
     'Tasks' => 'Tâches',
     'task_title' => 'Titre',

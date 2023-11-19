@@ -13,7 +13,7 @@
                     @can('view', new App\Models\Member())
                         <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
                             <a href="{{ route('tasks.create', ['id' => $project->id]) }}" class="btn btn-primary"><i
-                                    class="fas fa-plus"></i> Nouveau Tache</a>
+                                    class="fas fa-plus"></i>{{ __('words.new_task') }}</a>
                         </div>
                     @endcan
                 </div>
@@ -50,7 +50,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 {{-- search --}}
                                 <div class="input-group input-group-sm  col-md-3 p-0">
                                     <input type="hidden" value="1" id="pageNumber">
@@ -73,7 +73,7 @@
                                             <th>{{ __('words.task_title') }}</th>
                                             <th>{{ __('words.description') }}</th>
                                             @can('view', App\Models\Member::class)
-                                              <th>{{ __('words.action') }}</th>
+                                                <th>{{ __('words.action') }}</th>
                                             @endcan
                                         </tr>
                                     </thead>
@@ -113,29 +113,32 @@
             });
         });
 
-// script filter
-    $(document).ready(function() {
-        $('#projectFilter').on('change', function () {
-            let project = $(this).val();
-            $.ajax({
-                url: "{{ route('tasks.index')}}",
-                type:"GET",
-                data:{'project': project},
-                // success:function (data){
-                //     let tasks = data.tasks;
-                //     $('tbody').html("");
-                //     $('tbody').html(data);
+        // script filter
+        $(document).ready(function() {
+            $('#projectFilter').on('change', function() {
+                let project = $(this).val();
+                $.ajax({
+                    url: "{{ route('tasks.index') }}",
+                    type: "GET",
+                    data: {
+                        'project': project
+                    },
+                    // success:function (data){
+                    //     let tasks = data.tasks;
+                    //     $('tbody').html("");
+                    //     $('tbody').html(data);
 
-                //     console.log(tasks)
-                    
-                // }
-                success: function(response) {
-    if (response && response.tasks && response.tasks.data && Array.isArray(response.tasks.data)) {
-        // Clear existing tbody content
-        $('tbody').html("");
+                    //     console.log(tasks)
 
-        response.tasks.data.forEach(function(task) {
-            var row = `
+                    // }
+                    success: function(response) {
+                        if (response && response.tasks && response.tasks.data && Array.isArray(
+                                response.tasks.data)) {
+                            // Clear existing tbody content
+                            $('tbody').html("");
+
+                            response.tasks.data.forEach(function(task) {
+                                var row = `
                 <tr>
                     <td>${task.name}</td>
                     <td>${task.description}</td>
@@ -151,21 +154,20 @@
                 </tr>
                 
             `;
-            // Append the new row to the tbody
-            $('tbody').append(row);
-        });
-    } else {
-        console.error('Invalid data structure:', response);
-    }
-}
-,
+                                // Append the new row to the tbody
+                                $('tbody').append(row);
+                            });
+                        } else {
+                            console.error('Invalid data structure:', response);
+                        }
+                    },
+                })
             })
-        })
-    });
-</script>
+        });
+    </script>
 
 
-{{-- <script type="text/javascript">
+    {{-- <script type="text/javascript">
     $(document).ready(function() {
         function getData(page, filterValue) {
             let projectId = $('#projectFilter').val();

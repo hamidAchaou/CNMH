@@ -21,37 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('projects')->middleware('auth')->group(function () {
 
-    // project
-    Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/{id}/show', [ProjectController::class, 'show'])->name('projects.show');
-    // export pojects
-    Route::get('export/', [ProjectController::class, 'export'])->name('projects.export');
-    Route::post('import/', [ProjectController::class, 'import'])->name('projects.import');
-    
-    // check chef project
-    Route::middleware(['auth', 'CheckChefProjet'])->group(function () {
-        Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
-        Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
-        Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-        Route::post('/{id}/update', [ProjectController::class, 'update'])->name('projects.update');
-        Route::delete('/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
-        
-        // task
-        Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
-        Route::get('/task/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
-        Route::post('/task/{id}/store', [TaskController::class, 'store'])->name('tasks.store');
-        Route::delete('/task/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
-        Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-        Route::post('/task/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
-            // export pojects
-        Route::get('tasks/export/', [TaskController::class, 'export'])->name('tasks.export');
-        Route::post('tasks/import/', [TaskController::class, 'import'])->name('tasks.import');
-    });
-    
-
-});
 
 // Route Members
 Route::middleware(['auth', 'CheckChefProjet'])->group(function () {
@@ -73,3 +43,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
+require __DIR__.'/projects.php';
