@@ -23,9 +23,9 @@ class MemberExport implements FromCollection, WithStyles, WithHeadings
     {
         return $this->memberData->map(function ($members) {
             return [
-                'first Name' => $members->firstName,
-                'last Name' => $members->lastName,
-                'description' => $members->description,
+                'firstName' => $members->firstName,
+                'lastName' => $members->lastName,
+                'email' => $members->email,
             ];
         });
     }
@@ -35,7 +35,7 @@ class MemberExport implements FromCollection, WithStyles, WithHeadings
         return [
             'first Name',
             'last Name',
-            'description',
+            'email',
         ];
     }
 

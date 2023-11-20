@@ -35,17 +35,17 @@ class MemberController extends Controller
         if ($request->ajax()) {
             $searchValue = $request->input('searchValue');
             $searchValue = str_replace(' ', '%', $searchValue);
-    
+
             $dataSearch = $this->membersRepository->search($searchValue);
-    
+
             return view('members.data', compact('dataSearch'))->render();
         }
-    
+
         // load all members
         $members = $this->membersRepository->getAll();
         return view('members.index', compact('members'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -63,7 +63,7 @@ class MemberController extends Controller
         $request->validate([
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -72,7 +72,7 @@ class MemberController extends Controller
         $email = strip_tags($request->input('email'));
         $password = Hash::make($request->password);
         $role = 'member';
-    
+
         $data = [
             'firstName' => $firstName,
             'lastName' => $lastName,
@@ -80,9 +80,9 @@ class MemberController extends Controller
             'password' => $password,
             'role' => $role,
         ];
-    
+
         $this->membersRepository->create($data);
-    
+
         return redirect()->route('members.index')->with('success', 'Project added successfully');
     }
 
@@ -94,14 +94,14 @@ class MemberController extends Controller
         //
     }
 
-/**
- * Show the form for editing the specified resource.
- */
-public function edit($id)
-{
-    $member = $this->membersRepository->find($id);
-    return view('members.edit', compact('member'));
-}
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $member = $this->membersRepository->find($id);
+        return view('members.edit', compact('member'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -114,28 +114,28 @@ public function edit($id)
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ]);
-    
+
         $firstName = strip_tags($request->input('firstName'));
         $lastName = strip_tags($request->input('lastName'));
         $email = strip_tags($request->input('email'));
         $role = 'member';
-    
+
         $data = [
             'firstName' => $firstName,
             'lastName' => $lastName,
             'email' => $email,
             'role' => $role,
         ];
-    
+
         // Process other fields as before
-    
+
         if ($request->filled('password')) {
             $password = Hash::make($request->password);
             $data['password'] = $password;
         }
-    
+
         $this->membersRepository->update($data, $id);
-    
+
         return redirect()->route('members.index')->with('success', 'Member updated successfully');
     }
     /**
@@ -148,16 +148,15 @@ public function edit($id)
         $this->membersRepository->delete($id);
 
         return redirect()->route('members.index')->with('success', 'Task deleted successfully');
-
     }
 
     // function search
     public function search(Request $request)
     {
         $datasearch = $request->input('search');
-    
+
         $results = $this->membersRepository->search($datasearch);
-    
+
         return response()->json([
             'data' => $results->items(),
             'links' => $results->links()->toHtml(),
@@ -165,20 +164,17 @@ public function edit($id)
     }
 
     // Export member
-    public function export() 
+    public function export()
     {
-        // $members =  $this->membersRepository->getAll();
-        $members =  Member::members()->get();
-        // return Member::member()->
-
-        // return Excel::download(new ProjectExport($projects), 'projects.xlsx');
-        return Excel::download(new MemberExport($members), 'member.xlsx');
+        $members = Member::members()->get();
+        // $members =  User::all();
+        return Excel::download(new MemberExport($members), 'members.xlsx');
     }
 
     /**
      * Import  Projects.
-     */    
-    public function import(Request $request) 
+     */
+    public function import(Request $request)
     {
 
         $request->validate([
@@ -191,11 +187,9 @@ public function edit($id)
 
 
             return redirect()->route('projects.index')->with('success', 'Member ajouté avec succès');
-
         } catch (\Throwable $e) {
             Log::error($e);
             return redirect()->route('projects.index')->withError('Quelque chose s\'est mal passé, vérifiez votre fichier');
         }
-
     }
 }

@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('members/export', [MemberController::class, 'export'])->name('members.export');  
+Route::get('members/import/', [MemberController::class, 'import'])->name('members.import');  
+
+
 
 Route::prefix('projects')->middleware('auth')->group(function () {
 
@@ -67,8 +71,8 @@ Route::middleware(['auth', 'CheckChefProjet'])->group(function () {
 
     Route::get('members/create', [MemberController::class, 'create'])->name('members.create');
     Route::post('members/store', [MemberController::class, 'store'])->name('members.store');  
-    Route::get('members/export/', [MemberController::class, 'export'])->name('members.export');  
-    Route::get('members/import/', [MemberController::class, 'import'])->name('members.import');  
+    // Route::get('members/export', [MemberController::class, 'export'])->name('members.export');  
+    // Route::get('members/import/', [MemberController::class, 'import'])->name('members.import');  
 });
 
 

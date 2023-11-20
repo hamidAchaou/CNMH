@@ -35,7 +35,7 @@
                     <input type="file" id="upload" name="file" style="display:none;" />
                 </form>
             @endcan
-            <a href="{{ route('members.import') }}" class="btn  btn-default  mt-0 mx-2">
+            <a href="{{ route('members.export') }}" class="btn  btn-default  mt-0 mx-2">
                 <i class="fa-solid fa-file-export"></i>
                 {{ __('words.export') }}
             </a>
