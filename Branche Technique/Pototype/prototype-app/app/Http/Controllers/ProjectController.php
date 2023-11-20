@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\ProjectInterface;
 use App\Repositories\Interfaces\TaskInterface;
 use Illuminate\Http\Request;
 use App\Imports\ProjectImport;
+use App\Models\Project;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -137,27 +138,28 @@ class ProjectController extends Controller
     // export Project 
     public function export() 
     {
-        return Excel::download(new ProjectExport, 'projects.xlsx');
+        $projects =  $this->projectInterface->getAll();
+        return Excel::download(new ProjectExport($projects), 'projects.xlsx');
     }
 
     // Import Projects
     public function import(Request $request, ProjectInterface $projectInterface)
-{
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv|max:2048',
-    ]);
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
 
-    try {
-        $import = new ProjectImport;
-        $data = Excel::import($import, $request->file('file'));
+        try {
+            $import = new ProjectImport;
+            Excel::import($import, $request->file('file'));
 
-        // The import method directly creates the models. No need for extra 'create' call.
+            // The import method directly creates the models. No need for extra 'create' call.
 
-        return redirect()->route('projects.index')->with('success', 'Projet ajouté avec succès');
+            return redirect()->route('projects.index')->with('success', 'Projet ajouté avec succès');
 
-    } catch (\Throwable $e) {
-        Log::error($e);
-        return redirect()->route('projects.index')->withError('Quelque chose s\'est mal passé, vérifiez votre fichier');
+        } catch (\Throwable $e) {
+            Log::error($e);
+            return redirect()->route('projects.index')->withError('Quelque chose s\'est mal passé, vérifiez votre fichier');
+        }
     }
-}
 }

@@ -5,8 +5,10 @@ namespace App\Imports;
 use App\Models\Project;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProjectImport implements ToModel
+class ProjectImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,7 +19,7 @@ class ProjectImport implements ToModel
     {
         try {
             return new Project([
-                'name' => $row["name"],
+                'name' => $row["nom"],
                 'description' => $row["description"],
             ]);
         } catch (\Throwable $e) {

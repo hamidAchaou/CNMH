@@ -28,6 +28,8 @@ class TaskController extends Controller
         $tasks = $this->taskInterface->getAll($id);
         $projects = $this->projectInterface->getProjectsNameId($id);
 
+        
+
         if($request->ajax()) {
             $project_Id = $request->get('project');
             $tasks = $this->taskInterface->getAll($project_Id);

@@ -3,6 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 interface InterfaceMembers {
+    
     public function getAll();
     // public function getNameProjects();
     public function find($id);

@@ -100,20 +100,21 @@
                 $.ajax({
                     url: '/projects/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
                     success: function(data) {
-                        $('tbody').html("");
+                        console.log(data)
+                        $('tbody').html(" ");
                         $('tbody').html(data);
                     }
                 });
             }
 
             $('body').on('keyup', '#inputSearch-tasks', function() {
-                let page = $('#pageNumber').val();
+                let page = 1;
                 let searchValue = $('#inputSearch-tasks').val();
                 fetchData(page, searchValue);
             });
         });
 
-        // script filter
+        // // script filter
         $(document).ready(function() {
             $('#projectFilter').on('change', function() {
                 let project = $(this).val();

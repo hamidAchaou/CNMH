@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MemberExport;
 use App\Models\Member;
 use App\Repositories\Interfaces\InterfaceMembers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\MemberImport;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
@@ -164,16 +167,35 @@ public function edit($id)
     // Export member
     public function export() 
     {
-        return Excel::download(new Member(), 'member.xlsx');
+        // $members =  $this->membersRepository->getAll();
+        $members =  Member::members()->get();
+        // return Member::member()->
+
+        // return Excel::download(new ProjectExport($projects), 'projects.xlsx');
+        return Excel::download(new MemberExport($members), 'member.xlsx');
     }
 
-    // Emport
-    public function import() 
+    /**
+     * Import  Projects.
+     */    
+    public function import(Request $request) 
     {
-        Excel::import(new Member(), 'users.xlsx');
-        
-        // return redirect('/')->with('success', 'All good!');
-        return redirect()->route('members.index')->with('success', 'All good!');
+
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        try {
+            $import = new MemberImport;
+            Excel::import($import, $request->file('file'));
+
+
+            return redirect()->route('projects.index')->with('success', 'Member ajouté avec succès');
+
+        } catch (\Throwable $e) {
+            Log::error($e);
+            return redirect()->route('projects.index')->withError('Quelque chose s\'est mal passé, vérifiez votre fichier');
+        }
 
     }
 }
