@@ -21,10 +21,10 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-
         // get data with search
         if($request->ajax())
         {
+
             $searchValue = $request->get("searchValue");
             $searchValue = str_replace(' ', '%' , $searchValue);
             $projects = $this->projectInterface->search($searchValue);
@@ -68,7 +68,9 @@ class ProjectController extends Controller
     {
         if($request->ajax()) 
         {
+
             $searchValue = $request->get('searchValue');
+            dd($searchValue);
             $searchValue = str_replace(' ', '%' , $searchValue );
     
             $projects = Task::query()

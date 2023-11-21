@@ -68,13 +68,7 @@
                                 </table>
                             </div>
 
-                            <div class="card-footer ">
-                                <div class="d-flex flex-row-reverse">
-
-                                    {{-- {{ $project->task->links()}} --}}
-
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -83,28 +77,62 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script>
-      $(document).ready(function () {
-          function fetchData(page, searchValue) {
-              let projectId = $('#projectId').val();
-              console.log(projectId);
-              $.ajax({
-                  url: '/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
-                  success: function(data) {
-                      $('tbody').html("");
-                      $('tbody').html(data);
-                      console.log(data);
-                  }
-              });
-          }
+    {{-- <script>
+        $(document).ready(function () {
+            function fetchData(page, searchValue) {
+                let projectId = $('#projectId').val();
+                let url = "{{ route('projects.show', ['id' => ':id']) }}";
+                url = url.replace(':id', projectId); // Replace :id with the actual project ID
+                url += '?page=' + page + '&searchValue=' + searchValue;
 
-          $('body').on('keyup', '#inputSearch-tasks', function() {
-              let page = 1;
-              let searchValue = $('#inputSearch-tasks').val();
-              fetchData(page, searchValue);
-          });
-      });
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $('tbody').html(data);
+                        console.log(data);
+                    }
+                });
+            }
+
+            $('body').on('keyup', '#inputSearch-tasks', function() {
+                let page = 1;
+                let searchValue = $('#inputSearch-tasks').val();
+                fetchData(page, searchValue);
+            });
+        });
+    </script> --}}
+
+    <script>
+        $(document).ready(function () {
+            function fetchData(page, searchValue) {
+                let projectId = $('#projectId').val();
+                $.ajax({
+                    // url:'/?page=' + page + '&searchValue=' + searchValue, 
+                    url: '/' + projectId + '/show' + '?page=' + page + '&searchValue=' + searchValue,
+                    success:function(data){
+                        $('tbody').html("");
+                        $('tbody').html(data);
+                    }
+                })
+            }
+
+            $('body').on('keyup', '#inputSearch-tasks', function () {
+                let page = 1;
+                let searchValue = $('#inputSearch-tasks').val();
+                fetchData(page, searchValue);
+            });
+
+            $('body').on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                let page = $(this).attr('href').split('page=')[1];
+                let searchValue = $('#inputSearch-tasks').val(); // Added quotation marks around #inputSearch
+                fetchData(page, searchValue);
+            })
+
+        });
     </script>
+
 
     {{-- modal Delete Tasks --}}
     @component('component.modal-delete-tasks')
