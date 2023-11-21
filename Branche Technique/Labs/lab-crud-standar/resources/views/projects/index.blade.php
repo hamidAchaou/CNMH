@@ -32,25 +32,17 @@
                             @endif
                         </div>
                         <div class="card">
-                            <div class="card-header col-md-12 d-flex justify-content-between">                                <div>
-                                    <select class="custom-select">
-                                        @foreach ($projects as $project)
-                                            <option value="" selected>{{ $project->name }}</option>
-                                        @endforeach    
-                                    </select>
-    
-                                </div>
+                            <div class="card-header col-md-12 d-flex flex-row-reverse bd-highlight">
                                 {{-- search --}}
-                                    <div class="input-group input-group-sm  col-md-3 p-0">
-                                        <input type="text" id="inputSearch" class="form-control float-right"
-                                            placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
+                                <div class="input-group input-group  col-md-3 p-0">
+                                    <input type="text" id="inputSearch" class="form-control float-right"
+                                        placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
                                     </div>
-                                {{-- </div> --}}
+                                </div>
                             </div>
 
                             <div class="card-body table-responsive p-0">
@@ -67,19 +59,14 @@
                                         @include('projects.search')
                                     </tbody>
                                 </table>
-                               
-                                <input type="hidden" id="pageNumber" value="1">
-                                <input type="hidden" id="hidden_page" value="1">
                             </div>
-                           
-
-                           
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+    {{-- SCRIPT SEARCH  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -94,17 +81,18 @@
             }
 
             $('body').on('keyup', '#inputSearch', function () {
-                let page = $('#pageNumber').val();
+                let page = 1;
                 let searchValue = $('#inputSearch').val();
                 fetchData(page, searchValue);
             });
 
-            // $('body').on('click', '.pagination a', function(e) {
-            //     e.preventDefault();
-            //     let page = $(this).attr('href').split('page=')[1];
-            //     let searchValue = $(#inputSearch).val();
-            //     fetchData(page, searchValue);
-            // })
+            $('body').on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                let page = $(this).attr('href').split('page=')[1];
+                let searchValue = $('#inputSearch').val(); // Added quotation marks around #inputSearch
+                fetchData(page, searchValue);
+            })
+
         });
     </script>
 

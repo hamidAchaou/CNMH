@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Repositories\Interface\ProjectInterface;
 use App\Repositories\RepositoryTask;
 use Illuminate\Http\Request;
 
@@ -10,16 +11,23 @@ class TaskController extends Controller
 {
 
     private $repositoryTask;
-    public function __construct(RepositoryTask $repositoryTask)
+    private $projectInterface;
+    public function __construct(RepositoryTask $repositoryTask, ProjectInterface $projectInterface)
     {
         $this->repositoryTask = $repositoryTask;
+        $this->projectInterface = $projectInterface;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $projects = $this->projectInterface->getAll();
+        $project = $projects[0];
+        // get tasks this project
+        // $idProject = $project->id;
+        // $tasks = $this->repositoryTask->getAll($idProject);
+        return view('projects.tasks.index', compact('project'));
     }
 
     /**

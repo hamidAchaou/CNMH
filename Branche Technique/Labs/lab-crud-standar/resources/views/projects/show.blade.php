@@ -88,18 +88,18 @@
           function fetchData(page, searchValue) {
               let projectId = $('#projectId').val();
               console.log(projectId);
-              console.log(data);
               $.ajax({
                   url: '/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
                   success: function(data) {
                       $('tbody').html("");
                       $('tbody').html(data);
+                      console.log(data);
                   }
               });
           }
 
           $('body').on('keyup', '#inputSearch-tasks', function() {
-              let page = $('#pageNumber').val();
+              let page = 1;
               let searchValue = $('#inputSearch-tasks').val();
               fetchData(page, searchValue);
           });

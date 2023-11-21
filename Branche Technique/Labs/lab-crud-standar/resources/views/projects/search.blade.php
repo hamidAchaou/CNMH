@@ -14,14 +14,17 @@
                 <i class="fas fa-edit"></i>
             </a>
             <!-- btn delete  -->
-            <button type="submit" class="btn btn-default mr-2" onclick="deleetProject({{ $project->id }})" data-bs-toggle="modal" data-bs-target="#delete-project">
+            <button type="submit" class="btn btn-danger mr-2" onclick="deleetProject({{ $project->id }})" data-bs-toggle="modal" data-bs-target="#delete-project">
                 <i class="fas fa-trash-alt"></i>
             </button>
         </td>
     </tr>
 @endforeach
 <tr>
-    <td colspan="3" align="center" >
+    <td></td>
+    <td></td>
+    <td></td>
+    <td colspan="3" align="center" class="pagination">
         {!! $projects->links() !!}
     </td>
 </tr>

@@ -19,12 +19,23 @@
                 <a href="{{route('projects.index')}}" class="nav-link">
                   <i class="fas fa-chart-bar"></i>
                   <p>
-                    Gestion Projects
+                    Gestion des projets
                   </p>
                 </a>
               </li>
             </ul>
           </li>
+          {{-- links tasks --}}
+          <li class="nav-item">
+            <a href="{{route('tasks.index')}}" class="nav-link">
+              <i class="fas fa-chart-bar"></i>
+              <p>
+                Gestion des Taches
+              </p>
+            </a>
+          </li>
+        </ul>
+      </li>
         </ul>
       </nav>
     </div>

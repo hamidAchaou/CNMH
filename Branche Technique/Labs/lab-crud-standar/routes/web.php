@@ -25,9 +25,12 @@ Route::post('/{id}/update', [ProjectController::class, 'update'])->name('project
 Route::delete('/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
 
-// task
-Route::get('/task/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
-Route::post('/task/{id}/store', [TaskController::class, 'store'])->name('tasks.store');
-Route::delete('/task/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
-Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-Route::post('tasks/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
+Route::prefix('tasks')->group(function () {
+    // task
+    Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
+    Route::post('/{id}/store', [TaskController::class, 'store'])->name('tasks.store');
+    Route::delete('/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::get('/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+    Route::post('/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
+});

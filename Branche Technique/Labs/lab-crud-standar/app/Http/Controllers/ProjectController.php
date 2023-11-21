@@ -77,13 +77,14 @@ class ProjectController extends Controller
                     $query->where('name', 'LIKE', '%' . $searchValue . '%')
                           ->orWhere('description', 'LIKE', '%' . $searchValue . '%');
                 })
-                ->get();
+                ->paginate(3);
     
             return view('projects.tasks.search', compact('projects'))->render();
         }
     
         $project = $this->projectInterface->show($id);
-        return view('projects.show', compact('project'));
+        $tasks = Task::where('project_id', $id)->paginate(4);
+        return view('projects.show', compact('project', 'tasks'));
     }
 
     /**
