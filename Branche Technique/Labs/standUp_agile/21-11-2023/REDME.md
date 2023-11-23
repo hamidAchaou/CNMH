@@ -1,4 +1,4 @@
-Le 21 novembre 2023, le prototype concernant l'exportation et l'importation de projets et de membres dans la prototype cnmh.
+Le 22 novembre 2023, le prototype concernant l'exportation et l'importation de projets et de membres dans la prototype cnmh.
 
 Pour la journée d'aujourd'hui, terminer le Lab Laravel standard et créer un Lab d'authentification basique.
 
