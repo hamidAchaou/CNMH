@@ -22,6 +22,8 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+
+        
         $project = $this->projectInterface->getFirstProject();
         $id = $project->id;
 
@@ -29,16 +31,21 @@ class TaskController extends Controller
         $projects = $this->projectInterface->getProjectsNameId($id);
 
         
-
-        if($request->ajax()) {
-            $project_Id = $request->get('project');
-            $tasks = $this->taskInterface->getAll($project_Id);
-
-            // return view('projects.tasks.search-tasks', compact('tasks'))->render();
-            
-            // return response()->json(['tasks'=>$project]);
-            return response()->json(['tasks' => $tasks]);
-        }       
+        if($request->ajax()) 
+        {
+            $searchValue = $request->get('searchValue');
+            $searchValue = str_replace(' ', '%' , $searchValue );
+    
+            $tasks = Task::query()
+                ->where('project_Id', $id) 
+                ->where(function ($query) use ($searchValue) {
+                    $query->where('name', 'LIKE', '%' . $searchValue . '%')
+                          ->orWhere('description', 'LIKE', '%' . $searchValue . '%');
+                })
+                ->paginate(2);
+    
+            return view('projects.tasks.search-tasks', compact('tasks'))->render();
+        }     
 
         return view('projects.tasks.index', compact('project', 'tasks', 'projects'));
 

@@ -76,22 +76,22 @@ class ProjectController extends Controller
     {
         $projects = $this->projectInterface->getProjectsNameId($id);
         
-        // get data why search
-        if($request->ajax()) 
-        {
-            $searchValue = $request->get('searchValue');
-            $searchValue = str_replace(' ', '%' , $searchValue );
+        // // get data why search
+        // if($request->ajax()) 
+        // {
+        //     $searchValue = $request->get('searchValue');
+        //     $searchValue = str_replace(' ', '%' , $searchValue );
     
-            $tasks = Task::query()
-                ->where('project_Id', $id) 
-                ->where(function ($query) use ($searchValue) {
-                    $query->where('name', 'LIKE', '%' . $searchValue . '%')
-                          ->orWhere('description', 'LIKE', '%' . $searchValue . '%');
-                })
-                ->get();
+        //     $tasks = Task::query()
+        //         ->where('project_Id', $id) 
+        //         ->where(function ($query) use ($searchValue) {
+        //             $query->where('name', 'LIKE', '%' . $searchValue . '%')
+        //                   ->orWhere('description', 'LIKE', '%' . $searchValue . '%');
+        //         })
+        //         ->paginate(2);
     
-            return view('projects.tasks.search-tasks', compact('tasks'))->render();
-        }
+        //     return view('projects.tasks.search-tasks', compact('tasks'))->render();
+        // }
     
         // get tasks this project
         $tasks = $this->taskInterface->getAll($id);

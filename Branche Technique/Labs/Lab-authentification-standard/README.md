@@ -1,77 +1,71 @@
-# Laravel Authentication with Bootstrap UI
+# Authentification dans Laravel avec UI et AdminLTE
 
-This repository demonstrates how to set up authentication using Laravel UI with Bootstrap for a Laravel application.
+Ce référentiel démontre la configuration de l'authentification dans Laravel en utilisant l'interface utilisateur (UI) avec le thème AdminLTE.
 
-## Prerequisites
+## Package admin LTE
+- Laravel ui adminlte
+ - [Documentation](https://infyom.com/open-source/laravel-ui-adminlte/docs)
 
-- PHP installed on your machine
-- Composer globally installed
-- Node.js and npm installed
+## Pour commencer
 
-## Getting Started
-
-1. **Clone the repository**
+1. **Cloner le dépôt**
 
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/hamidAchaou/CNMH/tree/main/Branche%20Technique/Labs/Lab-authentification-standard
     ```
 
-2. **Install Dependencies**
+2. **Installer les dépendances**
 
     ```bash
     composer install
     npm install
     ```
 
-3. **Set Up Environment Variables**
+3. **Configurer les variables d'environnement**
 
-    - Rename `.env.example` to `.env`
-    - Configure your database credentials in the `.env` file
+    - Renommez `.env.example` en `.env`
+    - Configurez vos identifiants de base de données dans le fichier `.env`
 
-4. **Generate Application Key**
+4. **Générer la clé de l'application**
 
     ```bash
     php artisan key:generate
     ```
 
-5. **Run Migrations**
+5. **Exécuter les migrations**
 
     ```bash
     php artisan migrate
     ```
 
-6. **Install Laravel UI and Bootstrap**
+## Installation
 
-    ```bash
-    composer require laravel/ui
-    php artisan ui bootstrap --auth
-    ```
+- create new project laravel :
+  ```bash
+  composer create-project laravel/laravel laravel-starter
+  ```
 
-7. **Compile Assets**
+- Run Migrate Data :
+  ```bash
+  php artisan migrate
+  ```
+- Installez Laravel UI et le préréglage AdminLTE :
+  ```bash
+  composer require infyomlabs/laravel-ui-adminlte
+  ```
+  
+- Ensuite, utilisez la commande artisan UI pour générer les vues d'authentification avec le thème AdminLTE :
+  ```bash
+  php artisan ui adminlte --auth
+  ```
+  
+- Installation des dépendances Frontend :
+  ```bash
+  npm install
+  npm run dev ou npm run build
+  ```
 
-    ```bash
-    npm run dev
-    ```
-
-8. **Start the Development Server**
-
-    ```bash
-    php artisan serve
-    ```
-
-9. **Access the Application**
-
-    Open your browser and go to `http://localhost:8000`
-
-## Additional Information
-
-- For production deployment, make sure to configure your web server (e.g., Apache, Nginx) to serve the application properly.
-- Customize the UI and styles by modifying the Bootstrap views located in the `resources/views` directory.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request for any enhancements or fixes.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+- Démarrage du serveur:
+  ```bash
+  php artisan serve
+  ```

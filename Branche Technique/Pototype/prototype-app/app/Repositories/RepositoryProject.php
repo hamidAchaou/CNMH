@@ -7,7 +7,7 @@ use App\Repositories\Interfaces\ProjectInterface;
 class RepositoryProject implements ProjectInterface {
   public function getAll()
   {
-    $projects = Project::paginate(4);
+    $projects = Project::paginate(2);
     return $projects;
   }
   
