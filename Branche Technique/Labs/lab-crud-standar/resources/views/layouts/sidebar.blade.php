@@ -16,10 +16,10 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('projects.index')}}" class="nav-link">
+                <a href="{{route('projects.index')}}" class="nav-link {{ isset($projects) ? 'active' : '' }}">
                   <i class="fas fa-chart-bar"></i>
                   <p>
-                    Gestion des projets
+                    Les projets
                   </p>
                 </a>
               </li>
@@ -27,7 +27,7 @@
           </li>
           {{-- links tasks --}}
           <li class="nav-item">
-            <a href="{{route('tasks.index')}}" class="nav-link">
+            <a href="{{route('tasks.index')}}" class="nav-link {{ isset($tasks ) ? 'active' : '' }}">
               <i class="fas fa-chart-bar"></i>
               <p>
                 Gestion des Taches

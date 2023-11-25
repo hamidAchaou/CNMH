@@ -18,7 +18,7 @@
 <tr>
     <td></td>
     <td></td>
-    <td colspan="3" align="center" class="pagination">
+    <td align="center" class="pagination d-flex flex-row-reverse">
         {!! $tasks->links() !!}
     </td>
 </tr>

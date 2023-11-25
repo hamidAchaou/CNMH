@@ -10,10 +10,6 @@
                     <div class="form-group col-md-4">
                         <h4 class="container">Les Projects</h4>
                     </div>
-                    <div class="d-flex flex-row-reverse form-group col-md-4">
-                        <a href="{{ route('projects.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Nouveau
-                            Project</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -51,8 +47,7 @@
                                         <tr>
                                             <th>Nom de projet</th>
                                             <th>Description</th>
-                                            <th>Tache</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Tache</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
@@ -95,9 +90,5 @@
 
         });
     </script>
-
-    {{-- modal Delete Projects --}}
-    @component('component.modal-delete-projects')
-    @endcomponent
     
 @endsection

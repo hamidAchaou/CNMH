@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Show Projects')
+@section('title', 'Show Tasks Projects')
 
 @section('content')
     <div class="" style="min-height: 1302.4px;">
@@ -56,14 +56,12 @@
                                         <tr>
                                             <th>Titrte</th>
                                             <th>Description</th>
-                                            <!-- <th>Date debut</th>
-                                      <th>Date fin</th> -->
-                                            <th>Action</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {{-- get all Tasks --}}
-                                        @include('projects.tasks.search-tasks')
+                                        @include('tasks.search')
                                     </tbody>
                                 </table>
                             </div>
@@ -126,7 +124,7 @@
             $('body').on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 let page = $(this).attr('href').split('page=')[1];
-                let searchValue = $('#inputSearch-tasks').val(); // Added quotation marks around #inputSearch
+                let searchValue = $('#inputSearch-tasks').val(); 
                 fetchData(page, searchValue);
             })
 

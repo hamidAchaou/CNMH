@@ -15,18 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// project
+/**
+ * // project
+ * */
+
 Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/{id}/show', [ProjectController::class, 'show'])->name('projects.show');
-Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
-Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
-Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-Route::post('/{id}/update', [ProjectController::class, 'update'])->name('projects.update');
-Route::delete('/destroy', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
-
+/**
+ * Tasks 
+ * */
 Route::prefix('tasks')->group(function () {
-    // task
+    
+    Route::get('/{id}/show', [TaskController::class, 'show'])->name('tasks.show');
     Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/{id}/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::post('/{id}/store', [TaskController::class, 'store'])->name('tasks.store');
