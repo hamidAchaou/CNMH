@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Repository\ProjectsRepository;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    protected $projects;
+    public function __construct(ProjectsRepository $projectsRepository)
+    {
+        $this->projects = $projectsRepository;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +34,8 @@ class ProjectController extends Controller
         }
 
         // get data
-        $projects = Project::paginate(4);
+        // $projects = Project::paginate(4);
+        $projects = $this->projects->getall();
 
         return view('projects.index', compact('projects'));
     }

@@ -44,7 +44,7 @@ class TaskController extends Controller
                 })
                 ->paginate(2);
     
-            return view('projects.tasks.search-tasks', compact('tasks'))->render();
+            return view('projects.tasks.searchTasks', compact('tasks'))->render();
         }     
 
         return view('projects.tasks.index', compact('project', 'tasks', 'projects'));

@@ -79,7 +79,7 @@
                                     </thead>
                                     <tbody>
                                         {{-- get all Tasks --}}
-                                        @include('projects.tasks.search-tasks')
+                                        @include('projects.tasks.searchTasks')
                                     </tbody>
                                 </table>
                             </div>
@@ -101,7 +101,7 @@
                     url: '/projects/task?page=' + page + '&searchValue=' + searchValue,
                     success: function(data) {
                         console.log(data)
-                        $('tbody').html(" ");
+                        $('tbody').html("");
                         $('tbody').html(data);
                     }
                 });

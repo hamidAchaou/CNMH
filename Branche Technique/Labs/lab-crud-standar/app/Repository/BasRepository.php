@@ -15,13 +15,40 @@ abstract class BasRepository {
   abstract function getFeildsData() :array;
   abstract function model() :string;
 
-  public function getAll() {
-    return $this->model->all();
+  public function getAll() 
+  {
+    return $this->model->paginate(2);
   }
 
+  // create 
   public function create(array $data) {
     $fillableData = collect($data)->only($this->getFeildsData())->all();
     return $this->model->create($fillableData);
   }
+
+  // find 
+  public function find($id) {
+    return $this->model->find($id);
+  }
+
+  // update
+  public function update(array $data, $id) {
+    $data = $this->model->find($id);
+
+    if(!$data) {
+      return false;
+    }
+
+    $fillableData = collect($data)->only($this->getFeildsData())->all();
+
+    return $data->update($fillableData);
+
+  }
   
+  // delete
+  public function destroy($id) {
+    // $data = $this->model->find($id);
+
+    return $this->model->delete($id);
+  }
 } 

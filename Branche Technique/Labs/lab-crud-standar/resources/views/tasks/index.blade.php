@@ -33,6 +33,15 @@
                                     </h5>
                                 </div>
                             @endif
+                            @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible pt-3">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h5><i class="fas fa-exclamation-circle"></i> {{ session('error') }}</h5>
+                            </div>
+                        @endif
+                        
                         </div>
                         <div class="card">
                             <div class="card-header col-md-12">

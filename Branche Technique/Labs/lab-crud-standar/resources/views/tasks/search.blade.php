@@ -1,5 +1,5 @@
 {{-- get all Tasks --}}
-@foreach ($project->task as $task)
+@foreach ($tasks as $task)
     <tr>
         <td>{{ $task->name }}</td>
         <td>

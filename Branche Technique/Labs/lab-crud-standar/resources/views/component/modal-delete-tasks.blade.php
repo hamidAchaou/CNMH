@@ -13,11 +13,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form action="{{ route('tasks.destroy') }}" method="POST">
+        <form id="delete-task-form" action="{{ route('tasks.destroy') }}" method="POST">
           @csrf
-          @method('DELETE')
-          <input type="hidden" id="task_Id" name="task_Id">
-          <input type="hidden" id="project_Id" name="project_Id">
+          @method('DELETE') <!-- Ensure the method is set to DELETE -->
+          <input type="hidden" id="task-id" name="task_id">
+          <input type="hidden" id="project-id" name="project_id">
           <button type="submit" class="btn btn-danger">DELETE</button>
       </form>
       

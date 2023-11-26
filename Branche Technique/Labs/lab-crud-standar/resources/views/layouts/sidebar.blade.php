@@ -28,7 +28,7 @@
           {{-- links tasks --}}
           <li class="nav-item">
             <a href="{{route('tasks.index')}}" class="nav-link {{ isset($tasks ) ? 'active' : '' }}">
-              <i class="fas fa-chart-bar"></i>
+              <i class="nav-icon fas fa-tasks"></i>
               <p>
                 Gestion des Taches
               </p>

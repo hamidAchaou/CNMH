@@ -145,7 +145,7 @@ class ProjectController extends Controller
     }
 
     // Import Projects
-    public function import(Request $request, ProjectInterface $projectInterface)
+    public function import(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:2048',

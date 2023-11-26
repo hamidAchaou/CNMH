@@ -79,7 +79,7 @@
                                     </thead>
                                     <tbody>
                                         {{-- get all Tasks --}}
-                                        @include('projects.tasks.search-tasks')
+                                        @include('projects.tasks.searchTasks')
                                     </tbody>
                                 </table>
                             </div>

@@ -6,25 +6,33 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Repositories\Interface\ProjectInterface;
 use App\Repositories\RepositoryTask;
+use App\Repository\ProjectsRepository;
+use App\Repository\TasksRepository;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    protected $tasksRepository;
+    protected $projectsRepository;
+
+    public function __construct(TasksRepository $tasksRepository, ProjectsRepository $projectsRepository)
+    {
+        $this->tasksRepository = $tasksRepository;
+        $this->projectsRepository = $projectsRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $projects = Project::all();
+        $projects = $this->projectsRepository->getAll();
 
-        $project = $projects[0];
-        $idProject = $project->id;
+            $project = $projects->first();
+            $idProject = $project->id;
 
-        $tasks = Task::where('project_Id', $idProject)->paginate(1);
+            $tasks = $this->tasksRepository->getByProjectId($idProject);
 
-        // dd($idProject);
-
-       return view('tasks.index', compact('project', 'tasks'));
+            return view('tasks.index', compact('project', 'tasks'));
     }
 
     /**
@@ -32,7 +40,7 @@ class TaskController extends Controller
      */
     public function create($id)
     {
-        // $project = $this->repositoryTask->find($id);
+        $project = $this->tasksRepository->find($id);
         return view('tasks.create', ['id' => $id]);
     }
 
@@ -41,18 +49,14 @@ class TaskController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'description' => 'nullable',
+            'project_Id' => 'int',
         ]);
 
-        // dd($request->project_Id);
-        $data = $request->only('name', 'description', 'project_Id');
-
-        Task::create($data);
-
-
-        return redirect()->route('projects.show', ['id' => $id])->with('success', 'Task added successfully');
+        $this->tasksRepository->create($data);
+        return redirect()->route('tasks.show', ['id' => $id])->with('success', 'Task added successfully');
     }
 
     /**
@@ -60,8 +64,8 @@ class TaskController extends Controller
      */
     public function show(Task $task , $id)
     {
-        $tasks = Task::where('project_Id' , $id)->paginate(1);
-        $project = Project::findOrFail($id);
+        $project = $this->projectsRepository->find($id);
+        $tasks = $this->tasksRepository->getByProjectId($id);
         return view('tasks.show', compact('project' , 'tasks'));
 
     }
@@ -71,8 +75,8 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $tasks = $this->find($id);
-        return view('projects.tasks.edit', compact('tasks'));
+        $tasks = $this->tasksRepository->find($id);
+        return view('tasks.edit', compact('tasks'));
     }
 
     /**
@@ -80,18 +84,16 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'require|max:34',
-            'name' => 'nullable|max:555',
+        $data = $request->validate([
+            'name' => 'required|max:34',
+            'description' => 'nullable|max:555',
         ]);
 
-        $data = $request->only('name', 'description');
-        $task = $this->find($id);
-        $task->update($data);
+        $this->tasksRepository->update($data, $id);
 
 
         $project_Id = request()->input('project_Id');
-        return redirect()->route('projects.show', ['id' => $project_Id])->with('success', 'Task updated successfully');
+        return redirect()->route('tasks.show', ['id' => $project_Id])->with('success', 'Task updated successfully');
     }
 
     /**
@@ -99,19 +101,17 @@ class TaskController extends Controller
      */
     public function destroy(Request $request)
     {
-        $task_Id = $request->input('task_Id');
+        $id = $request->input('task_Id');
+        
+        $result = $this->tasksRepository->destroy($id);
+        dd($result);
 
-        $task = $this->find($task_Id);
-        $task->delete();
-
-        $project_Id = request()->input('project_Id');
-        return redirect()->route('projects.show', ['id' => $project_Id])->with('success', 'Task deleted successfully');
+        if ($result) {
+            return redirect()->route('project.task.index')->with('success', 'La tâche a été supprimée avec succès.');
+        } else {
+            return back()->with('error', 'Échec de la suppression de la tâche.');
+        }
     }
+    
 
-    // find One tasks
-    public function find($id)
-    {
-        $tasks = Task::findOrfail($id);
-        return $tasks;
-    }
 }
