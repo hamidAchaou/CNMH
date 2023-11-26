@@ -20,20 +20,36 @@ class TaskController extends Controller
         $this->tasksRepository = $tasksRepository;
         $this->projectsRepository = $projectsRepository;
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
+/**
+ * Display a listing of the resource.
+ */
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $projectId = $request->get("projectId");
+
+        $tasks = $this->tasksRepository->getByProjectId($projectId);
+        return view('tasks.search', compact('tasks'))->render();
+    } else {
         $projects = $this->projectsRepository->getAll();
-
-            $project = $projects->first();
-            $idProject = $project->id;
-
-            $tasks = $this->tasksRepository->getByProjectId($idProject);
-
-            return view('tasks.index', compact('project', 'tasks'));
+    
+        // Default to the first project's tasks
+        $project = $projects->first();
+        $idProject = $project->id;
+    
+        if ($request->filled('projectId')) {
+            $idProject = $request->input('projectId');
+            $project = $this->projectsRepository->find($idProject);
+        }
+    
+        $tasks = $this->tasksRepository->getByProjectId($idProject);
+    
+    
+        return view('tasks.index', compact('projects', 'project', 'tasks'));
     }
+
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -62,13 +78,24 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task , $id)
+    public function show(Request $request, $id)
     {
+        // get data with search
+        if ($request->ajax()) {
+            $searchValue = $request->get("searchValue");
+            $searchValue = str_replace(' ', '%' , $searchValue);
+    
+            $tasks = $this->tasksRepository->searchTasks($searchValue);
+    
+            return view('tasks.search', compact('tasks'))->render();
+        }
+    
         $project = $this->projectsRepository->find($id);
         $tasks = $this->tasksRepository->getByProjectId($id);
-        return view('tasks.show', compact('project' , 'tasks'));
-
+        return view('tasks.show', compact('project', 'tasks'));
     }
+    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -101,17 +128,15 @@ class TaskController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->input('task_Id');
-        
+        $id = $request->input('task_id');
+
         $result = $this->tasksRepository->destroy($id);
-        dd($result);
+        // dd($result);
 
         if ($result) {
-            return redirect()->route('project.task.index')->with('success', 'La tâche a été supprimée avec succès.');
+            return redirect()->route('tasks.index')->with('success', 'La tâche a été supprimée avec succès.');
         } else {
             return back()->with('error', 'Échec de la suppression de la tâche.');
         }
     }
-    
-
 }

@@ -19,26 +19,21 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         // get data with search
-        if($request->ajax())
-        {
-
+        if ($request->ajax()) {
             $searchValue = $request->get("searchValue");
             $searchValue = str_replace(' ', '%' , $searchValue);
-
-            $projects = Project::query()
-            ->where('name', 'LIKE', '%' . $searchValue . '%')
-            ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
-            ->paginate(4);
-
+    
+            $projects = $this->projects->searchProjects($searchValue);
+    
             return view('projects.search', compact('projects'))->render();
         }
-
-        // get data
-        // $projects = Project::paginate(4);
-        $projects = $this->projects->getall();
-
+    
+        // get all projects without search
+        $projects = $this->projects->getAll();
+    
         return view('projects.index', compact('projects'));
     }
+    
 
 
 }

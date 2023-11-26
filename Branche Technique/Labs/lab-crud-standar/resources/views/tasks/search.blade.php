@@ -19,6 +19,7 @@
     <td></td>
     <td></td>
     <td align="center" class="pagination d-flex flex-row-reverse">
-        {!! $tasks->links() !!}
+        {{-- {!! $tasks->links() !!} --}}
+        {{ $tasks->links() }}
     </td>
 </tr>

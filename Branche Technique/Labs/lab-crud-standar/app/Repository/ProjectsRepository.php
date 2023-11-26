@@ -26,4 +26,13 @@ class ProjectsRepository extends BasRepository {
   {
     return Project::class;
   }
+
+  public function searchProjects($searchValue, $perPage = 4)
+{
+    return $this->model
+        ->where('name', 'LIKE', '%' . $searchValue . '%')
+        ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
+        ->paginate($perPage);
+}
+
 }

@@ -47,8 +47,18 @@ abstract class BasRepository {
   
   // delete
   public function destroy($id) {
-    // $data = $this->model->find($id);
+    $data = $this->model->find($id);
 
-    return $this->model->delete($id);
-  }
+    if (!$data) {
+        return false;
+    }
+
+    try {
+        return $data->delete();
+    } catch (\Exception $e) {
+        return false; 
+    }
+}
+
+
 } 

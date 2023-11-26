@@ -29,8 +29,17 @@ class TasksRepository extends BasRepository {
         return Task::class;
     }
 
-    public function getByProjectId($projectId)
-    {
-        return $this->model->where('project_id', $projectId)->paginate(3);
+    public function getByProjectId($projectId, $perPage = 3) {
+        return $this->model->where('project_id', $projectId)->paginate($perPage);
     }
+
+    public function searchTasks($searchValue, $perPage = 4)
+    {
+        return $this->model
+            ->where('name', 'LIKE', '%' . $searchValue . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
+            ->paginate($perPage);
+    }
+
+    
 }

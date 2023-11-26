@@ -45,11 +45,20 @@
                         </div>
                         <div class="card">
                             <div class="card-header col-md-12">
-                                {{-- serarch --}}
-                                <div class=" p-0">
-                                    <div class="input-group input-group-sm float-sm-right col-md-3 p-0">
-                                        <input type="text" id="inputSearch-tasks"
-                                            class="form-control float-right" placeholder="Search">
+                                <div class="d-flex justify-content-between">
+                                    {{-- filter --}}
+                                    <div>
+                                        <select class="custom-select" id="filterSelect">
+                                            {{-- <option value="">Select a project</option> --}}
+                                            @foreach($projects as $project)
+                                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                            
+                                    {{-- search --}}
+                                    <div class="input-group input-group col-md-3 p-0">
+                                        <input type="text" id="inputSearch" class="form-control float-right" placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -58,6 +67,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
 
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped text-nowrap">
@@ -68,7 +78,7 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tasksContainer">
                                         {{-- get all Tasks --}}
                                         @include('tasks.search')
                                     </tbody>
@@ -83,40 +93,14 @@
         </section>
     </div>
 
+    {{-- SCRIPT SEARCH  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    {{-- <script>
-        $(document).ready(function () {
-            function fetchData(page, searchValue) {
-                let projectId = $('#projectId').val();
-                let url = "{{ route('projects.show', ['id' => ':id']) }}";
-                url = url.replace(':id', projectId); // Replace :id with the actual project ID
-                url += '?page=' + page + '&searchValue=' + searchValue;
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function(data) {
-                        $('tbody').html(data);
-                        console.log(data);
-                    }
-                });
-            }
-
-            $('body').on('keyup', '#inputSearch-tasks', function() {
-                let page = 1;
-                let searchValue = $('#inputSearch-tasks').val();
-                fetchData(page, searchValue);
-            });
-        });
-    </script> --}}
-
     <script>
         $(document).ready(function () {
             function fetchData(page, searchValue) {
                 let projectId = $('#projectId').val();
                 $.ajax({
-                    // url:'/?page=' + page + '&searchValue=' + searchValue, 
-                    url: '/' + projectId + '/show' + '?page=' + page + '&searchValue=' + searchValue,
+                    url: 'tasks/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
                     success:function(data){
                         $('tbody').html("");
                         $('tbody').html(data);
@@ -124,23 +108,47 @@
                 })
             }
 
-            $('body').on('keyup', '#inputSearch-tasks', function () {
+            $('body').on('keyup', '#inputSearch', function () {
                 let page = 1;
-                let searchValue = $('#inputSearch-tasks').val();
+                let searchValue = $('#inputSearch').val();
                 fetchData(page, searchValue);
             });
 
             $('body').on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 let page = $(this).attr('href').split('page=')[1];
-                let searchValue = $('#inputSearch-tasks').val(); 
+                let searchValue = $('#inputSearch').val(); // Added quotation marks around #inputSearch
                 fetchData(page, searchValue);
             })
 
         });
     </script>
 
-
+    {{-- filter --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+    <script>
+        $(document).ready(function () {
+            $('#filterSelect').change(function () {
+                let projectId = $(this).val();
+    
+                // Fetch tasks for the selected project using AJAX
+                $.ajax({
+                    url: `/tasks?projectId=${projectId}`,
+                    method: 'GET',
+                    success: function(data) {
+                        console.log(data);
+                        // $('#tasksContainer').html(data);
+                        // $('tbody').html("");
+                        // $('tbody').html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+    
     {{-- modal Delete Tasks --}}
     @component('component.modal-delete-tasks')
     @endcomponent

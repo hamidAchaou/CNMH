@@ -28,7 +28,7 @@
 
 <script>
   function deleetProject(task_Id, project_Id) {
-    document.getElementById('task_Id').value = task_Id;
-    document.getElementById('project_Id').value = project_Id;
+    document.getElementById('task-id').value = task_Id;
+    document.getElementById('project-id').value = project_Id;
   }
 </script>
