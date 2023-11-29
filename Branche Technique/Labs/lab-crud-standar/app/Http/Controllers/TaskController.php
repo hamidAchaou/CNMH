@@ -27,7 +27,6 @@ public function index(Request $request)
 {
     if ($request->ajax()) {
         $projectId = $request->get("projectId");
-
         $tasks = $this->tasksRepository->getByProjectId($projectId);
         return view('tasks.search', compact('tasks'))->render();
     } else {
@@ -89,10 +88,10 @@ public function index(Request $request)
     
             return view('tasks.search', compact('tasks'))->render();
         }
-    
+        $projects = $this->projectsRepository->getAll();
         $project = $this->projectsRepository->find($id);
         $tasks = $this->tasksRepository->getByProjectId($id);
-        return view('tasks.show', compact('project', 'tasks'));
+        return view('tasks.show', compact('projects', 'project', 'tasks'));
     }
     
 

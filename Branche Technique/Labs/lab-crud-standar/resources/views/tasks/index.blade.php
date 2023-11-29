@@ -51,10 +51,13 @@
                                         <select class="custom-select" id="filterSelect">
                                             {{-- <option value="">Select a project</option> --}}
                                             @foreach($projects as $project)
-                                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                                <option value="{{ $project->id }}" {{ ($project->id == request()->id) ? 'selected' : '' }}>
+                                                    {{ $project->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    
                             
                                     {{-- search --}}
                                     <div class="input-group input-group col-md-3 p-0">
@@ -95,34 +98,8 @@
 
     {{-- SCRIPT SEARCH  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            function fetchData(page, searchValue) {
-                let projectId = $('#projectId').val();
-                $.ajax({
-                    url: 'tasks/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
-                    success:function(data){
-                        $('tbody').html("");
-                        $('tbody').html(data);
-                    }
-                })
-            }
+    <script src="{{ asset('js/tasks.js') }}"></script>
 
-            $('body').on('keyup', '#inputSearch', function () {
-                let page = 1;
-                let searchValue = $('#inputSearch').val();
-                fetchData(page, searchValue);
-            });
-
-            $('body').on('click', '.pagination a', function(e) {
-                e.preventDefault();
-                let page = $(this).attr('href').split('page=')[1];
-                let searchValue = $('#inputSearch').val(); // Added quotation marks around #inputSearch
-                fetchData(page, searchValue);
-            })
-
-        });
-    </script>
 
     {{-- filter --}}
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
@@ -130,6 +107,7 @@
         $(document).ready(function () {
             $('#filterSelect').change(function () {
                 let projectId = $(this).val();
+                console.log(projectId);
     
                 // Fetch tasks for the selected project using AJAX
                 $.ajax({

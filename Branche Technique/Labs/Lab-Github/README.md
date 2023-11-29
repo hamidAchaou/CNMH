@@ -7,12 +7,13 @@ After collaborate with someone else to work on same repo
 ***First you need to clone your repo*** <br>
 
 ```
-git clone https://github.com/Jalil-Betroji/lab-github.git
+git clone [https://github.com/Jalil-Betroji/lab-github.git](https://github.com/hamidAchaou/CNMH/tree/main/Branche%20Technique/Labs/Lab-Github)
 
 ```
 ***than you need to clone your repo*** <br>
 
-- than you can start changing in files according to your tasks
+- than you can start changing in f
+- iles according to your tasks
 **=>** but sometimes you may change same line that your group mate changed too <br>
  in this stuation when you try to merge your branch with his branch you will get a conflict.
 

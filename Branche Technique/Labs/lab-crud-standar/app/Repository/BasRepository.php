@@ -17,7 +17,7 @@ abstract class BasRepository {
 
   public function getAll() 
   {
-    return $this->model->paginate(2);
+    return $this->model->paginate(4);
   }
 
   // create 
