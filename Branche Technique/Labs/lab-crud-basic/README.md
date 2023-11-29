@@ -1,74 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Lab laravel basic
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Travail à faire
 
-# Gestion des Competences
+- Créer les CRUD pour les tâches, et afichage des projet implémenter la recherche , ajouter la pagination et inclure la table des projets.
 
-Gestion des Competences is a Laravel-based Competence Management system designed to help you manage and organize competences efficiently.
+### Critères de validation 
 
-This repository is divided into two branches:
+- Créer le CRUD des tâches
+- afficher les tâches pour chaque projet
+- Inclure la recherche en utilisant AJAX
+- Ajouter la pagination
+- Ajouter la base de données incluant la table des projets dans les seeders
 
-- `main` branch: Contains the basic functionality for competence management.
-- `advanced` branch: Enhances the basic features with more advanced capabilities and features.
+#### Référence 
 
-## Features
+[Laravel Tutorial](https://grafikart.fr/formations/laravel)
 
-### Basic Branch
+##### Process Workflow 
 
-The `main` branch provides the following fundamental features:
-
-- **Competence Listing:** View a list of competences.
-- **Create, Edit, and Delete:** Easily manage competences.
-- **Search Functionality:** Search for competences by name, code, or other attributes.
-- **Basic Validation:** Ensure data integrity with basic validation rules.
-- **Pagination:** Navigate through a paginated list of competences.
-
-### Advanced Branch
-
-- **design patterns:** create new folder Repositories.
-- **Interface Class:** create Interface Class.
-- **Create Repository class** Create CompetencesRepositories class implements interface class.
-
-## Getting Started
-
-To install and run the advanced version of Gestion des Competences, please follow these steps:
-
-1. Clone the repository:
+1. Start by installing Laravel through the terminal with this command:
 
 ```bash
-   git clone https://github.com/yourusername/gestion-des-competences.git
-```
-2. Clone the repository:
-```bash
-   composer install
+composer create-project laravel/laravel=10 .
 
 ```
-3. Configure your environment by creating a .env file and setting up your database connection.:
+2. Next, create the .env file using the command:
 
 ```bash
-   cp .env.example .env
+cp .env.example .env
 ```
-4. generate key:
-```bash
-   php artisan key:generate
+3. Add the database name to the .env file.
 
-
-```
-5. Migrate and seed the database with user accounts and competence data:
+4. Proceed to create the tables by running these commands:
 
 ```bash
-   php artisan migrate --seed
+
+php artisan make:migration Projects
+
+php artisan make:migration Tasks
+
 ```
-6. Start the development server::
+5. Once the column names for the tables are set, migrate them to the database:
+
 ```bash
-   php artisan serve
+php artisan migrate
+
 ```
 
-7. Access the application in your browser at http://localhost:8000.
+6. Populate the database with project information by creating a seeder and executing:
 
-### for advanced code clone Branche advanced. 
+```bash
+php artisan db:seed
+```
+
+7. With the tasks table and seeder set, generate models for `tasks` and `projects`:
+
+```bash
+php artisan make:model Project
+
+php artisan make:model Task
+```
+8. Create controllers to manage data from the database:
+
+```bash
+php artisan make:controller ProjectsController 
+
+php artisan make:controller TasksController 
+
+```
+9. Design and create the necessary view pages within the resource directory and update your routes.
+
+10. To view your project's progress locally, run this command:
+
+```bash 
+php artisan serve
+
+```

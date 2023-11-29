@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CompetencesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [TasksController::class, 'index'])->name('tasks.index');
+Route::get('create', [TasksController::class, 'create'])->name('tasks.create');
+Route::post('store', [TasksController::class, 'store'])->name('tasks.store');
+Route::get('{id}/edit' ,[TasksController::class, 'edit'])->name('tasks.edit');
+Route::patch('{id}/update' ,[TasksController::class, 'update'])->name('tasks.update');
+Route::delete('tasks/{id}' ,[TasksController::class, 'destroy'])->name('tasks.delete');
 
-
-Route::get('/', [CompetencesController::class, 'index'])->name('competences.index'); // show page get all competences
-Route::get('/create', [CompetencesController::class, 'create'])->name("competences.create"); // show page create Competences
-Route::post('/store', [CompetencesController::class, 'store'])->name("competences.store"); // add competences in databases
-Route::get('/{id}/edit', [CompetencesController::class, 'edit'])->name("competences.edit"); // show edit competences
-Route::put('/update/{id}', [CompetencesController::class, 'update'])->name("competences.update");
-Route::delete('/destroy', [CompetencesController::class, 'destroy'])->name("competences.destroy");
-
-Route::post('/search-competences', [CompetencesController::class, 'searchCompetences'])->name('search.competences');
+Route::resource('projects', ProjectsController::class);
