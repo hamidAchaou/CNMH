@@ -9,6 +9,11 @@ En-tête (header) avec votre nom
 Liste à puces d'au moins trois compétences que vous possédez
 Un lien vers votre profil Github
 
+## Critères de validation
+  - Ulisant li titre
+  - utilisant les list
+  - utilusant image
+  - utilisant les liens
 # Achaou Hamid - Curriculum Vitae
 
 ## Informations de contact
