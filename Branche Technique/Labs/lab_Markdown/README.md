@@ -14,7 +14,6 @@ Un lien vers votre profil Github
   - utilisant les list
   - utilusant image
   - utilisant les liens
-    
 # Achaou Hamid - Curriculum Vitae
 
 ## Informations de contact
