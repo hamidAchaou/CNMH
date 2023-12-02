@@ -22,4 +22,5 @@ Route::get('{id}/edit' ,[TasksController::class, 'edit'])->name('tasks.edit');
 Route::put('{id}/update' ,[TasksController::class, 'update'])->name('tasks.update');
 Route::delete('tasks/{id}' ,[TasksController::class, 'destroy'])->name('tasks.delete');
 
+// Projects
 Route::resource('projects', ProjectsController::class);

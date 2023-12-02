@@ -4,7 +4,11 @@
 @section('content')
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
-            <h2>Les Project</h2>
+            <h2>Les Projet</h2>
+            {{-- btn add tasks --}}
+            <a href="{{ route('projects.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nouvelle Projet
+            </a>
         </div>
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,7 +30,7 @@
                         <tr>
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Tâches</th>
+                            <th scope="col" class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="search-result">

@@ -44,3 +44,10 @@ $(document).ready(function() {
         filterData(page, criteria);
     });
 });
+
+// function delete Projects
+function delteProjet(Project_id) {
+    document.getElementById('Project_id').value = Project_id;
+    document.getElementById('deleteForm').action = "projects/" + Project_id;
+}
+
