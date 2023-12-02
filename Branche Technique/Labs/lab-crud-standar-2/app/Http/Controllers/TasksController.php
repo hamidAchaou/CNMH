@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Repository\ProjectsRepository;
+use App\Repository\TasksRepository;
 
 class TasksController extends Controller
 {
+    protected $tasksRepository;
+    protected $projectsRepository;
+
+    public function __construct(TasksRepository $tasksRepository, ProjectsRepository $projectsRepository)
+    {
+        $this->tasksRepository = $tasksRepository;
+        $this->projectsRepository = $projectsRepository;
+    }
 
     /**
      * Get All tasks
@@ -19,20 +29,18 @@ class TasksController extends Controller
 
             $seachQuery = $request->get('searchValue');
             $seachQuery = str_replace(' ', '%', $seachQuery);
-            $tasks = Task::query()->where('nom', 'like', '%' . $seachQuery . '%')
-                ->orWhere('description', 'like', '%' . $seachQuery . '%')
-                ->paginate(3);
-
-            $filterName = $request->get('criteria');
-            if ($filterName) {
-                $tasks = Task::where('projetId', $filterName)
-                                ->paginate(3);
+            $tasks = $this->tasksRepository->searchTasks($seachQuery);
+            
+            
+            $projectId = $request->get('criteria');
+            if ($projectId) {
+                $tasks = $this->tasksRepository->getByProjectId($projectId);
             }
             return view('tasks.search', compact('tasks'))->render();
         }
 
-        $projects = Project::all();
-        $tasks = Task::paginate(3);
+        $projects = $this->projectsRepository->getAll();
+        $tasks = $this->tasksRepository->getAll();
         return view('tasks.index', compact('tasks', 'projects'));
     }
 
@@ -41,7 +49,7 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $projects = Project::all();
+        $projects = $this->projectsRepository->getAll();
         return view('tasks.create', compact('projects'));
     }
 
@@ -56,7 +64,7 @@ class TasksController extends Controller
             'description' => 'required'
         ]);
 
-        Task::create($validatedData);
+        $task = $this->tasksRepository->create($validatedData);
         return redirect()->route('tasks.create')->with('success', 'tache a été ajouter avec succés');
     }
 
@@ -65,8 +73,8 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::findOrFail($id);
-        $projects = Project::all();
+        $task = $this->tasksRepository->find($id);
+        $projects = $this->projectsRepository->getAll();
         return view('tasks.edit', compact('task', 'projects'));
     }
 
@@ -75,14 +83,16 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::findOrFail($id);
         $validatedData = $request->validate([
             'nom' => 'required | max:50',
+            'description' => 'required',
             'projetId' => 'required',
-            'description' => 'required'
         ]);
-        $task->update($validatedData);
-        return redirect()->route('tasks.edit', ['id' => $task->id])->with('success', 'tache a été modifier avec succés');
+
+        // dd($validatedData);
+        $this->tasksRepository->update($validatedData, $id);
+
+        return redirect()->route('tasks.index')->with('success', 'tache a été modifier avec succés');
     }
 
     /**
@@ -90,9 +100,7 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
-
+        $this->tasksRepository->destroy($id);
         return redirect()->route('tasks.index')->with('success', 'Tâche supprimée avec succès !');
     }
 }

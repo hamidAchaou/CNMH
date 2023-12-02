@@ -13,8 +13,8 @@ class ProjectsRepository extends BasRepository {
    }
 
    protected $feildsProjects = [
-    'name', 
-    'descrption',
+    'nom',
+    'description',
    ];
 
   public function getFeildsData() :array

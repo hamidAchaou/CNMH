@@ -28,20 +28,18 @@ abstract class BasRepository {
 
   // find 
   public function find($id) {
-    return $this->model->find($id);
+    return $this->model->findOrFail($id);
   }
 
   // update
-  public function update(array $data, $id) {
+  public function update(array $validatedData, $id) {
+    
     $data = $this->model->find($id);
-
     if(!$data) {
       return false;
     }
-
-    $fillableData = collect($data)->only($this->getFeildsData())->all();
-
-    return $data->update($fillableData);
+    
+    return $data->update($validatedData);
 
   }
   

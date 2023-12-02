@@ -4,7 +4,7 @@
         <td>{{ $task->description }}</td>
         <td class="d-md-flex">
             <a href="{{ route('tasks.edit', ['id' => $task->id]) }}" class="btn btn-success me-2">Modifier</a>
-            <button type="button" class="btn btn-danger" onclick="deleteTask({{ $task->id }})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-danger" onclick="delteTask({{ $task->id }})" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Supprimer
             </button>
         </td>

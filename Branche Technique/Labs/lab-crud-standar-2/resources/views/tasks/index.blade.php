@@ -5,11 +5,12 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
             <h2>Les Tâches</h2>
+            {{-- btn add tasks --}}
             <a href="{{ route('tasks.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Nouvelle Tâche
             </a>
         </div>
-
+        {{-- message Flashbag --}}
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -19,14 +20,16 @@
 
         <div class="card">
             <div class="card-header d-flex justify-content-between">
+                {{-- filter --}}
                 <div>
                     <div class="input-group">
                         <label class="input-group-text" for="projectsFilter"><i class="fas fa-filter"></i></label>
                         <select class="form-select form-control" id="projectsFilter" aria-label="Filter Select">
                             @foreach ($projects as $project)
-                                <option value="{{ $project->id }}" {{ $project->id == request()->id ? 'selected' : '' }}>
-                                    {{ $project->nom }}
-                                </option>
+                            <option value="{{ $project->id }}" {{ $project->id == request()->get('id') ? 'selected' : '' }}>
+                                {{ $project->nom }}
+                            </option>
+                            
                             @endforeach
                         </select>
                     </div>

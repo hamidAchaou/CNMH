@@ -48,9 +48,11 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
+        $projects = Project::all();
+        
         $project = Project::findOrFail($id);
         $tasks = Task::where('projetId', $id)->paginate(4);
-        return view('projects.show', compact('project', 'tasks'));
+        return view('projects.show', compact('projects', 'project', 'tasks'));
     }
 
     /**
