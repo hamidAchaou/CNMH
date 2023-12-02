@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProjectsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a Projects By Route and By ajax.
      */
     public function index(Request $request){
 
@@ -28,52 +28,12 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Display the Tasks By Projects.
      */
     public function show(string $id)
     {
         $project = Project::findOrFail($id);
         $tasks = Task::where('projetId', $id)->paginate(4);
         return view('projects.show', compact('project', 'tasks'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

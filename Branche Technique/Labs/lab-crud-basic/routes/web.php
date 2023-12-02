@@ -19,7 +19,7 @@ Route::get('/', [TasksController::class, 'index'])->name('tasks.index');
 Route::get('create', [TasksController::class, 'create'])->name('tasks.create');
 Route::post('store', [TasksController::class, 'store'])->name('tasks.store');
 Route::get('{id}/edit' ,[TasksController::class, 'edit'])->name('tasks.edit');
-Route::patch('{id}/update' ,[TasksController::class, 'update'])->name('tasks.update');
+Route::put('{id}/update' ,[TasksController::class, 'update'])->name('tasks.update');
 Route::delete('tasks/{id}' ,[TasksController::class, 'destroy'])->name('tasks.delete');
 
 Route::resource('projects', ProjectsController::class);
