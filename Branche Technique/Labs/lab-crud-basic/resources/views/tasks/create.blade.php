@@ -26,23 +26,22 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom">
+                        <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ old('nom') }}">
                         @error('nom')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="mb-3">
+                    
+                    <div class="mb-5">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" rows="3" name="description"></textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" rows="3" name="description">{{ old('description') }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    
 
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>

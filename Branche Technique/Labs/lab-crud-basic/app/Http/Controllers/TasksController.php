@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Illuminate\Validation\ValidationException;
+
 
 class TasksController extends Controller
 {
@@ -36,19 +38,20 @@ class TasksController extends Controller
         return view('tasks.create' , compact('projects'));
     }
 
-    /**
-     * create tasks
-     */
     public function store(Request $request){
-        $validatedData = $request->validate([
-            'nom' => 'required | max:50',
-            'projetId' => 'required',
-            'description' => 'required'
-        ]);
-
-        Task::create($validatedData);
-        return redirect()->route('tasks.create')->with('success' , 'tache a été ajouter avec succés');
+        try {
+            $validatedData = $request->validate([
+                'nom' => 'required|max:50',
+                'projetId' => 'required',
+            ]);
+    
+            Task::create($validatedData);
+            return redirect()->route('tasks.create')->with('success' , 'Tâche a été ajoutée avec succès');
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->validator->errors())->withInput();
+        }
     }
+    
 
     /**
      * show form Edit tasks
@@ -70,16 +73,23 @@ class TasksController extends Controller
           'description' => 'required'
         ]);
         $task->update($validatedData);
-        return redirect()->route('tasks.edit' , ['id' => $task->id])->with('success' , 'tache a été modifier avec succés');
+        return redirect()->route('tasks.index')->with('success' , 'tache a été modifier avec succés');
     }
 
     /**
      * Delete tasks
      */
-    public function destroy($id){
-        $task = Task::findOrFail($id);
+    public function destroy($id)
+    {
+        // Logic to find and delete the task with the given ID
+        $task = Task::find($id);
+        if (!$task) {
+            return redirect()->route('tasks.index')->with('error', 'Task not found');
+        }
+    
         $task->delete();
-
-        return redirect()->route('tasks.index')->with('success', 'Tâche supprimée avec succès !');
+    
+        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully');
     }
+    
 }

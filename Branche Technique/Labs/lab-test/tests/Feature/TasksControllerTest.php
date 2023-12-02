@@ -7,40 +7,72 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Task;
 use App\Models\Project;
-use Illuminate\Cache\Repository;
+use Illuminate\Support\Carbon;
 
 class TasksControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function test_displays_tasks()
-    {
-        $task = Task::factory(3)->create();
-
-        $response = $this->get('/');
-        
-        dd($task);
-
-        // $response->assertStatus(200)
-        //     ->assertViewIs('tasks.index')
-        //     ->assertSee('Your HTML content to check in the tasks index view');
-
-            // Add assertions as needed to check the content displayed in the view
-    }
-
-    /** @test */
-    // public function test_shows_create_task_form()
+    // public function test_displays_tasks()
     // {
-    //     $projects = Project::factory()->count(3)->create();
+    //     $data = [
+    //         [
+    //             'nom' => 'choisir le thème',
+    //             'description' => 'choisir le thème pour créer un portfolio',
+    //             'projetId' => '1',
+    //             'created_at' => Carbon::now(),
+    //             'updated_at' => Carbon::now(),
+    //         ],
+    //         [
+    //             'nom' => 'Choix des Technologies',
+    //             'description' => 'Évaluation et sélection des technologies les plus adaptées pour développer l\'application Arbre des Compétences.',
+    //             'projetId' => '2',
+    //             'created_at' => Carbon::now(),
+    //             'updated_at' => Carbon::now(),
+    //         ],
+    //     ];
 
-    //     $response = $this->get('/tasks/create');
+    //     foreach ($data as $taskData) {
+    //         Task::create($taskData);
+    //     }
 
-    //     $response->assertStatus(200)
-    //         ->assertViewIs('tasks.create')
-    //         ->assertViewHas('projects', $projects);
-    //         // Assert other view content or data passed to the view as needed
+    //     $response = $this->get('/');
+
+    //     // Add your assertions here to check the content displayed in the view
+    //     // For example:
+    //     // $response->assertStatus(200)
+    //     //     ->assertViewIs('tasks.index')
+    //     //     ->assertSee('Your HTML content to check in the tasks index view');
     // }
+
+
+
+
+/** @test */
+public function test_shows_create_task_form()
+{
+    $projectData = [
+        'nom' => 'Portfolio',
+        'description' => 'Développement d\'un site web mettant en valeur nos compétences.',
+    ];
+
+    $project = Project::create($projectData);
+
+    $response = $this->get('/create');
+
+    // $response->assertStatus(200)
+    //     ->assertViewIs('tasks.create')
+    //     ->assertSee('Your HTML content to check in the tasks create form'); // Add appropriate HTML content checks
+
+    // Optionally, you can also assert that the view contains the project information
+    // $response->assertViewHas('projects', Project::all()); // If you expect all projects to be passed to the view
+    // Or
+    // $response->assertViewHas('projects', function ($viewProjects) use ($project) {
+    //     return $viewProjects->contains($project);
+    // });
+}
+
 
     /** @test */
     // public function test_shows_edit_task_form()
