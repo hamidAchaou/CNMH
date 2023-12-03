@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function fetchData(page, searchValue) {
         $.ajax({
-            url: '/?page=' + page + '&searchValue=' + searchValue,
+            url: 'tasks/?page=' + page + '&searchValue=' + searchValue,
             success: function(data) {
                 $('tbody').html('');
                 $('tbody').html(data);
@@ -12,11 +12,10 @@ $(document).ready(function() {
     // filter By Projects
     function filterData(page, criteria) {
         $.ajax({
-            url: '/?page=' + page + '&criteria=' + criteria,
+            url: 'tasks/?page=' + page + '&criteria=' + criteria,
             success: function(data) {
                 $('tbody').html('');
                 $('tbody').html(data);
-                console.log(data)
             }
         });
     }
@@ -41,9 +40,9 @@ $(document).ready(function() {
     });
 
     $('#projectsFilter').on('change', function () {
-        var page = $('#page').val();
-        // var searchValue = $('#search-input').val();
+        var page = 1;
         var criteria = $(this).val();
+        console.log(criteria);
         filterData(page, criteria);
       });
 

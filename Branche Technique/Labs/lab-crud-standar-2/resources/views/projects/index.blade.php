@@ -4,18 +4,18 @@
 @section('content')
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
-            <h2>Les Projet</h2>
+            <h2 class="text-primary">Les Projet</h2>
             {{-- btn add tasks --}}
             <a href="{{ route('projects.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Nouvelle Projet
             </a>
         </div>
         @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header d-flex flex-row-reverse bd-highlight">
                 <div class="input-group w-25">
@@ -44,5 +44,6 @@
 
     {{-- script search by ajax --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="JS/projects.js"></script>
+    <script src="{{ asset('JS/projects.js') }}"></script>
+
 @endsection

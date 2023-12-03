@@ -2,11 +2,11 @@
     <tr>
         <th>{{ $project->nom }}</th>
         <td>{{ $project->description }}</td>
-        <td class="d-md-flex">
-            <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-secondary me-2">
+        <td class="d-md-flex justify-content-center">
+            <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-info  me-2">
                 <i class="fas fa-tasks ms-1"></i> les tâches
             </a>
-            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-success me-2">     
+            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-secondary me-2">     
                <i class="fas fa-edit me-1"></i> 
             </a>
             <button type="button" class="btn btn-danger" onclick="delteProjet({{ $project->id }})" data-bs-toggle="modal" data-bs-target="#modaldeleteProjects">

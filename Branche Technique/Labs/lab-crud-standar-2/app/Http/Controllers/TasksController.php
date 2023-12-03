@@ -39,9 +39,14 @@ class TasksController extends Controller
             return view('tasks.search', compact('tasks'))->render();
         }
 
+
         $projects = $this->projectsRepository->getAll();
-        $tasks = $this->tasksRepository->getAll();
-        return view('tasks.index', compact('tasks', 'projects'));
+        $project = $projects->first();
+        $id = $project->id;
+
+        $tasks = $this->tasksRepository->getByProjectId($id);
+
+        return view('tasks.index', compact('tasks', 'projects', 'project'));
     }
 
     /**
@@ -64,8 +69,9 @@ class TasksController extends Controller
             'description' => 'required'
         ]);
 
+        $project = request()->input('projetId');
         $task = $this->tasksRepository->create($validatedData);
-        return redirect()->route('tasks.create')->with('success', 'tache a été ajouter avec succés');
+        return redirect()->route('projects.show', compact('project'))->with('success', 'tache a été ajouter avec succés');
     }
 
     /**

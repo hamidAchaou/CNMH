@@ -3,7 +3,7 @@
         <th>{{ $task->nom }}</th>
         <td>{{ $task->description }}</td>
         <td class="d-md-flex">
-            <a href="{{ route('tasks.edit', ['id' => $task->id]) }}" class="btn btn-success me-2">
+                <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info opacity-75 me-2">
                 <i class="fas fa-edit me-1"></i> 
             </a>
             <button type="button" class="btn btn-danger" onclick="delteTask({{ $task->id }})" data-bs-toggle="modal" data-bs-target="#exampleModal">
