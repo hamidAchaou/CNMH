@@ -30,8 +30,10 @@ class TasksRepository extends BasRepository {
     }
 
     public function getByProjectId($projectId, $perPage = 3) {
-        return $this->model->where('projetId', $projectId)->paginate($perPage);
+        $tasks = $this->model->where('projetId', $projectId)->paginate($perPage);
+        return $tasks;
     }
+    
 
     public function searchTasks($searchValue, $perPage = 4)
     {

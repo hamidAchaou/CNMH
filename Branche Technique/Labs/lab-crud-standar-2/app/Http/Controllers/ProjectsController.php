@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository\ProjectsRepository;
 use App\Repository\TasksRepository;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectsController extends Controller
 {
@@ -44,32 +45,14 @@ class ProjectsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $request->validate([
-            'nom' => 'required|max:255',
-            'description' => 'nullable|max:555',
-        ]);
+        $validatedData = $request->validated(); 
 
-        $nameProject = $request->nom;
-        $data = $request->only(['nom', 'description']);
-        $result = $this->projectsRepository->create($data);
+        $nameProject = $validatedData['nom'];
+        $result = $this->projectsRepository->create($validatedData);
 
-        return redirect()->route('projects.index')->with('success', "Le projet $nameProject  a été ajouté avec succès");
-
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $projects = $this->projectsRepository->getAll();
-        
-        $project = $this->projectsRepository->find($id);
-
-        $tasks = $this->tasksRepository->getByProjectId($id);
-        return view('projects.show', compact('projects', 'project', 'tasks'));
+        return redirect()->route('projects.index')->with('success', "Le projet $nameProject a été ajouté avec succès");
     }
 
     /**
@@ -84,16 +67,11 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(StoreProjectRequest $request, $id)
     {
-        $request->validate([
-            'nom' => 'required|max:33',
-            'description' => 'nullable|max:455',
-        ]);
-        
+        $validatedData = $request->validated(); 
 
-        $data = $request->only(['nom', 'description']);
-        $this->projectsRepository->update($data, $id);
+        $this->projectsRepository->update($validatedData, $id);
 
         return redirect()->route('projects.index')->with('success', 'Projets modifiés avec succès');
     }

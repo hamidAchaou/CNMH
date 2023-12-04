@@ -39,13 +39,22 @@ class TasksController extends Controller
             return view('tasks.search', compact('tasks'))->render();
         }
 
-
+        $id = $request->id;
         $projects = $this->projectsRepository->getAll();
-        $project = $projects->first();
-        $id = $project->id;
+
+        if($id) {
+            $project = $this->projectsRepository->find($id);
+            // $tasks = $this->tasksRepository->getByProjectId($id);
+        } 
+        else {
+            $project = $projects->first();
+            if(isset($project->id)) {
+                $id = $project->id;
+            }
+            // $tasks = $this->tasksRepository->getByProjectId($id);
+        }
 
         $tasks = $this->tasksRepository->getByProjectId($id);
-
         return view('tasks.index', compact('tasks', 'projects', 'project'));
     }
 
@@ -66,12 +75,12 @@ class TasksController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required | max:50',
             'projetId' => 'required',
-            'description' => 'required'
+            'description' => 'nullable|max:555',
         ]);
 
-        $project = request()->input('projetId');
+        $id = request()->input('projetId');
         $task = $this->tasksRepository->create($validatedData);
-        return redirect()->route('projects.show', compact('project'))->with('success', 'tache a été ajouter avec succés');
+        return redirect()->route('tasks.index', compact('id'))->with('success', 'tache a été ajouter avec succés');
     }
 
     /**
@@ -91,7 +100,7 @@ class TasksController extends Controller
     {
         $validatedData = $request->validate([
             'nom' => 'required | max:50',
-            'description' => 'required',
+            'description' => 'nullable|max:555',
             'projetId' => 'required',
         ]);
 

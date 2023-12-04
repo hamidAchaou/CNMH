@@ -46,7 +46,7 @@ $(document).ready(function() {
         filterData(page, criteria);
       });
 
-    fetchData(1, '');
+    // fetchData(1, '');
 });
 
 // function delete tasks
