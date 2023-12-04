@@ -1,26 +1,57 @@
-$(document).ready(function () {
+$(document).ready(function() {
     function fetchData(page, searchValue) {
-        let projectId = $('#projectId').val();
         $.ajax({
-            url: 'tasks/' + projectId + '/show?page=' + page + '&searchValue=' + searchValue,
-            success:function(data){
-                $('tbody').html("");
+            url: 'tasks/?page=' + page + '&searchValue=' + searchValue,
+            success: function(data) {
+                $('tbody').html('');
                 $('tbody').html(data);
             }
-        })
+        });
     }
 
-    $('body').on('keyup', '#inputSearch', function () {
-        let page = 1;
-        let searchValue = $('#inputSearch').val();
+    // filter By Projects
+    function filterData(page, criteria) {
+        $.ajax({
+            url: 'tasks/?page=' + page + '&criteria=' + criteria,
+            success: function(data) {
+                $('tbody').html('');
+                $('tbody').html(data);
+            }
+        });
+    }
+
+    $('body').on('click', '.pagination a', function(param) {
+
+        param.preventDefault();
+
+        var page = $(this).attr('href').split('page=')[1];
+        var searchValue = $('#search-input').val();
+        console.log($(this).attr('href').split('page=')[1]);
+        console.log($(this).attr('href').split('page='));
+
+        fetchData(page, searchValue);
+
+    });
+
+    $('body').on('keyup', '#search-input', function() {
+        var page = 1;
+        var searchValue = $('#search-input').val();
         fetchData(page, searchValue);
     });
 
-    $('body').on('click', '.pagination a', function(e) {
-        e.preventDefault();
-        let page = $(this).attr('href').split('page=')[1];
-        let searchValue = $('#inputSearch').val(); // Added quotation marks around #inputSearch
-        fetchData(page, searchValue);
-    })
+    $('#projectsFilter').on('change', function () {
+        var page = 1;
+        var criteria = $(this).val();
+        console.log(criteria);
+        filterData(page, criteria);
+      });
 
+    // fetchData(1, '');
 });
+
+// function delete tasks
+function delteTask(Task_id) {
+    document.getElementById('Task_id').value = Task_id;
+    document.getElementById('deleteForm').action = "tasks/" + Task_id;
+}
+

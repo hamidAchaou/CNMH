@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\Interface\ProjectInterface;
-use App\Repositories\RepositoryProject;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ProjectInterface::class, RepositoryProject::class);
+        //
     }
 
     /**

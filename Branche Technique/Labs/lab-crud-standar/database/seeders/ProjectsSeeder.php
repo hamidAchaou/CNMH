@@ -13,14 +13,18 @@ class ProjectsSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('projects')->insert([
+        DB::table("projects")->insert([
             [
-                'name' => 'Prototype maquette',
-                'description' => 'Création du prototype maquette CNMH',
+                'nom' => 'Portfolio',
+                'description' => 'Développement d\'un site web mettant en valeur nos compétences.',
             ],
             [
-                'name' => 'Prototype d\'application',
-                'description' => 'Création du prototype d\'application CNMH',
+                'nom' => 'Arbre des compétences',
+                'description' => 'Création d\'une application web pour l\'évaluation des compétences.',
+            ],
+            [
+                'nom' => 'CNMH',
+                'description' => 'Création d\'une application web pour la gestion des patients du centre CNMH.',
             ]
         ]);
     }

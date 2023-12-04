@@ -1,25 +1,30 @@
-{{-- get all Tasks --}}
-@foreach ($tasks as $task)
+@if($tasks->isEmpty())
     <tr>
-        <td>{{ $task->name }}</td>
-        <td>
-            {{ $task->description }}
-        </td>
-        <td>
-            <a href="{{ route('tasks.edit', ['id' => $task->id, 'project_Id' => $project->id]) }}"
-                class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i></a>
-            <button type="button" class="btn btn-danger"
-                onclick="deleetProject({{ $task->id }}, {{ $project->id }})" data-bs-toggle="modal"
-                data-bs-target="#delete-task"><i class="fa-solid fa-trash"></i></button>
-        </td>
-
+        <td colspan="3" align="center">Aucune tâche à afficher</td>
     </tr>
-@endforeach
-<tr>
-    <td></td>
-    <td></td>
-    <td align="center" class="pagination d-flex flex-row-reverse">
-        {{-- {!! $tasks->links() !!} --}}
-        {{ $tasks->links() }}
-    </td>
-</tr>
+@else
+    @foreach ($tasks as $task)
+        <tr>
+            <th>{{ $task->nom }}</th>
+            <td>{{ $task->description }}</td>
+            <td class="d-md-flex">
+                <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info opacity-75 me-2">
+                    <i class="fas fa-edit me-1"></i> Edit
+                </a>
+                <button type="button" class="btn btn-danger" onclick="deleteTask({{ $task->id }})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fas fa-trash-alt me-1"></i> Delete
+                </button>
+            </td>
+        </tr>
+    @endforeach
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td colspan="3" align="center">
+            <div class="d-flex justify-content-center mt-3">
+                {!! $tasks->links() !!}
+            </div>
+        </td>
+    </tr>
+@endif

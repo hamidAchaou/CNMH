@@ -1,36 +1,52 @@
 @extends('layouts.master')
+@include('layouts.nav')
 
-@section('title', 'create Task')
-    
 @section('content')
-<section class="">
-    <div class="content py-4">
-      <div class="container card col-md-8">
-          <h2 class="card-header">Ajouter Task</h2>
+    <div class="container py-4">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Ajouter Une Tâche</h2>
+            </div>
             <div class="card-body">
-                <form method="post" action="{{route('tasks.store', ['id' => $id])}}">
-                   @csrf
-                    <input type="hidden" name="id_user">
-                    <input type="hidden" name="project_Id" value="{{$id}}">
-                    <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" id="nom" class="form-control" name="name" value="{{ old('name')}}">
-                        @error('name')
-                            <div class="invalide-feedback text-danger">{{ $message }}</div>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('tasks.store') }}">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Projet</label>
+                        <select name="projetId" id="projetId" class="form-select">
+                            @foreach ($projects as $project)
+                                <option value="{{ $project->id }}">{{ $project->nom }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom">
+                        @error('nom')
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group">
-                      <label for="inputDescription">Description</label>
-                      <textarea name="description" id="inputDescription" class="form-control" oninvalid="this.setCustomValidity('Ajouter ce champ s\'il vous plaît')" oninput="setCustomValidity('')">{{ old('description')}}</textarea>
-                      @error('description')
-                      <div class="invalide-feedback text-danger">{{ $message }}</div>
-                  @enderror
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" rows="3" name="description"></textarea>
                     </div>
-        
-                    <button type="submit" class="btn btn-primary mb-2">Ajouter</button>
+
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
             </div>
         </div>
     </div>
-  </section>
 @endsection

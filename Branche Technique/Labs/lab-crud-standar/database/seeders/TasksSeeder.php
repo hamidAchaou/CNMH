@@ -15,24 +15,29 @@ class TasksSeeder extends Seeder
     {
         DB::table('tasks')->insert([
             [
-                'name' => 'Installer admin LTE',
-                'description' => 'Installer adminLTE sur le prototype maquette CNMH',
-                'project_Id' => '1',
+                'nom' => 'choisir le thème',
+                'description' => 'choisir le thème pour créer un portfolio',
+                'projetId' => '1',
             ],
             [
-                'name' => 'Page Projets',
-                'description' => 'Création de la page Projets avec admin LTE',
-                'project_Id' => '1',
+                'nom' => 'Choix des Technologies',
+                'description' => 'Évaluation et sélection des technologies les plus adaptées pour développer l\'application Arbre des Compétences.',
+                'projetId' => '2',
             ],
             [
-                'name' => 'Installer admin LTE',
-                'description' => 'Installer avec admin LTE',
-                'project_Id' => '2',
+                'nom' => 'Design wireframes for CNMH Application',
+                'description' => 'Create wireframes detailing the layout and functionalities of the CNMH application.',
+                'projetId' => '3',
             ],
             [
-                'name' => 'Migration',
-                'description' => 'Création des tables Projets et Tâches dans la migration',
-                'project_Id' => '1',
+                'nom' => 'Develop basic database structure',
+                'description' => 'Design and implement the basic database structure for the CNMH application.',
+                'projetId' => '3',
+            ],
+            [
+                'nom' => 'Build user authentication system',
+                'description' => 'Implement user authentication and authorization functionalities for the CNMH application.',
+                'projetId' => '3',
             ],
         ]);
     }
