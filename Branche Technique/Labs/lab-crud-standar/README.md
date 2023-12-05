@@ -1,76 +1,66 @@
-# Lab laravel basic
+# lab crud standard
 
-## Travail à faire
+- Ce dépôt présente un projet Laravel standard pour la gestion des tâches.
 
-- Créer les CRUD pour les tâches, et afichage des projet implémenter la recherche , ajouter la pagination et inclure la table des projets.
-
-### Critères de validation 
-
-- Créer le CRUD des tâches
-- afficher les tâches pour chaque projet
-- Inclure la recherche en utilisant AJAX
-- Ajouter la pagination
-- Ajouter la base de données incluant la table des projets dans les seeders
-
-#### Référence 
+#### Référence. 
 
 [Laravel Tutorial](https://grafikart.fr/formations/laravel)
 
+## Travail à faire
+Complétez le travail sur le lab CRUD Laravel de base en utilisant le design pattern Repository, implémentez la recherche, ajoutez la pagination et incluez la table des projets ainsi que l'ajout CRUD pour les projets.
+
+### Critères de validation 
+
+- Compléter le travail sur  [`lab crud laravel basic`](https://github.com/hamidAchaou/CNMH/tree/main/Branche%20Technique/Labs/lab-crud-basic)
+- Opérations CRUD pour les tâches et les projets
+- Pagination
+- Recherche (AJAX)
+- Design Pattern Repository
+- Filtrer les tâches par projet
+- Données d'exemple (jeux de test)
+
 ##### Process Workflow 
 
-1. Start by installing Laravel through the terminal with this command:
+1. Commencez par cloner le lab CRUD de base avec cette commande :
 
 ```bash
-composer create-project laravel/laravel=10 .
+git clone https://github.com/hamidAchaou/CNMH.git
 
 ```
-2. Next, create the .env file using the command:
+2. Ensuite, accédez au lab-crud-standar :
+
+```bash
+cd "Branche Technique" 
+cd "Labs" 
+cd "lab-crud-standar"
+```
+3. Ensuite, créez le fichier .env en utilisant la commande :
 
 ```bash
 cp .env.example .env
 ```
-3. Add the database name to the .env file.
+4. Ajoutez le nom de la base de données dans le fichier .env.
 
-4. Proceed to create the tables by running these commands:
-
+5. Générez une clé en utilisant cette commande.
 ```bash
-
-php artisan make:migration Projects
-
-php artisan make:migration Tasks
-
+php artisan key:generate
 ```
-5. Once the column names for the tables are set, migrate them to the database:
+
+6. Migrez les tables vers la base de données :
 
 ```bash
 php artisan migrate
 
 ```
 
-6. Populate the database with project information by creating a seeder and executing:
+7. Remplissez la base de données avec des informations de projet en créant un seeder et en exécutant :
 
 ```bash
 php artisan db:seed
 ```
 
-7. With the tasks table and seeder set, generate models for `tasks` and `projects`:
 
-```bash
-php artisan make:model Project
-
-php artisan make:model Task
-```
-8. Create controllers to manage data from the database:
-
-```bash
-php artisan make:controller ProjectsController 
-
-php artisan make:controller TasksController 
-
-```
-9. Design and create the necessary view pages within the resource directory and update your routes.
-
-10. To view your project's progress locally, run this command:
+6. Pour voir l'avancement de votre projet localement, exécutez cette commande :
 
 ```bash 
 php artisan serve
