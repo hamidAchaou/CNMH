@@ -6,6 +6,7 @@ use App\Repository\ProjectsRepository;
 use App\Repository\TasksRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectsController extends Controller
 {
@@ -67,7 +68,7 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreProjectRequest $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
         $validatedData = $request->validated(); 
 
