@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Task;
@@ -44,14 +46,12 @@ class TasksController extends Controller
 
         if($id) {
             $project = $this->projectsRepository->find($id);
-            // $tasks = $this->tasksRepository->getByProjectId($id);
         } 
         else {
             $project = $projects->first();
             if(isset($project->id)) {
                 $id = $project->id;
             }
-            // $tasks = $this->tasksRepository->getByProjectId($id);
         }
 
         $tasks = $this->tasksRepository->getByProjectId($id);
@@ -70,15 +70,10 @@ class TasksController extends Controller
     /**
      * create tasks
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        $validatedData = $request->validate([
-            'nom' => 'required | max:50',
-            'projetId' => 'required',
-            'description' => 'nullable|max:555',
-        ]);
+        $validatedData = $request->validated();
 
-        $id = request()->input('projetId');
         $task = $this->tasksRepository->create($validatedData);
         return redirect()->route('tasks.index', compact('id'))->with('success', 'tache a été ajouter avec succés');
     }
@@ -96,15 +91,9 @@ class TasksController extends Controller
     /**
      * Update tasks
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'nom' => 'required | max:50',
-            'description' => 'nullable|max:555',
-            'projetId' => 'required',
-        ]);
-
-        // dd($validatedData);
+        $validatedData = $request->validated();
         $this->tasksRepository->update($validatedData, $id);
 
         return redirect()->route('tasks.index')->with('success', 'tache a été modifier avec succés');
