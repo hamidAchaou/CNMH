@@ -32,7 +32,7 @@ $(document).ready(function() {
 });
 
 // function delete tasks
-function delteTask(Task_id) {
+function deleteTask(Task_id) {
     document.getElementById('Task_id').value = Task_id;
     document.getElementById('deleteForm').action = "tasks/" + Task_id;
 }

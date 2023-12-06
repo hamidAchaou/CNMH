@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Task;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
 
@@ -16,7 +15,6 @@ class TasksController extends Controller
      * Get All tasks
      */
     public function index(Request $request){
-        // Gate::authorize('index-tasks');
         if($request->ajax()){
             $seachQuery = $request->get('searchValue');
             $seachQuery = str_replace(' ','%', $seachQuery);
@@ -36,13 +34,11 @@ class TasksController extends Controller
      * display form Create tasks
      */
     public function create(){
-        Gate::authorize('create-tasks');
         $projects = Project::all();
         return view('tasks.create' , compact('projects'));
     }
 
     public function store(Request $request){
-        Gate::authorize('store-tasks');
         try {
             $validatedData = $request->validate([
                 'nom' => 'required|max:50',
@@ -61,7 +57,6 @@ class TasksController extends Controller
      * show form Edit tasks
      */
     public function edit($id){
-        Gate::authorize('edit-tasks');
         $task = Task::findOrFail($id);
         $projects = Project::all();
         return view('tasks.edit' , compact('task' , 'projects'));
@@ -71,7 +66,6 @@ class TasksController extends Controller
      * Update tasks
      */
     public function update(Request $request , $id){
-        Gate::authorize('update-tasks');
         $task = Task::findOrFail($id);
         $validatedData = $request->validate([
             'nom' => 'required | max:50',
@@ -87,7 +81,6 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('destroy-tasks');
         // Logic to find and delete the task with the given ID
         $task = Task::find($id);
         if (!$task) {

@@ -5,14 +5,12 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
             <h2>Les Tâches</h2>
-
+           @role('project-leader')
             {{-- btn create --}}
-            @can('create-tasks')
                 <a href="{{ route('tasks.create') }}" type="button" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Nouveau Tâche
                 </a>
-            @endcan
-
+           @endrole
         </div>
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -35,9 +33,7 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
                             <th scope="col">Nom de Projet</th>
-                            @can('show-tasks')
                               <th scope="col">Action</th>
-                            @endcan
                         </tr>
                     </thead>
                     <tbody id="search-result">

@@ -3,7 +3,6 @@
         <th>{{ $task->nom }}</th>
         <td>{{ $task->description }}</td>
         <td>{{ $task->project->nom }}</td>
-        @can('show-tasks')
             <td class="d-md-flex">
                 <a href="{{ route('tasks.edit', ['id' => $task->id]) }}" class="btn btn-success me-2">
                     <i class="fas fa-edit me-1"></i> 
@@ -12,7 +11,6 @@
                     <i class="fas fa-trash-alt me-1"></i> 
                 </button>
             </td>
-        @endcan
 
     </tr>
 @endforeach
@@ -28,6 +26,4 @@
 </tr>
 
 <!-- Modal DELETE TASKS-->
-@can('show-tasks')
   <x-modal-delete-tasks />
-@endcan

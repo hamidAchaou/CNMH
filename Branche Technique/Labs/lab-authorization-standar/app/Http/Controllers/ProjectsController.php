@@ -13,7 +13,6 @@ class ProjectsController extends Controller
      * Display a Projects By Route and By ajax.
      */
     public function index(Request $request){
-        Gate::authorize('index-tasks');
 
         if($request->ajax()){
             $seachQuery = $request->get('searchValue');
@@ -34,7 +33,6 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
-        Gate::authorize('index-tasks');
         $project = Project::findOrFail($id);
         $tasks = Task::where('projetId', $id)->paginate(4);
         return view('projects.show', compact('project', 'tasks'));

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,25 +14,42 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    // public function run(): void
+    // {
+    //     User::create([
+    //         'name' => 'Chef de projet',
+    //         'email' => 'project.leader@solicode.com',
+    //         'password' => Hash::make('leader'),
+    //         'created_at' => Carbon::now(),
+    //         'updated_at' => Carbon::now(),
+    //     ])->assignRole('project-leader');
+
+    //     User::create([
+    //         'name' => 'membre',
+    //         'email' => 'membre@solicode.com',
+    //         'password' => Hash::make('member'),
+    //         'created_at' => Carbon::now(),
+    //         'updated_at' => Carbon::now(),
+    //     ])->assignRole('member');
+    // }
+
     public function run(): void
     {
-        DB::table("users")->insert([
-            [
-                'name' => 'Chef de projet',
-                'email' => 'project.leader@solicode.com',
-                'role' => 'project-leader',
-                'password' => Hash::make('leader'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'name' => 'membre',
+       $user =  User::create([
+            'name' => 'Chef de projet',
+            'email' => 'project.leader@solicode.com',
+            'password' => Hash::make('leader'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ])->assignRole('project-leader');
+
+        User::create([
+            'name' => 'membre',
                 'email' => 'membre@solicode.com',
-                'role' => 'member',
-                'password' => Hash::make('member'),
+                'password' => Hash::make('membre'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ]
-        ]);
+        ])->assignRole('member');
+        
     }
 }
