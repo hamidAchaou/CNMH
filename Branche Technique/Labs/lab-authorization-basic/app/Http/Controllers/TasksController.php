@@ -16,7 +16,7 @@ class TasksController extends Controller
      * Get All tasks
      */
     public function index(Request $request){
-        Gate::authorize('index-tasks');
+        // Gate::authorize('index-tasks');
         if($request->ajax()){
             $seachQuery = $request->get('searchValue');
             $seachQuery = str_replace(' ','%', $seachQuery);

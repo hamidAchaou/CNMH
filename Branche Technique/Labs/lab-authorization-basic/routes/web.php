@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\TasksController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/tasks', [TasksController::class, 'index'])->name('tasks.index');
+    Route::get('/', [TasksController::class, 'index'])->name('tasks.index');
     Route::get('create', [TasksController::class, 'create'])->name('tasks.create');
     Route::post('store', [TasksController::class, 'store'])->name('tasks.store');
     Route::get('{id}/edit' ,[TasksController::class, 'edit'])->name('tasks.edit');
@@ -31,4 +32,6 @@ Route::middleware('auth')->group(function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [AuthController::class,'show'])->name('login');
+// Route::post('/', [AuthController::class,'login']);
+// Route::post('logout' , [AuthController::class,'logout'])->name('logout');
