@@ -5,11 +5,11 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
             <h2>Les Tâches</h2>
-            @can('create-TasksController')
             {{-- btn create --}}
-            <a href="{{ route('tasks.create') }}" type="button" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nouveau Tâche
-            </a>
+            @can('create-TasksController')
+                <a href="{{ route('tasks.create') }}" type="button" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nouveau Tâche
+                </a>
             @endcan
         </div>
 
@@ -34,7 +34,10 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
                             <th scope="col">Nom de Projet</th>
-                            <th scope="col">Action</th>
+                            @can('create-TasksController')
+                                <th scope="col">Action</th>
+                            @endcan
+
                         </tr>
                     </thead>
                     <tbody id="search-result">

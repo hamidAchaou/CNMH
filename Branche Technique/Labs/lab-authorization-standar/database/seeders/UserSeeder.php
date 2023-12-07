@@ -42,8 +42,9 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('Super.Admin'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-        ])->assignRole('Super Admin');
-        // $superAdmin->givePermissionTo($leaderPermissions);
+        ]);
+
+        $superAdmin->assignRole('Super Admin');
 
         $user = User::create([
             'name' => 'membre',
@@ -52,7 +53,7 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         ])->assignRole('member');
-        $user->givePermissionTo('create-TasksController');
+        // $user->givePermissionTo('create-TasksController');
 
     }
 }

@@ -53,17 +53,15 @@ class TasksController extends Controller
     }
 
     public function store(Request $request){
-        try {
             $validatedData = $request->validate([
                 'nom' => 'required|max:50',
                 'projetId' => 'required',
+                'description' => 'nullable'
             ]);
     
-            Task::create($validatedData);
-            return redirect()->route('tasks.create')->with('success' , 'Tâche a été ajoutée avec succès');
-        } catch (ValidationException $e) {
-            return back()->withErrors($e->validator->errors())->withInput();
-        }
+            $task = Task::create($validatedData);
+            $project = $task->projetId;
+            return redirect()->route('projects.show', compact('project'))->with('success' , 'Tâche a été ajoutée avec succès');
     }
     
 
@@ -88,7 +86,7 @@ class TasksController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required | max:50',
           'projetId' => 'required',
-          'description' => 'required'
+          'description' => 'nullable'
         ]);
         $task->update($validatedData);
         return redirect()->route('tasks.index')->with('success' , 'tache a été modifier avec succés');
