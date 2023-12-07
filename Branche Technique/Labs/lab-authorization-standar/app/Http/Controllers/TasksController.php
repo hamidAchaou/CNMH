@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
 
@@ -31,11 +32,24 @@ class TasksController extends Controller
     }
 
     /**
-     * display form Create tasks
+     * Display form to create tasks
      */
-    public function create(){
-        $projects = Project::all();
-        return view('tasks.create' , compact('projects'));
+    public function create()
+    {
+        // Check if the user has the 'project-leader' role
+        if (Gate::allows('role', 'project-leader') || Gate::allows('create-TasksController')) {
+            $projects = Project::all();
+            return view('tasks.create', compact('projects'));
+        }
+
+        // // Check if the user can create tasks through the 'TasksController' policy
+        // if (Gate::allows('create-TasksController')) {
+        //     $projects = Project::all();
+        //     return view('tasks.create', compact('projects'));
+        // }
+
+        // Handle unauthorized access
+        abort(403, 'Unauthorized action.');
     }
 
     public function store(Request $request){
@@ -57,9 +71,13 @@ class TasksController extends Controller
      * show form Edit tasks
      */
     public function edit($id){
-        $task = Task::findOrFail($id);
-        $projects = Project::all();
-        return view('tasks.edit' , compact('task' , 'projects'));
+        if (Gate::allows('role', 'project-leader') || Gate::allows('create-TasksController')) {
+            $task = Task::findOrFail($id);
+            $projects = Project::all();
+            return view('tasks.edit' , compact('task' , 'projects'));
+        }
+        abort(403, 'Unauthorized action.');
+
     }
 
     /**

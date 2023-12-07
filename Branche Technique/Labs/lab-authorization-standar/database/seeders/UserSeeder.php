@@ -14,42 +14,45 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    // public function run(): void
-    // {
-    //     User::create([
-    //         'name' => 'Chef de projet',
-    //         'email' => 'project.leader@solicode.com',
-    //         'password' => Hash::make('leader'),
-    //         'created_at' => Carbon::now(),
-    //         'updated_at' => Carbon::now(),
-    //     ])->assignRole('project-leader');
-
-    //     User::create([
-    //         'name' => 'membre',
-    //         'email' => 'membre@solicode.com',
-    //         'password' => Hash::make('member'),
-    //         'created_at' => Carbon::now(),
-    //         'updated_at' => Carbon::now(),
-    //     ])->assignRole('member');
-    // }
 
     public function run(): void
     {
-       $user =  User::create([
+        $leaderPermissions = [
+            'index-TasksController',
+            'create-TasksController',
+            'store-TasksController',
+            'edit-TasksController',
+            'update-TasksController',
+            'destroy-TasksController',
+        ];
+
+       $projectLeader =  User::create([
             'name' => 'Chef de projet',
             'email' => 'project.leader@solicode.com',
             'password' => Hash::make('leader'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-        ])->assignRole('project-leader');
+        ]);
+        $projectLeader->assignRole('project-leader');
+        $projectLeader->givePermissionTo($leaderPermissions);
+        
+        $superAdmin = User::create([
+            'name' => 'Super Admin',
+                'email' => 'Super.Admin@gmail.com',
+                'password' => Hash::make('Super.Admin'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        ])->assignRole('Super Admin');
+        // $superAdmin->givePermissionTo($leaderPermissions);
 
-        User::create([
+        $user = User::create([
             'name' => 'membre',
                 'email' => 'membre@solicode.com',
                 'password' => Hash::make('membre'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         ])->assignRole('member');
-        
+        $user->givePermissionTo('create-TasksController');
+
     }
 }

@@ -5,19 +5,20 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
             <h2>Les Tâches</h2>
-           @role('project-leader')
+            @can('create-TasksController')
             {{-- btn create --}}
-                <a href="{{ route('tasks.create') }}" type="button" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Nouveau Tâche
-                </a>
-           @endrole
+            <a href="{{ route('tasks.create') }}" type="button" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nouveau Tâche
+            </a>
+            @endcan
         </div>
+
         @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header d-flex flex-row-reverse bd-highlight">
                 <div class="input-group w-25">
@@ -33,7 +34,7 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
                             <th scope="col">Nom de Projet</th>
-                              <th scope="col">Action</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody id="search-result">

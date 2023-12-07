@@ -3,14 +3,17 @@
         <th>{{ $task->nom }}</th>
         <td>{{ $task->description }}</td>
         <td>{{ $task->project->nom }}</td>
+        @can('index-TasksController')
             <td class="d-md-flex">
                 <a href="{{ route('tasks.edit', ['id' => $task->id]) }}" class="btn btn-success me-2">
-                    <i class="fas fa-edit me-1"></i> 
+                    <i class="fas fa-edit me-1"></i>
                 </a>
-                <button type="button" class="btn btn-danger" onclick="deleteTask({{ $task->id }})" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-trash-alt me-1"></i> 
+                <button type="button" class="btn btn-danger" onclick="deleteTask({{ $task->id }})" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    <i class="fas fa-trash-alt me-1"></i>
                 </button>
             </td>
+            @endcan
 
     </tr>
 @endforeach
@@ -24,6 +27,5 @@
         </div>
     </td>
 </tr>
-
 <!-- Modal DELETE TASKS-->
-  <x-modal-delete-tasks />
+<x-modal-delete-tasks />
