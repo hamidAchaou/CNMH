@@ -7,10 +7,12 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between my-3">
             <h2 class="text-secondary">Les Tâches</h2>
+            @can('create-TasksController')
             {{-- btn add tasks --}}
             <a href="{{ route('tasks.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Nouvelle Tâche
             </a>
+            @endcan
         </div>
         {{-- message Flashbag --}}
         @if (session('success'))
