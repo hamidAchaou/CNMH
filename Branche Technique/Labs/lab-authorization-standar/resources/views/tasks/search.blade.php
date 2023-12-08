@@ -12,6 +12,7 @@
                     data-bs-target="#exampleModal">
                     <i class="fas fa-trash-alt me-1"></i>
                 </button>
+                
             </td>
             @endcan
 

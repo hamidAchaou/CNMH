@@ -26,7 +26,7 @@
                         <tr>
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Tâches</th>
+                            <th scope="col">Les Tâches</th>
                         </tr>
                     </thead>
                     <tbody id="search-result">

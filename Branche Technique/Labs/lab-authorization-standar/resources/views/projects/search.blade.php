@@ -3,7 +3,9 @@
         <th>{{ $project->nom }}</th>
         <td>{{ $project->description }}</td>
         <td class="d-md-flex">
-            <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-primary me-2">Afficher les tâches</a>
+            <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-primary me-2">
+                <i class="fas fa-tasks ms-1"></i> Afficher les tâches
+            </a>
 
         </td>
     </tr>
