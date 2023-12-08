@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Members;
 use Illuminate\Http\Request;
 
 class MembersController extends Controller
@@ -34,7 +33,7 @@ class MembersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Members $members)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class MembersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Members $members)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +49,7 @@ class MembersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Members $members)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +57,7 @@ class MembersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Members $members)
+    public function destroy(string $id)
     {
         //
     }

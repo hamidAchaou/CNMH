@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Members extends Model
+class Member extends Model
 {
     use HasFactory;
 
@@ -17,10 +17,4 @@ class Members extends Model
         'email',
         'password',
     ];
-    
-    // This scope retrieves only users with the 'role' set to 'member'
-    public function scopeMembers($query)
-    {
-        return $query->where('role', '=', 'member');
-    }
 }
