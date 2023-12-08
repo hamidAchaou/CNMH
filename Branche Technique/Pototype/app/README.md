@@ -1,77 +1,68 @@
-# Laravel Authentication with Bootstrap UI
+# lab crud standard
 
-This repository demonstrates how to set up authentication using Laravel UI with Bootstrap for a Laravel application.
+- Ce dépôt présente un projet Laravel standard pour la gestion des tâches.
 
-## Prerequisites
+#### Référence. 
 
-- PHP installed on your machine
-- Composer globally installed
-- Node.js and npm installed
+[Laravel Tutorial](https://grafikart.fr/formations/laravel)
 
-## Getting Started
+## Travail à faire
+Complétez le travail sur le lab CRUD Laravel de base en utilisant le design pattern Repository, implémentez la recherche, ajoutez la pagination et incluez la table des projets ainsi que l'ajout CRUD pour les projets.
 
-1. **Clone the repository**
+### Critères de validation 
 
-    ```bash
-    git clone <repository-url>
-    ```
+- Compléter le travail sur  [`lab crud laravel basic`](https://github.com/hamidAchaou/CNMH/tree/main/Branche%20Technique/Labs/lab-crud-basic)
+- Opérations CRUD pour les tâches et les projets
+- Pagination
+- Recherche (AJAX)
+- Design Pattern Repository
+- Filtrer les tâches par projet
+- Données d'exemple (jeux de test)
 
-2. **Install Dependencies**
+##### Process Workflow 
 
-    ```bash
-    composer install
-    npm install
-    ```
+1. Commencez par cloner le lab CRUD de base avec cette commande :
 
-3. **Set Up Environment Variables**
+```bash
+git clone https://github.com/hamidAchaou/CNMH.git
 
-    - Rename `.env.example` to `.env`
-    - Configure your database credentials in the `.env` file
+```
+2. Ensuite, accédez au lab-crud-standar :
 
-4. **Generate Application Key**
+```bash
+cd "Branche Technique" 
+cd "Labs" 
+cd "lab-crud-standar"
+```
+3. Ensuite, créez le fichier .env en utilisant la commande :
 
-    ```bash
-    php artisan key:generate
-    ```
+```bash
+cp .env.example .env
+```
+4. Ajoutez le nom de la base de données dans le fichier .env.
 
-5. **Run Migrations**
+5. Générez une clé en utilisant cette commande.
+```bash
+php artisan key:generate
+```
 
-    ```bash
-    php artisan migrate
-    ```
+6. Migrez les tables vers la base de données :
 
-6. **Install Laravel UI and Bootstrap**
+```bash
+php artisan migrate
 
-    ```bash
-    composer require laravel/ui
-    php artisan ui bootstrap --auth
-    ```
+```
 
-7. **Compile Assets**
+7. Remplissez la base de données avec des informations de projet en créant un seeder et en exécutant :
 
-    ```bash
-    npm run dev
-    ```
+```bash
+php artisan db:seed
+```
 
-8. **Start the Development Server**
 
-    ```bash
-    php artisan serve
-    ```
+6. Pour voir l'avancement de votre projet localement, exécutez cette commande :
 
-9. **Access the Application**
+```bash 
+php artisan serve
 
-    Open your browser and go to `http://localhost:8000`
-
-## Additional Information
-
-- For production deployment, make sure to configure your web server (e.g., Apache, Nginx) to serve the application properly.
-- Customize the UI and styles by modifying the Bootstrap views located in the `resources/views` directory.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request for any enhancements or fixes.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+```

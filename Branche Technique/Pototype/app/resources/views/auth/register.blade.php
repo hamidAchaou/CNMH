@@ -14,27 +14,13 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <input type="text" name="firstName"
-                                class="form-control @error('firstName') is-invalid @enderror" value="{{ old('firstName') }}"
-                                placeholder="Full firstName">
+                            <input type="text" name="name"
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                placeholder="Full name">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
-                            @error('firstName')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <input type="text" name="lastName"
-                                class="form-control @error('firstName') is-invalid @enderror" value="{{ old('firstName') }}"
-                                placeholder="Full firstName">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-user"></span></div>
-                            </div>
-                            @error('firstName')
+                            @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

@@ -46,7 +46,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-6. Migrez les tables vers la base de données :
+6. Migrez les tables vers lphp arta base de données :
 
 ```bash
 php artisan migrate
