@@ -13,7 +13,7 @@ class ProjectsRepository extends BasRepository {
    }
 
    protected $feildsProjects = [
-    'nom',
+    'name',
     'description',
    ];
 
@@ -30,7 +30,7 @@ class ProjectsRepository extends BasRepository {
   public function searchProjects($searchValue, $perPage = 4)
 {
   return $this->model
-  ->where('nom', 'LIKE', '%' . $searchValue . '%')
+  ->where('name', 'LIKE', '%' . $searchValue . '%')
   ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
   ->paginate($perPage);
 }

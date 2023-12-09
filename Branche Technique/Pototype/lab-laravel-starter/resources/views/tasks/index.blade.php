@@ -10,12 +10,12 @@
                         <input type="hidden" id="projectId" value="{{ $project->id }}">
                     </div>
                     {{-- neveau Task --}}
-                    @can('view', new App\Models\Member())
+                    {{-- @can('view') --}}
                         <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
                             <a href="{{ route('tasks.create', ['id' => $project->id]) }}" class="btn btn-primary"><i
                                     class="fas fa-plus"></i>{{ __('words.new_task') }}</a>
                         </div>
-                    @endcan
+                    {{-- @endcan --}}
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                                 {{-- search --}}
                                 <div class="input-group input-group-sm  col-md-3 p-0">
                                     <input type="hidden" value="1" id="pageNumber">
-                                    <input type="text" id="inputSearch-tasks" class="form-control float-right"
+                                    <input type="text" id="search-input" class="form-control float-right"
                                         placeholder="{{ __('words.search_placeholder') }}">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -72,14 +72,14 @@
                                         <tr>
                                             <th>{{ __('words.task_title') }}</th>
                                             <th>{{ __('words.description') }}</th>
-                                            @can('view', App\Models\Member::class)
+                                            {{-- @can('view', App\Models\Member::class) --}}
                                                 <th>{{ __('words.action') }}</th>
-                                            @endcan
+                                            {{-- @endcan --}}
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {{-- get all Tasks --}}
-                                        @include('projects.tasks.searchTasks')
+                                        @include('tasks.searchTasks')
                                     </tbody>
                                 </table>
                             </div>
@@ -90,127 +90,6 @@
         </section>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    {{-- Script Search --}}
-    <script>
-        $(document).ready(function() {
-
-            function fetchData(page, searchValue) {
-                let projectId = $('#projectId').val();
-                $.ajax({
-                    url: '/projects/task?page=' + page + '&searchValue=' + searchValue,
-                    success: function(data) {
-                        console.log(data)
-                        $('tbody').html("");
-                        $('tbody').html(data);
-                    }
-                });
-            }
-
-            $('body').on('keyup', '#inputSearch-tasks', function() {
-                let page = 1;
-                let searchValue = $('#inputSearch-tasks').val();
-                fetchData(page, searchValue);
-            });
-        });
-
-        // // script filter
-        $(document).ready(function() {
-            $('#projectFilter').on('change', function() {
-                let project = $(this).val();
-                $.ajax({
-                    url: "{{ route('tasks.index') }}",
-                    type: "GET",
-                    data: {
-                        'project': project
-                    },
-                    // success:function (data){
-                    //     let tasks = data.tasks;
-                    //     $('tbody').html("");
-                    //     $('tbody').html(data);
-
-                    //     console.log(tasks)
-
-                    // }
-                    success: function(response) {
-                        if (response && response.tasks && response.tasks.data && Array.isArray(
-                                response.tasks.data)) {
-                            // Clear existing tbody content
-                            $('tbody').html("");
-
-                            response.tasks.data.forEach(function(task) {
-                                var row = `
-                <tr>
-                    <td>${task.name}</td>
-                    <td>${task.description}</td>
-                    <td>
-                        <!-- Your edit and delete buttons here -->
-                        <button class="btn btn-default" data-task-id="${task.id}">
-                            Edit
-                        </button>
-                        <button class="btn btn-danger" data-task-id="${task.id}">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-                
-            `;
-                                // Append the new row to the tbody
-                                $('tbody').append(row);
-                            });
-                        } else {
-                            console.error('Invalid data structure:', response);
-                        }
-                    },
-                })
-            })
-        });
-    </script>
-
-
-    {{-- <script type="text/javascript">
-    $(document).ready(function() {
-        function getData(page, filterValue) {
-            let projectId = $('#projectFilter').val();
-            $.ajax({
-                url: '/projects/' + projectId + '/show?page=' + page + '&filterValue=' + filterValue,
-                success: function(data) {
-                    $('tbody').html("");
-                    $('tbody').html(data);
-                    console.log(data)
-                }
-            })
-        }
-
-        $('body').on('change', '#projectFilter', function() {
-                let page = 1;
-                let filterValue = $('#projectFilter').val();
-                getData(page, filterValue);
-            });
-        });
-
-        // $('#projectFilter').change(function() {
-        //     var projectId = $(this).val();
-        //     $.ajax({
-        //         url: '/tasks/filter',
-        //         type: 'GET',
-        //         data: {
-        //             projectId: projectId
-        //         },
-        //         success: function(response) {
-        //             $('#tasksList').html(response);
-        //         },
-        //         error: function(xhr) {
-        //             console.log(xhr.responseText);
-        //             // Handle error here
-        //         }
-        //     });
-        // });
-</script> --}}
-
-
-
     {{-- modal Delete Tasks --}}
-    @component('component.modal-delete-tasks')
-    @endcomponent
+    <x-modal-delete-tasks />
 @endsection

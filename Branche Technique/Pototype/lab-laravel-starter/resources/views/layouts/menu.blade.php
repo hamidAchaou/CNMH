@@ -13,7 +13,6 @@
 </li>
 
 {{-- tasks --}}
-{{-- @can('create', App\Models\Member::class) --}}
 <li class="nav-item menu-open">
     <ul class="nav nav-treeview">
         <li class="nav-item">
@@ -24,8 +23,8 @@
         </li>
     </ul>
 </li>
-{{-- @endcan --}}
-{{-- links member --}}
+
+    {{-- links member --}}
 {{-- @can('create', App\Models\Member::class) --}}
 <li class="nav-item menu-open">
     <ul class="nav nav-treeview">

@@ -50,11 +50,24 @@ class ProjectsController extends Controller
     {
         $validatedData = $request->validated(); 
 
-        $nameProject = $validatedData['nom'];
+        $nameProject = $validatedData['name'];
         $result = $this->projectsRepository->create($validatedData);
 
         return redirect()->route('projects.index')->with('success', "Le projet $nameProject a été ajouté avec succès");
     }
+
+        /**
+     * Display the specified resource.
+     */
+    public function show(Request $request, $id)
+    {
+        $projects = $this->projectsRepository->getAll();
+        $tasks = $this->tasksRepository->getByProjectId($id);
+        $project = $this->projectsRepository->find($id);
+        
+        return view('tasks.index', compact('project', 'tasks', 'projects'));
+    }
+    
 
     /**
      * Show the form for editing the specified resource.

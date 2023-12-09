@@ -50,7 +50,7 @@ class ProjectsController extends Controller
     {
         $validatedData = $request->validated(); 
 
-        $nameProject = $validatedData['nom'];
+        $nameProject = $validatedData['name'];
         $result = $this->projectsRepository->create($validatedData);
 
         return redirect()->route('projects.index')->with('success', "Le projet $nameProject a été ajouté avec succès");

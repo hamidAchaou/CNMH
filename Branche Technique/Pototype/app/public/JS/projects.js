@@ -8,15 +8,6 @@ $(document).ready(function() {
         });
     }
 
-    function filterData(page, criteria) {
-        $.ajax({
-            url: 'projects/?page=' + page + '&criteria=' + criteria,
-            success: function(data) {
-                $('tbody').html(data);
-                console.log(criteria);
-            }
-        });
-    }
 
     $('body').on('click', '.pagination a', function(event) {
         event.preventDefault();
@@ -33,22 +24,16 @@ $(document).ready(function() {
         fetchData(page, searchValue);
     });
 
-    $('#filterCriteria').on('change', function() {
-        var page = $('#page').val(); // Assuming there's an element with ID 'page'
-        var criteria = $(this).val();
-        var baseUrl = window.location.href.split('/');
-        baseUrl.pop();
-        var newUrl = baseUrl.join('/') + '/' + criteria;
-        console.log(newUrl);
-        window.history.pushState({ path: newUrl }, '', newUrl);
-        filterData(page, criteria);
-    });
 });
 
 
-// function delete Projects
-function deleteProject(Project_id) {
-    document.getElementById('Project_id').value = Project_id;
-    document.getElementById('deleteForm').action = "projects/" + Project_id;
+// function to delete project
+function deletProject(ProjectId) {
+    // set the project_id input value
+    document.getElementById("project_id").value = ProjectId;
+    // set the form action dynamically
+    document.getElementById("deleteForm").action = "/projects/" + ProjectId;
+    // submit the form
+    document.getElementById("deleteForm").submit();
 }
 

@@ -6,18 +6,18 @@
             {{ $task->description }}
         </td>
         <td>
-            @can('update', App\Models\Member::class)
+            @can('update.TasksController')
                 {{-- btn edit --}}
-                <a href="{{ route('tasks.edit', ['id' => $task->id, 'project_Id' => $project->id]) }}"
-                    class="btn btn-default"><i class="fa-solid fa-pen-to-square"></i>
+                <a href="{{ route('tasks.edit', ['task' => $task->id, 'project' => $project->id]) }}" class="btn btn-default">
+                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
             @endcan
 
             {{-- btn delete --}}
-            @can('delete', App\Models\Member::class)
+            @can('delete.TasksController')
                 <button type="button" class="btn btn-danger"
-                    onclick="deleetProject({{ $task->id }}, {{ $project->id }})"
-                    data-toggle="modal" data-target="#dalete-tasks-modal"><i class="fa-solid fa-trash"></i>
+                    onclick="deletTasks({{ $task->id }}, {{ $project->id }})"
+                    data-toggle="modal" data-target="#modalDeleteTask"><i class="fa-solid fa-trash"></i>
                 </button>
             @endcan
         </td>
@@ -25,7 +25,7 @@
 @endforeach
 <tr>
     <td>
-        <div class="d-flex align-items-center">
+        {{-- <div class="d-flex align-items-center">
             @can('create', App\Models\Member::class)
                 <form action="{{ route('tasks.import') }}" method="post"
                     enctype="multipart/form-data" id="importForm">
@@ -41,7 +41,7 @@
                 <i class="fa-solid fa-file-export"></i>
                 {{ __('words.export') }}
             </a>
-        </div>
+        </div> --}}
     </td>
     <td></td>
     <td colspan="3" class="d-flex flex-row-reverse bd-highlight">

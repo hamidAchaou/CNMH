@@ -5,6 +5,10 @@
     <form method="POST" action="{{ isset($project) ? route('projects.update', $project->id) : route('projects.store') }}">
         @csrf
         
+        @isset($project)
+            @method('PUT')
+        @endisset
+
         <div class="card-body">
             <div class="form-group mb-0">
                 <label for="nom">{{ __('words.name') }}</label>

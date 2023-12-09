@@ -1,24 +1,14 @@
-@extends('layouts.master')
-@include('layouts.nav')
+@extends('layouts.app')
 
 @section('content')
-    <div class="container py-4">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Modifier Une Tâche</h2>
-            </div>
-            <div class="card-body">
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                    {{-- fet Form fealds --}}
-                    @include('projects.formFields')
-
+<section class="content pt-4">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+              {{-- get form feailds --}}
+              @include('projects.formFields')
             </div>
         </div>
     </div>
+</section>
 @endsection

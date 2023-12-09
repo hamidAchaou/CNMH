@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="" style="min-height: 1302.4px;">
+    <div class="">
         <div class="content-header">
             <div class="container-fluid">
-                <div class="mt-4 container row justify-content-between">
+                <div class="mt-4 container d-flex justify-content-between">
                     <div class="form-group col-md-4">
-                        <h4 class="container">Les Member</h4>
+                        <h4 class="container">{{ __('words.projects') }}</h4>
                     </div>
-
-                    <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
-                        <a href="create.html" class="btn btn-primary"><i class="fas fa-plus"></i> Nouveau Member</a>
-                    </div>
+                    {{-- create Project --}}
+                    @can('create-TasksController')
+                        <div class="d-flex flex-row-reverse form-group col-md-4">
+                            <a href="{{ route('projects.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
+                                {{ __('words.new_project_button') }}</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -19,20 +22,37 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
+                        <div class="">
+                            @if (session('success'))
+                                <div class="alert alert-success alert-dismissible pt-3">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    <h5><i class="icon fas fa-check"></i>
+                                        {{ session('success') }}
+                                    </h5>
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ session('error') }}.
+                                </div>
+                            @endif
+                        </div>
                         <div class="card">
-                            <div class="card-header col-md-12">
-                                <div class=" p-0">
-                                    <div class="input-group input-group-sm float-sm-right col-md-3 p-0">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
+                            <div class="card-header col-md-12 d-flex flex-row-reverse bd-highlight">
+                                {{-- search --}}
+                                <div class="input-group input-group  col-md-3 p-0">
+                                    <input type="text" name="search-input" id="search-input" class="form-control float-right"
+                                        placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped text-nowrap">
@@ -40,129 +60,29 @@
                                         <tr>
                                             <th>Nom de projet</th>
                                             <th>Description</th>
-                                            <th>Date de debut</th>
-                                            <th>Date de fin</th>
-                                            <th>Task de projet</th>
-                                            <th>Action</th>
+                                            <th class="d-flex justify-content-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
-
-                                        <tr>
-                                            <td>maquitage de cnmh</td>
-                                            <td>Devlopper maquitage de gestion Project et member</td>
-                                            <td>2023-10-12</td>
-                                            <td>2023-10-16</td>
-                                            <td class="text-center">
-                                                <a href="./tasks/tasks.html" class="btn btn-default text-center">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </a>
-                                            </td>
-                                            <td class="d-md-flex">
-                                                <!-- btn edit  -->
-                                                <a href="edit.html" type="submit" class="btn btn-default mr-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <!-- btn delete  -->
-                                                <button type="submit" class="btn btn-default mr-2">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Prototype de cnmh</td>
-                                            <td>Devlopper application de gestion Project et member</td>
-                                            <td>2023-10-12</td>
-                                            <td>2023-10-16</td>
-                                            <td class="text-center">
-                                                <a href="./tasks/tasks.html" class="btn btn-default">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </a>
-                                            </td>
-                                            <td class="d-md-flex">
-                                                <!-- btn edit  -->
-                                                <a href="edit.html" type="submit" class="btn btn-default mr-2">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <!-- btn delete  -->
-                                                <button type="submit" class="btn btn-default mr-2">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
+                                        @include('projects.search')
                                     </tbody>
                                 </table>
-                            </div>
 
+                                <input type="hidden" id="pageNumber" value="1">
+                            </div>
                             <div class="card-footer ">
-                                <div class="d-flex justify-content-between">
-                                    <div class="">
-                                        <button type="button" class="btn  btn-default">
-                                            <i class="fa-solid fa-download"></i>
-                                            IMPORT</button>
-                                        <button type="button" class="btn  btn-default">
-                                            <i class="fa-solid fa-file-export"></i>
-                                            EXPORT</button>
-                                    </div>
-                                    <div class="">
-                                        <ul class="pagination  m-0 ">
-                                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 
-    {{-- script import Project --}}
-
-    <script>
-        document.getElementById('upload').addEventListener('change', function() {
-            document.getElementById('importForm').submit();
-        });
-    </script>
-
-    {{-- link ajax --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            function fetchData(page, searchValue) {
-                $.ajax({
-                    url: 'projects/?page=' + page + '&searchValue=' + searchValue,
-                    success: function(data) {
-                        $('tbody').html("");
-                        $('tbody').html(data);
-                        console.log(data)
-                    }
-                })
-            }
-
-            $('body').on('keyup', '#inputSearch', function() {
-                let page = $('#pageNumber').val();
-                let searchValue = $('#inputSearch').val();
-                fetchData(page, searchValue);
-            });
-
-            $('body').on('click', '.pagination a', function(e) {
-                e.preventDefault();
-                let page = $(this).attr('href').split('page=')[1];
-                let searchValue = $('#inputSearch').val();
-                fetchData(page, searchValue);
-            })
-        });
-    </script>
-
     {{-- modal Delete Projects --}}
-    @component('component.modal-delete-projects')
-    @endcomponent
+    <x-modal_delete_projects />
+
+    {{-- script search by ajax --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('JS/projects.js') }}"></script>
 @endsection

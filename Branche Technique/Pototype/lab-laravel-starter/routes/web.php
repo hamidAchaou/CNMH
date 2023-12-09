@@ -23,11 +23,16 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     
-    // tasks
-    Route::resource('tasks', TasksController::class);
-
     // projects
     Route::resource('projects', ProjectsController::class);
+
+    // tasks
+    Route::prefix('projects')->group(function () {
+        Route::get('{id}/tasks', [TasksController::class, 'index'])->name('projects.tasks');
+    
+        Route::resource('tasks', TasksController::class); 
+    });
+    
 
     // Members
     Route::resource('members', MembersController::class);

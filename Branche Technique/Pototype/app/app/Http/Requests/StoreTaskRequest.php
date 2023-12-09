@@ -22,17 +22,9 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required | max:50',
+            'name' => 'required | max:50',
             'description' => 'nullable|max:555',
-            'projetId' => 'required',            
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'nom.string' => 'Le champ nom doit être une chaîne de caractères.',
-            'nom.max' => 'Le champ nom ne peut pas dépasser :max caractères.',
+            'project_Id' => 'required',   
         ];
     }
 }

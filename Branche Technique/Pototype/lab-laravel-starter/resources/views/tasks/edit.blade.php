@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
               {{-- get form feailds --}}
-              @include('projects.tasks.formFieldsTasks')
+              @include('tasks.formFields')
             </div>
         </div>
     </div>

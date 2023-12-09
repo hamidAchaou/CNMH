@@ -1,32 +1,29 @@
 <?php
 
-// app/Http/Requests/UpdateProjectRequest.php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProjectRequest extends FormRequest
 {
-    public function authorize()
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
     {
         return [
-            'nom' => 'required | max:50',
+            'name' => 'required | max:50',
             'description' => 'nullable|max:555',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'nom.string' => 'Le champ nom doit être une chaîne de caractères.',
-            'nom.max' => 'Le champ nom ne peut pas dépasser :max caractères.',
-        ];
-    }
 }
-

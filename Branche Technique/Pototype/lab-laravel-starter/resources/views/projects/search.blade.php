@@ -4,19 +4,21 @@
         <td>{{ $project->name }}</td>
         <td>{{ $project->description }}</td>
         <td class="d-md-flex justify-content-center">
-            <a href="{{ route('projects.show', ['id' => $project->id]) }}" class="btn btn-primary text-center mr-2">
-                <i class="fa-solid fa-eye"></i> 
-                 {{ __('words.Tasks')}}
+            <a href="{{ route('projects.tasks', ['id' => $project->id]) }}" class="btn btn-primary text-center mr-2">
+                <i class="fa-solid fa-eye"></i>
+                {{ __('words.Tasks') }}
             </a>
-            @can('update', App\Models\Member::class)
-                <!-- btn edit  -->
-                <a href="{{ route('projects.edit', ['id' => $project->id]) }}" type="submit" class="btn btn-default mr-2">
+            
+            @can('edit-TasksController')
+            <!-- btn edit  -->
+                <a href="{{ route('projects.edit', ['project' => $project->id]) }}" class="btn btn-default mr-2">
                     <i class="fas fa-edit"></i>
                 </a>
             @endcan
-            @can('delete', App\Models\Member::class)
-                <!-- btn delete  -->
-                <button type="submit" class="btn btn-danger mr-2" onclick="deleetProject({{ $project->id }})" data-toggle="modal" data-target="#exampleModal">
+            
+            @can('destroy-TasksController')
+            <!-- btn delete  -->
+                <button type="submit" class="btn btn-danger mr-2" onclick="deleetProject({{ $project->id }})" data-toggle="modal" data-target="#modalDeleteProjects">
                     <i class="fas fa-trash-alt"></i>
                 </button>
             @endcan
@@ -25,7 +27,7 @@
 @endforeach
 <tr>
     <td>
-        <div class="d-flex align-items-center">
+        {{-- <div class="d-flex align-items-center">
             @can('create', App\Models\Member::class)
                 <form action="{{ route('projects.import') }}" method="post"
                     enctype="multipart/form-data" id="importForm">
@@ -41,7 +43,7 @@
                 <i class="fa-solid fa-file-export"></i>
                 {{ __('words.export') }}
             </a>
-        </div>
+        </div> --}}
     </td>
     <td></td>
     <td colspan="3" class="d-flex flex-row-reverse bd-highlight">

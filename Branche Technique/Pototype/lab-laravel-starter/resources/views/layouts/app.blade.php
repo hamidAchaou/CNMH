@@ -30,5 +30,4 @@
             toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
         });
     </script>
-    
 </x-laravel-ui-adminlte::adminlte-layout>

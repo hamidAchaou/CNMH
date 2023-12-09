@@ -14,9 +14,9 @@ class TasksRepository extends BasRepository {
     }
 
     protected $fieldsTasks = [
-        'nom',
+        'name',
         'description',
-        'projetId',
+        'project_Id ',
     ];
 
     public function getFeildsData(): array
@@ -30,9 +30,11 @@ class TasksRepository extends BasRepository {
     }
 
     public function getByProjectId($projectId, $perPage = 3) {
-        $tasks = $this->model->where('projetId', $projectId)->paginate($perPage);
+        $tasks = $this->model->where('project_Id', $projectId)->paginate($perPage);
         return $tasks;
     }
+
+    
     
 
     public function searchTasks($searchValue, $perPage = 4)
