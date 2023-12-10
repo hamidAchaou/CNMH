@@ -24,7 +24,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'name' => 'required | max:50',
             'description' => 'nullable|max:555',
-            'project_Id' => 'required',   
+            'project_Id' => 'required',
         ];
     }
 }

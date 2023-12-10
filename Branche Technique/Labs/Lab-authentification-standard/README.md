@@ -1,17 +1,21 @@
 # Authentification dans Laravel avec UI et AdminLTE
 
+## Travail a faire
 Ce référentiel démontre la configuration de l'authentification dans Laravel en utilisant l'interface utilisateur (UI) avec le thème AdminLTE.
 
 ## Package admin LTE
 - Laravel ui adminlte
  - [Documentation](https://infyom.com/open-source/laravel-ui-adminlte/docs)
 
+## Critères de validation
+- utilisant adminlte ui
+
 ## Pour commencer
 
 1. **Cloner le dépôt**
 
     ```bash
-    git clone https://github.com/hamidAchaou/CNMH/tree/main/Branche%20Technique/Labs/Lab-authentification-standard
+    git clone https://github.com/hamidAchaou/CNMH.git
     ```
 
 2. **Installer les dépendances**

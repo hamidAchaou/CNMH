@@ -16,7 +16,7 @@ class TasksRepository extends BasRepository {
     protected $fieldsTasks = [
         'name',
         'description',
-        'project_Id ',
+        'project_Id',
     ];
 
     public function getFeildsData(): array
@@ -40,7 +40,7 @@ class TasksRepository extends BasRepository {
     public function searchTasks($searchValue, $perPage = 4)
     {
         return $this->model
-            ->where('nom', 'LIKE', '%' . $searchValue . '%')
+            ->where('name', 'LIKE', '%' . $searchValue . '%')
             ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
             ->paginate($perPage);
     }

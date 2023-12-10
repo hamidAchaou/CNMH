@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+    
 @section('content')
 <section class="content pt-4">
     <div class="container-fluid">
@@ -12,3 +12,5 @@
     </div>
 </section>
 @endsection
+
+

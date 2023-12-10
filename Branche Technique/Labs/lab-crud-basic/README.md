@@ -8,6 +8,7 @@
 
 - Créer le CRUD des tâches
 - afficher les tâches pour chaque projet
+- afficher les projet
 - Inclure la recherche en utilisant AJAX
 - Ajouter la pagination
 - Ajouter la base de données incluant la table des projets dans les seeders
@@ -21,7 +22,7 @@
 1. Start by installing Laravel through the terminal with this command:
 
 ```bash
-composer create-project laravel/laravel=10 .
+composer create-project laravel/laravel=10 lab-crud-basic
 
 ```
 2. Next, create the .env file using the command:

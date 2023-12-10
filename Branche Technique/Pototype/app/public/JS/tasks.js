@@ -24,7 +24,7 @@ $(document).ready(function() {
 
         param.preventDefault();
 
-        var page = $(this).attr('href').split('page=')[1];
+        var page = 1;
         var searchValue = $('#search-input').val();
         console.log($(this).attr('href').split('page=')[1]);
         console.log($(this).attr('href').split('page='));
@@ -49,9 +49,12 @@ $(document).ready(function() {
     // fetchData(1, '');
 });
 
-// function delete tasks
-function delteTask(Task_id) {
-    document.getElementById('Task_id').value = Task_id;
-    document.getElementById('deleteForm').action = "tasks/" + Task_id;
+
+function deletTasks(Task_id) {
+    // set the project_id input value
+    document.getElementById("Task_id").value = Task_id;
+    // set the form action dynamically
+    document.getElementById("deleteForm").action = "/projects/" + Task_id;
+    // submit the form
 }
 

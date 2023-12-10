@@ -1,56 +1,46 @@
-# Lab authorisation basic
+# lab-authorization-standard
 
 ## Travail à faire
 
-- Ajouter l'authentification pour [`Lab-Laravel-crud-basic`](https://github.com/Jalil-Betroji/lab-crud.git) .
-- Additionner l'autorisation pour [`Lab-Laravel-crud-basic`](https://github.com/Jalil-Betroji/lab-crud.git) .
+
+- Améliorer l'athourisation de [`lab-authorization-basic`](https://github.com/hamidAchaou/CNMH/tree/main/Branche%20Technique/Labs/lab-authorization-basic)
 
 ### Critères de validation
+- Attribution d'un rôle et de permissions à chaque utilisateur.
+- Éviter l'utilisation de Gate ou de policies.
+- Utiliser un seeder pour ajouter les rôles et les permissions
 
-- Intégrer l'authentification via Laravel Auth.
-- Appliquer la fonction callAction.
-- Utiliser Gate pour les autorisations.
-- Éviter l'utilisation des policies
+#### Packages
 
-#### Référence
-- [Authentififcation](https://laravel.com/docs/10.x/authentication)
-- [authorization référence 1](https://laravel.com/docs/10.x/authorization)
-- [authorization référence 2](https://jhadiary.wordpress.com/2020/03/14/laravel-call-a-routine-or-function-before-each-route-action-is-called/ )
+- spatie/laravel-permission
 
-##### Command used in the application
+##### Référence 
 
-1. Clone the Repository:
+- [spatie package](https://spatie.be/docs/laravel-permission/v6/introduction)
+- [callAction](https://hotexamples.com/examples/illuminate.routing/Controller/callAction/php-controller-callaction-method-examples.html)
 
-```bash
-git clone https://github.com/Jalil-Betroji/lab-crud.git
-```
+###### Commands
 
-2. Update Composer Dependencies:
+1. Install the Spatie package:
 
-```bash
-composer update 
-```
+    ```bash
+    composer require spatie/laravel-permission
+    ```
 
-3. Create Environment File:
+2. Publish the configuration file and generate permission tables:
 
-```bash
-cp .env.example .env
-```
+    ```bash
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```
 
-4. Run Migrations:
+3. Run migrations to update the database schema:
 
-```bash
-php artisan migrate
-```
+    ```bash
+    php artisan migrate
+    ```
 
-5. Seed Database:
+4. Seed the database with initial data:
 
-```bash
-php artisan db:seed
-```
-
-6. Launch the Application::
-
-```bash 
-php artisan serve
-```
+    ```bash
+    php artisan db:seed
+    ```

@@ -4,24 +4,24 @@
         <td>{{ $project->name }}</td>
         <td>{{ $project->description }}</td>
         <td class="d-md-flex justify-content-center">
-            <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-primary text-center mr-2">
+            <a href="{{ route('projects.tasks', ['id' => $project->id]) }}" class="btn btn-primary text-center mr-2">
                 <i class="fa-solid fa-eye"></i>
                 {{ __('words.Tasks') }}
             </a>
             
-            {{-- @can('edit-TasksController') --}}
+            @can('edit-TasksController')
             <!-- btn edit  -->
                 <a href="{{ route('projects.edit', ['project' => $project->id]) }}" class="btn btn-default mr-2">
                     <i class="fas fa-edit"></i>
                 </a>
-            {{-- @endcan --}}
+            @endcan
             
-            {{-- @can('destroy-TasksController') --}}
+            @can('destroy-TasksController')
             <!-- btn delete  -->
-                <button type="submit" class="btn btn-danger mr-2" onclick="deletProject({{ $project->id }})" data-toggle="modal" data-target="#modalDeleteProjects">
+                <button type="submit" class="btn btn-danger mr-2" onclick="deleetProject({{ $project->id }})" data-toggle="modal" data-target="#modalDeleteProjects">
                     <i class="fas fa-trash-alt"></i>
                 </button>
-            {{-- @endcan --}}
+            @endcan
         </td>
     </tr>
 @endforeach

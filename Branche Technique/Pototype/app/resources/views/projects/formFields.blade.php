@@ -11,8 +11,8 @@
 
         <div class="card-body">
             <div class="form-group mb-0">
-                <label for="name">{{ __('words.name') }}</label>
-                <input name="name" type="text" class="form-control" id="name" placeholder="{{ __('words.inputName_placeholder') }}"
+                <label for="nom">{{ __('words.name') }}</label>
+                <input name="name" type="text" class="form-control" id="nom" placeholder="{{ __('words.inputName_placeholder') }}"
                     value="{{ old('name', isset($project) ? $project->name : '') }}">
             </div>
             @error('name')

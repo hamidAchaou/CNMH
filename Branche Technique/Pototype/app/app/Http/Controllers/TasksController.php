@@ -41,10 +41,11 @@ class TasksController extends Controller
             return view('tasks.search', compact('tasks'))->render();
         }
 
-        $id = $request->id;
+        // $id = $request->id;
         $projects = $this->projectsRepository->getAll();
 
-        if($id) {
+        if($request->id) {
+            $id = $request->id;
             $project = $this->projectsRepository->find($id);
         } 
         else {
@@ -73,11 +74,13 @@ class TasksController extends Controller
     public function store(StoreTaskRequest $request)
     {
         $validatedData = $request->validated();
-
+    
+        $id = $validatedData['project_Id'];
+    
         $task = $this->tasksRepository->create($validatedData);
-        return redirect()->route('tasks.index', compact('id'))->with('success', 'tache a été ajouter avec succés');
+        return redirect()->route('projects.tasks', compact('id'))->with('success', 'La tâche a été ajoutée avec succès');
     }
-
+    
     /**
      * show form Edit tasks
      */

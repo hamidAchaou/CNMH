@@ -83,8 +83,11 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+    'locale' => 'fr',
+    'languages' => [
+        'fr' => 'french',
+        'en' => 'English'
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -96,7 +99,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +112,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'fr_FR',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +171,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
         Laracasts\Flash\FlashServiceProvider::class,
     ])->toArray(),
 
