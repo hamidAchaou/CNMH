@@ -1,8 +1,7 @@
 # Lab html
 ## Réferences
 
-[Js-Craft]()
-[MICHAEL GEARON]()
+[Scroll to text fragment](https://mgearon.com/html/text-fragments/)
 
 ### Travail a faire
 
