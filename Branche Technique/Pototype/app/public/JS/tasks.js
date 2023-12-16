@@ -12,7 +12,7 @@ $(document).ready(function() {
     // filter By Projects
     function filterData(page, criteria) {
         $.ajax({
-            url: 'tasks/?page=' + page + '&criteria=' + criteria,
+            url: 'tasks?page=' + page + '&criteria=' + criteria,
             success: function(data) {
                 $('tbody').html('');
                 $('tbody').html(data);
@@ -51,10 +51,7 @@ $(document).ready(function() {
 
 
 function deletTasks(Task_id) {
-    // set the project_id input value
     document.getElementById("Task_id").value = Task_id;
-    // set the form action dynamically
     document.getElementById("deleteForm").action = "/projects/" + Task_id;
-    // submit the form
 }
 

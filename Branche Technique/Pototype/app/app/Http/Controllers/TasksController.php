@@ -35,17 +35,17 @@ class TasksController extends Controller
             
             
             $projectId = $request->get('criteria');
+            dd($projectId);
             if ($projectId) {
                 $tasks = $this->tasksRepository->getByProjectId($projectId);
             }
             return view('tasks.search', compact('tasks'))->render();
         }
 
-        // $id = $request->id;
+        $id = $request->id;
         $projects = $this->projectsRepository->getAll();
 
-        if($request->id) {
-            $id = $request->id;
+        if($id) {
             $project = $this->projectsRepository->find($id);
         } 
         else {

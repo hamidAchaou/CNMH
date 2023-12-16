@@ -11,10 +11,10 @@
                     </div>
                     {{-- neveau Task --}}
                     {{-- @can('view') --}}
-                        <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
-                            <a href="{{ route('tasks.create', ['id' => $project->id]) }}" class="btn btn-primary"><i
-                                    class="fas fa-plus"></i>{{ __('words.new_task') }}</a>
-                        </div>
+                    <div class="w-25 d-flex flex-row-reverse form-group col-md-4">
+                        <a href="{{ route('tasks.create', ['id' => $project->id]) }}" class="btn btn-primary"><i
+                                class="fas fa-plus"></i>{{ __('words.new_task') }}</a>
+                    </div>
                     {{-- @endcan --}}
                 </div>
             </div>
@@ -41,55 +41,66 @@
                             @endif
                         </div>
                         <div class="card">
-                            <div class="card-header col-md-12 d-flex justify-content-between">
-                                <div class="container">
-                                    <select id="projectFilter" class="custom-select">
-                                        <option value="">All Projects</option>
-                                        @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                {{-- search --}}
-                                <div class="input-group input-group-sm  col-md-3 p-0">
-                                    <input type="hidden" value="1" id="pageNumber">
-                                    <input type="text" id="search-input" class="form-control float-right"
-                                        placeholder="{{ __('words.search_placeholder') }}">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                            <div class="card-header d-flex justify-content-between w-100">
+                                {{-- filter --}}
+                                <div class="">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="projectsFilter"><i
+                                                class="fas fa-filter"></i></label>
+                                        <select class="form-select form-control" id="projectsFilter"
+                                            aria-label="Filter Select">
+                                            @foreach ($projects as $Project)
+                                                <option value="{{ $Project->id }}"
+                                                    {{ $Project->id == $project->id ? 'selected' : '' }}>
+                                                    {{ $Project->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+
+                                {{-- <div> --}}
+                                    <div class="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Recherche"
+                                                aria-label="Recherche" aria-describedby="basic-addon1" id="search-input">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-search"></i></span>
+                                        </div>
+                                    </div>
                                 {{-- </div> --}}
                             </div>
+                        </div>
 
-                            <div class="card-body table-responsive p-0">
-                                {{-- table tasks --}}
-                                <table class="table table-striped text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('words.task_title') }}</th>
-                                            <th>{{ __('words.description') }}</th>
-                                            {{-- @can('view', App\Models\Member::class) --}}
-                                                <th>{{ __('words.action') }}</th>
-                                            {{-- @endcan --}}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{-- get all Tasks --}}
-                                        @include('tasks.searchTasks')
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="card-body table-responsive p-0">
+                            {{-- table tasks --}}
+                            <table class="table table-striped text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('words.task_title') }}</th>
+                                        <th>{{ __('words.description') }}</th>
+                                        {{-- @can('view', App\Models\Member::class) --}}
+                                        <th>{{ __('words.action') }}</th>
+                                        {{-- @endcan --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- get all Tasks --}}
+                                    @include('tasks.searchTasks')
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 
     {{-- modal Delete Tasks --}}
     <x-modal-delete-tasks />
+
+        {{-- script search by ajax --}}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('JS/tasks.js') }}"></script>
 @endsection
