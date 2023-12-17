@@ -10,6 +10,7 @@ use App\Exports\TaskExport;
 use App\Imports\ImportTask;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\StoreTaskRequest;
+use App\Imports\ProjectImport;
 use App\Models\Task;
 
 class TasksController extends AppBaseController
@@ -160,7 +161,7 @@ class TasksController extends AppBaseController
         
         if ($file) {
             $path = $file->store('files');
-            Excel::import(new ImportTask, $path);
+            Excel::import(new ProjectImport, $path);
         }
         
         return redirect()->back();

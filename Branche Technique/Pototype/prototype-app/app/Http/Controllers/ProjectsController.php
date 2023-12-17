@@ -6,6 +6,7 @@ use App\Exports\ProjectExport;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Imports\ImportProject;
+use App\Imports\ProjectImport;
 use App\Models\Project;
 use App\Repository\ProjectRepository;
 use Illuminate\Http\Request;
@@ -92,7 +93,7 @@ class ProjectsController extends AppBaseController
         
         if ($file) {
             $path = $file->store('files');
-            Excel::import(new ImportProject, $path);
+            Excel::import(new ProjectImport, $path);
         }
         
         return redirect()->back();

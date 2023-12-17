@@ -2,25 +2,24 @@
 
 namespace App\Exports;
 
-use App\Models\Project;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Models\Task;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 
-class ProjectExport implements FromCollection, WithHeadings, WithStyles
+class TaskExport implements FromCollection
 {
     use Exportable;
 
     public function collection()
     {
-        return Project::select(
+        return Task::select(
             'name',
             'description',
             'start_date',
             'end_date',
+            'project_id'
         )->get()->map(function ($item) {
             $item->description = strip_tags($item->description);
             return $item;
@@ -34,17 +33,19 @@ class ProjectExport implements FromCollection, WithHeadings, WithStyles
             'description',
             'start_date',
             'end_date',
+            'project_id'
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
+        $lastRow = $sheet->getHighestRow();
 
-        $sheet->getStyle("A1:D300")->applyFromArray([
+        $sheet->getStyle("A1:E{$lastRow}")->applyFromArray([
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                 'startColor' => [
-                    'argb' => 'fffff',
+                    'argb' => 'FFFFFF',
                 ],
             ],
             'borders' => [
@@ -55,7 +56,7 @@ class ProjectExport implements FromCollection, WithHeadings, WithStyles
             ],
         ]);
 
-        $sheet->getStyle("A1:D1")->applyFromArray([
+        $sheet->getStyle("A1:E1")->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
@@ -73,5 +74,4 @@ class ProjectExport implements FromCollection, WithHeadings, WithStyles
             ],
         ]);
     }
-
 }

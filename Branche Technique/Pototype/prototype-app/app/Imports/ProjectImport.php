@@ -3,12 +3,19 @@
 namespace App\Imports;
 
 use App\Models\Project;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
-class ImportProject implements ToModel, WithHeadingRow
+
+
+class ProjectImport implements ToModel
 {
+    /**
+    * @param array $row
+    *
+    * @return \Illuminate\Database\Eloquent\Model|null
+    */
     public function model(array $row)
     {
         $rules = [
@@ -20,7 +27,7 @@ class ImportProject implements ToModel, WithHeadingRow
 
         $rules['name'] = Rule::unique('projects', 'name');
 
-        $validator = \Validator::make($row, $rules);
+        $validator = Validator::make($row, $rules);
 
         if ($validator->fails()) {
             return null;

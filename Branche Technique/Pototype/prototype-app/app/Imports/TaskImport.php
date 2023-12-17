@@ -2,13 +2,19 @@
 
 namespace App\Imports;
 
+use Maatwebsite\Excel\Concerns\ToModel;
 use App\Models\Task;
 use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Validator;
 
-class ImportTask implements ToModel, WithHeadingRow
+
+class TaskImport implements ToModel
 {
+    /**
+    * @param array $row
+    *
+    * @return \Illuminate\Database\Eloquent\Model|null
+    */
     public function model(array $row)
     {
         $rules = [
@@ -23,7 +29,7 @@ class ImportTask implements ToModel, WithHeadingRow
             return $query->where('project_id', $row['project_id']);
         });
 
-        $validator = \Validator::make($row, $rules);
+        $validator = Validator::make($row, $rules);
 
         if ($validator->fails()) {
             return null;
@@ -47,4 +53,3 @@ class ImportTask implements ToModel, WithHeadingRow
         ]);
     }
 }
-

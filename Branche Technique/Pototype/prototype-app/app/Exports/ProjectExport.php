@@ -2,26 +2,23 @@
 
 namespace App\Exports;
 
-use App\Models\Task;
+use App\Models\Project;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class TaskExport implements FromCollection, WithHeadings, WithStyles
+class ProjectExport implements FromCollection
 {
     use Exportable;
 
     public function collection()
     {
-        return Task::select(
+        return Project::select(
             'name',
             'description',
             'start_date',
             'end_date',
-            'project_id'
         )->get()->map(function ($item) {
             $item->description = strip_tags($item->description);
             return $item;
@@ -35,19 +32,17 @@ class TaskExport implements FromCollection, WithHeadings, WithStyles
             'description',
             'start_date',
             'end_date',
-            'project_id'
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        $lastRow = $sheet->getHighestRow();
 
-        $sheet->getStyle("A1:E{$lastRow}")->applyFromArray([
+        $sheet->getStyle("A1:D300")->applyFromArray([
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                 'startColor' => [
-                    'argb' => 'FFFFFF',
+                    'argb' => 'fffff',
                 ],
             ],
             'borders' => [
@@ -58,7 +53,7 @@ class TaskExport implements FromCollection, WithHeadings, WithStyles
             ],
         ]);
 
-        $sheet->getStyle("A1:E1")->applyFromArray([
+        $sheet->getStyle("A1:D1")->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
@@ -76,4 +71,5 @@ class TaskExport implements FromCollection, WithHeadings, WithStyles
             ],
         ]);
     }
+
 }
