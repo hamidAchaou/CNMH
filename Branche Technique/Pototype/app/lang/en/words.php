@@ -28,7 +28,7 @@ return [
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
     'project_tasks' => 'Project Tasks',
-    'action' => 'Action',
+    'actions' => 'Actions',
     'projects' => 'Projects',
     'search_placeholder' => 'Search',
     'inputName_placeholder' => 'Enter Name',

@@ -26,7 +26,6 @@ class TasksController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
 
             $seachQuery = $request->get('searchValue');
@@ -35,28 +34,36 @@ class TasksController extends Controller
             
             
             $projectId = $request->get('criteria');
-            dd($projectId);
             if ($projectId) {
                 $tasks = $this->tasksRepository->getByProjectId($projectId);
             }
             return view('tasks.search', compact('tasks'))->render();
         }
-
-        $id = $request->id;
+    
         $projects = $this->projectsRepository->getAll();
-
-        if($id) {
+        $project = null;
+        $tasks = [];
+    
+        $id = $request->id;
+        if ($id) {
             $project = $this->projectsRepository->find($id);
-        } 
-        else {
-            $project = $projects->first();
-            if(isset($project->id)) {
-                $id = $project->id;
-            }
+            $tasks = $this->tasksRepository->getByProjectId($id);
         }
-
-        $tasks = $this->tasksRepository->getByProjectId($id);
+    
+        $projects = $this->projectsRepository->getAll();
+        $projects = $this->projectsRepository->getAll();
         return view('tasks.index', compact('tasks', 'projects', 'project'));
+    }
+    
+
+    public function getTasksByProject(Request $request)
+    {
+        $projects = $this->projectsRepository->getAll();
+        $project = $projects->first();
+        $projectsId = $project->id;
+        $tasks = $this->tasksRepository->getByProjectId($projectsId);
+        
+        return view('tasks.index', compact('project', 'tasks', 'projects'));
     }
 
     /**
@@ -78,7 +85,7 @@ class TasksController extends Controller
         $id = $validatedData['project_Id'];
     
         $task = $this->tasksRepository->create($validatedData);
-        return redirect()->route('projects.tasks', compact('id'))->with('success', 'La tâche a été ajoutée avec succès');
+        return redirect()->route('tasks.index', compact('id'))->with('success', 'La tâche a été ajoutée avec succès');
     }
     
     /**
@@ -99,7 +106,7 @@ class TasksController extends Controller
         $validatedData = $request->validated();
         $this->tasksRepository->update($validatedData, $id);
 
-        return redirect()->route('tasks.index')->with('success', 'tache a été modifier avec succés');
+        return redirect()->route('tasks.index', compact('id'))->with('success', 'tache a été modifier avec succés');
     }
 
     /**

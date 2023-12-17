@@ -3,10 +3,12 @@
 return [
     // page Welcome
     'welcome_to_your_app' => 'Welcome to Your App',
+    'welcome_to_prototype' => 'Welcome to the CNMH prototype!',
     'get_started_with_amazing_features' => 'Get started with our amazing features.',
     'log_in' => 'Log in',
     'new_task' => 'Nouveau Task',
     'Tasks' => 'Tasks',
+    'Tasks_of' => 'Tasks of',
     'edit_task' => 'Edit Task',
     'add_task' => 'Add Task',
     'cancel' => 'Cancel',
@@ -23,12 +25,14 @@ return [
     'sidebar_members' => 'the members',
     'sidebar_logout' => 'Logout',
     'navbar_home' => 'Home',
+    'startDate' => 'Start Date',
+    'endDate' => 'End Date',
     'project_name' => 'Project Name',
     'description' => 'Description',
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
-    'project_tasks' => 'Project Tasks',
-    'action' => 'Action',
+    'view_tasks' => 'view Tasks',
+    'actions' => 'Actions',
     'projects' => 'Projects',
     'search_placeholder' => 'Search',
     'inputName_placeholder' => 'Enter Name',
@@ -65,5 +69,11 @@ return [
     'confirm_password' => 'Confirm Password',
     'confirm_password_placeholder' => 'Confirm password',
 
+    // members
+    'list_members' => "List of members",
+    'add_member' => 'Add Member',
+    'conferme_delete_member' => 'Are You Sure to delete !!',
+    'Sign_out' => 'Sign out',
+    'profile' => 'Profile',
 
 ];

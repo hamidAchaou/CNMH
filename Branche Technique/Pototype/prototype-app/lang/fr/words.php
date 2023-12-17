@@ -3,6 +3,7 @@
 return [
     // page welcome
     'welcome_to_your_app' => 'Bienvenue sur votre application',
+    'welcome_to_prototype' => 'Bienvenue dans le prototype CNMH!',
     'get_started_with_amazing_features' => 'Commencez avec nos fonctionnalités étonnantes.',
     'log_in' => 'Connexion',
 
@@ -11,12 +12,16 @@ return [
     'add_task' => 'Add Tâche',
     'cancel' => 'Annuler',
     'Tasks' => 'Tâches',
+    'Tasks_of' => 'Tasks de',
+    'view_tasks' => 'afficher les tâches',
     'task_title' => 'Titre',
     'brand_text' => 'SoliCoders',
     'user_image_alt' => 'Image de l\'utilisateur',
     'profile_link' => 'Profil',
     'projects_management' => 'Gestion des Projets',
     'logout' => 'Déconnexion',
+    'startDate' => 'Date de début',
+    'endDate' => 'Date de fin',
     'logout_icon' => 'fas fa-sign-out-alt',
     'sidebar_toggle_icon' => 'fas fa-bars',
     'toggle_navigation' => 'Basculer la navigation',
@@ -28,8 +33,7 @@ return [
     'description' => 'Description',
     'start_date' => 'Date de début',
     'end_date' => 'Date de fin',
-    'project_tasks' => 'Tâches du projet',
-    'action' => 'Action',
+    'actions' => 'Actions',
     'projects' => 'Les Projets',
     'search_placeholder' => 'Rechercher',
     'search_button' => 'Rechercher',
@@ -72,5 +76,12 @@ return [
     'enter_password' => 'Enter password',
     'confirm_password' => 'Confirm Password',
     'confirm_password_placeholder' => 'Confirm password',
+
+    // members
+    'list_members' => "Liste des membres",
+    'add_member' => 'Ajouter un membre',
+    'conferme_delete_member' => 'Êtes-vous sûr de vouloir supprimer !!',
+    'Sign_out' => 'se déconnecter',
+    'profile' => 'Profil',
 
 ];

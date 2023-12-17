@@ -29,7 +29,7 @@ return [
     'start_date' => 'Date de début',
     'end_date' => 'Date de fin',
     'project_tasks' => 'Tâches du projet',
-    'action' => 'Action',
+    'actions' => 'Actions',
     'projects' => 'Les Projets',
     'search_placeholder' => 'Rechercher',
     'search_button' => 'Rechercher',

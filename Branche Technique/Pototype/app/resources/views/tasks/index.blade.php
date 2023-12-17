@@ -43,10 +43,11 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between w-100">
                                 {{-- filter --}}
-                                <div class="">
+                                <div>
                                     <div class="input-group">
-                                        <label class="input-group-text" for="projectsFilter"><i
-                                                class="fas fa-filter"></i></label>
+                                        <label class="input-group-text" for="projectsFilter">
+                                            <i class="fas fa-filter"></i>
+                                        </label>
                                         <select class="form-select form-control" id="projectsFilter"
                                             aria-label="Filter Select">
                                             @foreach ($projects as $Project)
@@ -60,14 +61,14 @@
                                 </div>
 
                                 {{-- <div> --}}
-                                    <div class="">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Recherche"
-                                                aria-label="Recherche" aria-describedby="basic-addon1" id="search-input">
-                                            <span class="input-group-text" id="basic-addon1"><i
-                                                    class="fas fa-search"></i></span>
-                                        </div>
+                                <div class="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Recherche"
+                                            aria-label="Recherche" aria-describedby="basic-addon1" id="search-input">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fas fa-search"></i></span>
                                     </div>
+                                </div>
                                 {{-- </div> --}}
                             </div>
                         </div>
@@ -100,7 +101,7 @@
     {{-- modal Delete Tasks --}}
     <x-modal-delete-tasks />
 
-        {{-- script search by ajax --}}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="{{ asset('JS/tasks.js') }}"></script>
+    {{-- script search by ajax --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('JS/tasks.js') }}"></script>
 @endsection

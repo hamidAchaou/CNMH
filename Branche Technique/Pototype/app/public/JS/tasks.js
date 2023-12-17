@@ -12,7 +12,7 @@ $(document).ready(function() {
     // filter By Projects
     function filterData(page, criteria) {
         $.ajax({
-            url: 'tasks?page=' + page + '&criteria=' + criteria,
+            url: 'tasks/?page=' + page + '&criteria=' + criteria,
             success: function(data) {
                 $('tbody').html('');
                 $('tbody').html(data);
@@ -24,7 +24,7 @@ $(document).ready(function() {
 
         param.preventDefault();
 
-        var page = 1;
+        var page = $(this).attr('href').split('page=')[1];
         var searchValue = $('#search-input').val();
         console.log($(this).attr('href').split('page=')[1]);
         console.log($(this).attr('href').split('page='));
@@ -48,7 +48,6 @@ $(document).ready(function() {
 
     // fetchData(1, '');
 });
-
 
 function deletTasks(Task_id) {
     document.getElementById("Task_id").value = Task_id;

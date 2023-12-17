@@ -6,20 +6,13 @@
             {{ $task->description }}
         </td>
         <td>
-            @can('update.TasksController')
-                {{-- btn edit --}}
-                <a href="{{ route('tasks.edit', ['task' => $task->id, 'project' => $project->id]) }}" class="btn btn-default">
+                <a href="{{ route('tasks.edit', [ 'project' => $project->id, 'task' => $task->id]) }}" class="btn btn-default">
                      <i class="fa-solid fa-pen-to-square"></i>
                 </a>
-            @endcan
-
-            {{-- btn delete --}}
-            @can('delete.TasksController')
                 <button type="button" class="btn btn-danger"
                     onclick="deletTasks({{ $task->id }}, {{ $project->id }})"
                     data-toggle="modal" data-target="#modalDeleteTask"><i class="fa-solid fa-trash"></i>
                 </button>
-            @endcan
         </td>
     </tr>
 @endforeach

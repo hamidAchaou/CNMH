@@ -56,14 +56,15 @@ class ProjectsController extends Controller
         return redirect()->route('projects.index')->with('success', "Le projet $nameProject a été ajouté avec succès");
     }
 
-        /**
+    /**
      * Display the specified resource.
      */
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
         $projects = $this->projectsRepository->getAll();
-        $tasks = $this->tasksRepository->getByProjectId($id);
-        $project = $this->projectsRepository->find($id);
+        $project = $projects->first();
+        $projectsId = $project->id;
+        $tasks = $this->tasksRepository->getByProjectId($projectsId);
         
         return view('tasks.index', compact('project', 'tasks', 'projects'));
     }

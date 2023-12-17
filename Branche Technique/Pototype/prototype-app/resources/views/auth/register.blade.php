@@ -13,29 +13,14 @@
                     <form method="post" action="{{ route('register') }}">
                         @csrf
 
-                        {{-- first Name --}}
                         <div class="input-group mb-3">
-                            <input type="text" name="firstName"
-                                class="form-control @error('firstName') is-invalid @enderror" value="{{ old('firstName') }}"
-                                placeholder="Nom">
+                            <input type="text" name="name"
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                placeholder="Full name">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
-                            @error('firstName')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        {{-- lastName --}}
-                        <div class="input-group mb-3">
-                            <input type="text" name="lastName"
-                                class="form-control @error('lastName') is-invalid @enderror" value="{{ old('lastName') }}"
-                                placeholder="Prénom">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-user"></span></div>
-                            </div>
-                            @error('lastName')
+                            @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
