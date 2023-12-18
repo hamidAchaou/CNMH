@@ -9,7 +9,7 @@ return [
 
     'new_task' => 'Nouveau Tâche',
     'edit_task' => 'Edit Tâche',
-    'add_task' => 'Add Tâche',
+    'add_task' => 'Ajouter Tâche',
     'cancel' => 'Annuler',
     'Tasks' => 'Tâches',
     'Tasks_of' => 'Tasks de',

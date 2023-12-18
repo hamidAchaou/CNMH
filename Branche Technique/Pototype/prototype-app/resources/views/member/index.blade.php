@@ -15,7 +15,7 @@
             @role('project-leader')
             <div class="col-sm-6">
                 <div class="float-sm-right">
-                    <a href=" {{ route('members.create') }} " class="btn btnAdd">{{ __('words.add_member') }}</a>
+                    <a href=" {{ route('members.create') }} " class="btn btn-secondary">{{ __('words.add_member') }}</a>
                 </div>
             </div>
             @endrole
