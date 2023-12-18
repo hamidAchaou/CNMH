@@ -17,14 +17,6 @@ class userSeeder extends Seeder
      */
     public function run(): void
     {
-        // $leaderPermissions = [
-        //     'index-TasksController',
-        //     'create-TasksController',
-        //     'store-TasksController',
-        //     'edit-TasksController',
-        //     'update-TasksController',
-        //     'destroy-TasksController',
-        // ];
         $leaderPermissions = Permission::pluck('name')->toArray();
 
         $projectLeaderRole = Role::findByName('project-leader');

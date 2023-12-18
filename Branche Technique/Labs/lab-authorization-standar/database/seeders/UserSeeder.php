@@ -8,6 +8,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -17,14 +18,7 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-        $leaderPermissions = [
-            'index-TasksController',
-            'create-TasksController',
-            'store-TasksController',
-            'edit-TasksController',
-            'update-TasksController',
-            'destroy-TasksController',
-        ];
+        $leaderPermissions = Permission::pluck('name')->toArray();
 
        $projectLeader =  User::create([
             'name' => 'Chef de projet',
@@ -52,8 +46,10 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('membre'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-        ])->assignRole('member');
-        // $user->givePermissionTo('create-TasksController');
+        ]);
+        $user->assignRole('member');
+        $permissionsToKeep = ['index-ProjectsController', 'show-ProjectsController', 'index-TasksController', 'show-TasksController'];
+        $user->givePermissionTo($permissionsToKeep);
 
     }
 }

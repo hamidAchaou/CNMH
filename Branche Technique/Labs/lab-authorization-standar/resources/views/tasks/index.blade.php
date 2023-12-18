@@ -35,7 +35,7 @@
                             <th scope="col">Description</th>
                             <th scope="col">Nom de Projet</th>
                             @can('create-TasksController')
-                                <th scope="col">Action</th>
+                                <th scope="col">Actions</th>
                             @endcan
 
                         </tr>
