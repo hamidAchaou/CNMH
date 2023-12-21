@@ -1,77 +1,68 @@
-# Laravel Authentication with Bootstrap UI
+# lab-laravel-starter
 
-This repository demonstrates how to set up authentication using Laravel UI with Bootstrap for a Laravel application.
+## Travail a faire
 
-## Prerequisites
+Creation d'une application laravel avec des packages que nous utillisons
 
-- PHP installed on your machine
-- Composer globally installed
-- Node.js and npm installed
 
-## Getting Started
+### Packages
 
-1. **Clone the repository**
+* Laravel ui adminlte
+    * [https://infyom.com/open-source/laravel-ui-adminlte/docs](https://infyom.com/open-source/laravel-ui-adminlte/docs)
 
-    ```bash
-    git clone <repository-url>
-    ```
+* Flash 
+    * [https://github.com/laracasts/flash](https://github.com/laracasts/flash)
 
-2. **Install Dependencies**
+* Laravel/collective 
+    * [https://github.com/LaravelCollective/html](https://github.com/LaravelCollective/html)
 
-    ```bash
-    composer install
-    npm install
-    ```
 
-3. **Set Up Environment Variables**
+### Realisation
 
-    - Rename `.env.example` to `.env`
-    - Configure your database credentials in the `.env` file
+```shell
+composer create-project laravel/laravel laravel-starter
+```
 
-4. **Generate Application Key**
+```shell
+composer require infyomlabs/laravel-ui-adminlte
+```
 
-    ```bash
-    php artisan key:generate
-    ```
+```shell
+php artisan ui adminlte --auth
+```
 
-5. **Run Migrations**
+```shell
+npm install && npm run build
+```
 
-    ```bash
-    php artisan migrate
-    ```
+```shell
+composer require laracasts/flash
+```
 
-6. **Install Laravel UI and Bootstrap**
+```shell
+composer require laravelcollective/html
+```
 
-    ```bash
-    composer require laravel/ui
-    php artisan ui bootstrap --auth
-    ```
+A copie dans fichier config/app.php
 
-7. **Compile Assets**
+```shell
+'providers' => [
+    Laracasts\Flash\FlashServiceProvider::class,
+    Collective\Html\HtmlServiceProvider::class,
+],
 
-    ```bash
-    npm run dev
-    ```
+'aliases' => [
+    'Flash' => Laracasts\Flash\Flash::class,
+    'Form' => Collective\Html\FormFacade::class,
+    'Html' => Collective\Html\HtmlFacade::class,
+],
+```
 
-8. **Start the Development Server**
+### Extension
 
-    ```bash
-    php artisan serve
-    ```
+* Markdown All in One
+  * yzhang.markdown-all-in-one
+  
+* Todo Tree
+  * Gruntfuggly.todo-tree
 
-9. **Access the Application**
-
-    Open your browser and go to `http://localhost:8000`
-
-## Additional Information
-
-- For production deployment, make sure to configure your web server (e.g., Apache, Nginx) to serve the application properly.
-- Customize the UI and styles by modifying the Bootstrap views located in the `resources/views` directory.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request for any enhancements or fixes.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
