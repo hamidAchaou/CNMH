@@ -8,6 +8,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -17,14 +18,7 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-        $leaderPermissions = [
-            'index-TasksController',
-            'create-TasksController',
-            'store-TasksController',
-            'edit-TasksController',
-            'update-TasksController',
-            'destroy-TasksController',
-        ];
+        $leaderPermissions = Permission::pluck('name')->toArray();
 
        $projectLeader =  User::create([
             'name' => 'Chef de projet',
@@ -35,16 +29,6 @@ class UserSeeder extends Seeder
         ]);
         $projectLeader->assignRole('project-leader');
         $projectLeader->givePermissionTo($leaderPermissions);
-        
-        $superAdmin = User::create([
-            'name' => 'Super Admin',
-                'email' => 'Super.Admin@gmail.com',
-                'password' => Hash::make('Super.Admin'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-        ]);
-
-        $superAdmin->assignRole('Super Admin');
 
         $user = User::create([
             'name' => 'membre',
@@ -53,7 +37,7 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         ])->assignRole('member');
-        // $user->givePermissionTo('create-TasksController');
+        $user->givePermissionTo('index-TasksController','index-ProjectsController', 'show-ProjectsController');
 
     }
 }

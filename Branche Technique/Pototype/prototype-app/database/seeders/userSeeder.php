@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -17,14 +16,6 @@ class userSeeder extends Seeder
      */
     public function run(): void
     {
-        // $leaderPermissions = [
-        //     'index-TasksController',
-        //     'create-TasksController',
-        //     'store-TasksController',
-        //     'edit-TasksController',
-        //     'update-TasksController',
-        //     'destroy-TasksController',
-        // ];
         $leaderPermissions = Permission::pluck('name')->toArray();
 
         $projectLeaderRole = Role::findByName('project-leader');
@@ -34,6 +25,9 @@ class userSeeder extends Seeder
 
         // Call permissions from PermissionSeeder
         $projectLeaderRole->givePermissionTo($leaderPermissions);
+        $superAdminRole->givePermissionTo($leaderPermissions);
+        $projectLeaderRole->givePermissionTo($leaderPermissions);
+
 
         $projectLeader = User::create([
             'name' => 'Chef de projet',
@@ -43,8 +37,8 @@ class userSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        $projectLeaderRole->givePermissionTo($leaderPermissions);
         $projectLeader->assignRole($projectLeaderRole);
+
 
         
         $superAdmin = User::create([
@@ -55,10 +49,8 @@ class userSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         ]);
-        $superAdminRole->givePermissionTo($leaderPermissions);
         $superAdmin->assignRole($superAdminRole);
         $superAdmin->assignRole($projectLeaderRole);
-
 
         $member = User::create([
             'name' => 'membre',
