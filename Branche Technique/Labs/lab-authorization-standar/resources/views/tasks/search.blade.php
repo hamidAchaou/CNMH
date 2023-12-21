@@ -3,7 +3,11 @@
         <th>{{ $task->nom }}</th>
         <td>{{ $task->description }}</td>
         <td>{{ $task->project->nom }}</td>
+<<<<<<< HEAD
         @can('show-TasksController')
+=======
+        @can('create-TasksController')
+>>>>>>> 258aaa4cfe1f64f7f2eba3d419b781203aebc9d0
             <td class="d-md-flex">
                 @can('edit-TasksController')
                     <a href="{{ route('tasks.edit', ['id' => $task->id]) }}" class="btn btn-success me-2">

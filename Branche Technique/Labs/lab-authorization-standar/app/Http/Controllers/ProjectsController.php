@@ -7,7 +7,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class ProjectsController extends Controller
+class ProjectsController extends AppBaseController
 {
     /**
      * Display a Projects By Route and By ajax.

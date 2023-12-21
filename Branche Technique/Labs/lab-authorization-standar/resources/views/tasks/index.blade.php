@@ -34,8 +34,13 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
                             <th scope="col">Nom de Projet</th>
+<<<<<<< HEAD
                             @can('show-TasksController')
                                 <th scope="col">Action</th>
+=======
+                            @can('create-TasksController')
+                                <th scope="col">Actions</th>
+>>>>>>> 258aaa4cfe1f64f7f2eba3d419b781203aebc9d0
                             @endcan
 
                         </tr>
