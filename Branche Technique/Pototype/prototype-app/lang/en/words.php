@@ -8,6 +8,7 @@ return [
     'log_in' => 'Log in',
     'new_task' => 'Nouveau Task',
     'Tasks' => 'Tasks',
+    'app_name' => 'Project Management',
     'Tasks_of' => 'Tasks of',
     'edit_task' => 'Edit Task',
     'add_task' => 'Add Task',

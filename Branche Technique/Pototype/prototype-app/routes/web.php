@@ -33,6 +33,10 @@ Route::middleware('auth')->group(function () {
 
     // Tasks
     Route::get('tasks', [TasksController::class, 'getTasksByProject'])->name('getTasksByProject');
+    // Route::get('tasks/{task}/edit', [TasksController::class, 'edit'])->name('tasks.edit');
+    // Update task route
+    // Route::put('projects/{id}/tasks/{task_id}', [TasksController::class, 'update'])->name('tasks.update');
+    
     Route::prefix('projects/{id}')->group(function () {
         Route::resource('tasks', TasksController::class);
 

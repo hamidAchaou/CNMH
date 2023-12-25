@@ -14,10 +14,10 @@
     </td>
     @role('project-leader')
     <td>
-        <a href="{{ route('tasks.edit', ['id' => $task->project_id, 'task' => $task->id]) }}"
-            class="btn btn-sm btn-default">
+        <a href="{{ route('tasks.edit', ['id' => $task->project_id, 'task' => $task->id]) }}" class="btn btn-sm btn-default">
             <i class="fas fa-edit"></i>
         </a>        
+               
         <form method="POST" action="{{ route('tasks.destroy', ['id' => $task->project_id, 'task' => $task->id]) }}" style="display: inline-block;">
             @csrf
             @method('DELETE')
@@ -43,14 +43,14 @@
                 <form action="{{ route('tasks.import') }}" method="post" enctype="multipart/form-data" id="importForm">
                     @csrf
                     <label for="upload" class="btn btn-default btn-sm mb-0 font-weight-normal">
-                        <i class="fa-solid fa-file-arrow-down"></i>
-                        {{__('words.import')}}
+                        <i class="fa-solid fa-download"></i>
+                        {{ __('words.import') }}
                     </label>
                     <input type="file" id="upload" name="file" style="display:none;" onchange="submitForm()" />
                 </form>
                 <a href="{{ route('tasks.export') }}" class="btn  btn-default btn-sm mt-0 mx-2">
                     <i class="fa-solid fa-file-export"></i>
-                    {{__('wordds.export')}}
+                    {{ __('words.export') }}
                 </a>
             </div>
 

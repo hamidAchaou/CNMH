@@ -9,7 +9,7 @@ abstract class BasRepository {
 
   public function __construct(Model $model)
   {
-    $this->model;
+    $this->model = $model;
   }
 
   abstract function getFeildsData() :array;

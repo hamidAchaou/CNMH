@@ -54,7 +54,7 @@ class TasksController extends AppBaseController
     public function index(Request $request, $id)
     {
         if ($request->ajax()) {
-            dd($request->get('searchValue'));
+            // dd($request->get('searchValue'));
             $seachQuery = $request->get('searchValue');
             $seachQuery = str_replace(' ', '%', $seachQuery);
             $tasks = $this->TaskRepository->searchTasks($seachQuery);
@@ -113,13 +113,23 @@ class TasksController extends AppBaseController
     }
     
 
-    public function edit($id, $task_id){
+    // public function edit($id, $task_id){
 
-        $task = $this->TaskRepository->find($task_id);
+    //     $task = $this->TaskRepository->find($task_id);
 
+    //     $project = $this->ProjectRepository->find($id);
+
+    //     return view('tasks.edit',compact('task','project'));
+
+    // }
+    public function edit($task){
+
+        $task = $this->TaskRepository->find($task);
+        $id = $task->project_id;
         $project = $this->ProjectRepository->find($id);
+        $projects = $this->ProjectRepository->getData();
 
-        return view('tasks.edit',compact('task','project'));
+        return view('tasks.edit',compact('task','project', 'projects'));
 
     }
 
@@ -131,10 +141,11 @@ class TasksController extends AppBaseController
             'end_date' => 'nullable',
             'project_id' => 'required',
         ]);
-
+    
         $task = $this->TaskRepository->update($data, $task_id);
         return back()->with('success','Task updated successfully.');
     }
+    
     
 
     public function destroy($id, $task_id)
