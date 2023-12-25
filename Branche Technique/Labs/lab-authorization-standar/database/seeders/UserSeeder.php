@@ -29,16 +29,6 @@ class UserSeeder extends Seeder
         ]);
         $projectLeader->assignRole('project-leader');
         $projectLeader->givePermissionTo($leaderPermissions);
-        
-        $superAdmin = User::create([
-            'name' => 'Super Admin',
-                'email' => 'Super.Admin@gmail.com',
-                'password' => Hash::make('Super.Admin'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-        ]);
-
-        $superAdmin->assignRole('Super Admin');
 
         $user = User::create([
             'name' => 'membre',
@@ -46,10 +36,15 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('membre'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+<<<<<<< HEAD
+        ])->assignRole('member');
+        $user->givePermissionTo('index-TasksController','index-ProjectsController', 'show-ProjectsController');
+=======
         ]);
         $user->assignRole('member');
         $permissionsToKeep = ['index-ProjectsController', 'show-ProjectsController', 'index-TasksController', 'show-TasksController'];
         $user->givePermissionTo($permissionsToKeep);
+>>>>>>> 258aaa4cfe1f64f7f2eba3d419b781203aebc9d0
 
     }
 }

@@ -30,8 +30,8 @@
                     <div class="card">
                         <div class="card-header col-md-12">
                             <div class="d-flex justify-content-between">
-
-                                <div class="dropdown input-group">
+                                {{-- filter --}}
+                                <div class="dropdown input-group  input-group-sm">
                                     <label class="input-group-text" for="projectsFilter">
                                         <i class="fa-solid fa-filter" class="input-group-text text-dark"></i>
                                     </label>
@@ -42,25 +42,24 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         @foreach ($projects as $project)
-                                            <a class="dropdown-item project-link" href="{{route('tasks.index', ['id' => $project->id])}}"
+                                            <a class="dropdown-item project-link" id="filter_project_id" href="{{ route('tasks.index', ['id' => $project->id]) }}"
                                                 data-id="{{ $project->id }}">{{ $project->name }}</a>
                                         @endforeach
                                     </div>
                                 </div>
                                 <!-- search -->
-                                <div class="input-group input-group col-md-3 p-0">
+                                <div class="input-group input-group-sm col-md-3 p-0"> <!-- Added 'input-group-sm' class -->
                                     <input type="hidden" name="project_id" id="project_id" value="{{ $project->id }}">
                                     <input type="text" class="form-control" placeholder="Recherche" aria-label="Recherche"
-                                    aria-describedby="basic-addon1" id="search-input">
-                                    <div class="input-group-append">
+                                        aria-describedby="basic-addon1" id="search-input">
+                                    <div class="input-group-append  input-group-sm">
                                         <button type="button" class="btn btn-default">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
-
                                 </div>
-
                             </div>
+                            
                         </div>
                         <div class="card-body table-responsive p-0 table-tasks">
                             @include('tasks.table')

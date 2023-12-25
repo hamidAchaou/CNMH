@@ -13,4 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function () {
+    ob_start();
+    phpinfo();
+    return ob_get_clean();
+});
+
+
 Route::get('/', [App\Http\Controllers\CalculeController::class , 'calculate']);

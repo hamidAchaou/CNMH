@@ -9,10 +9,10 @@
             <td>{{ $task->description }}</td>
             <td class="d-md-flex">
                 <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="btn btn-info opacity-75 me-2">
-                    <i class="fas fa-edit me-1"></i> Edit
+                    <i class="fas fa-edit me-1"></i> 
                 </a>
                 <button type="button" class="btn btn-danger" onclick="deleteTask({{ $task->id }})" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-trash-alt me-1"></i> Delete
+                    <i class="fas fa-trash-alt me-1"></i> 
                 </button>
             </td>
         </tr>

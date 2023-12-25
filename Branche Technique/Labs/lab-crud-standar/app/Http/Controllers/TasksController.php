@@ -73,6 +73,8 @@ class TasksController extends Controller
     public function store(StoreTaskRequest $request)
     {
         $validatedData = $request->validated();
+        
+        $id = $request->validated()['projetId'];
 
         $task = $this->tasksRepository->create($validatedData);
         return redirect()->route('tasks.index', compact('id'))->with('success', 'tache a été ajouter avec succés');

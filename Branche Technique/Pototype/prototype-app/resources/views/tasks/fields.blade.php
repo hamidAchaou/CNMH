@@ -2,7 +2,7 @@
     <div class="card-header">
         <h3 class="card-title">{{ isset($task) ? __('words.edit_task') : __('words.add_task') }}</h3>
     </div>
-    <form method="POST" class="container pt-2" action="{{ isset($task) ? route('tasks.update', $task->id) : route('tasks.store') }}">
+    <form method="POST" class="container pt-2" action="{{ isset($task) ? route('tasks.update', ['id' => $task->project_id, 'task_id' => $task->id]) : route('tasks.store') }}">
         @csrf
         @if (isset($task))
             @method('PUT')
