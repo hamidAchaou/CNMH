@@ -27,22 +27,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function () {
     // Projects
-    Route::resource('projects', ProjectsController::class);
+    // Route::resource('projects', ProjectsController::class);
+    Route::resource('projects', ProjectsController::class)->except(['show']);
     Route::post('/projects/import', [ProjectsController::class, 'import'])->name('project.import');
     Route::get('/projects/export', [ProjectsController::class, 'export'])->name('project.export');
 
     // Tasks
     Route::get('tasks', [TasksController::class, 'getTasksByProject'])->name('getTasksByProject');
-    // Route::get('tasks/{task}/edit', [TasksController::class, 'edit'])->name('tasks.edit');
-    // Update task route
-    // Route::put('projects/{id}/tasks/{task_id}', [TasksController::class, 'update'])->name('tasks.update');
-    
     Route::prefix('projects/{id}')->group(function () {
         Route::resource('tasks', TasksController::class);
 
         // Additional routes related to tasks within projects
         Route::get('tasks/create', [TasksController::class, 'create'])->name('tasks.create');
-        Route::get('tasks/{task_id}/update', [TasksController::class, 'update'])->name('tasks.update');
+        // Route::get('tasks/{task_id}/update', [TasksController::class, 'update'])->name('tasks.update');
+        Route::put('tasks/{task_id}', [TasksController::class, 'update'])->name('tasks.update');
+
         Route::get('tasks/{task}/edit', [TasksController::class, 'edit'])->name('tasks.edit');
         
     });

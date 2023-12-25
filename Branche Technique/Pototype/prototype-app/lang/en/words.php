@@ -77,4 +77,9 @@ return [
     'Sign_out' => 'Sign out',
     'profile' => 'Profile',
 
+    // footer
+    'Prototype_Version' =>  "Prototype Version",
+    "Copyright" => "Copyright",
+    "All_rights_reserved." => "All rights reserved."
+
 ];

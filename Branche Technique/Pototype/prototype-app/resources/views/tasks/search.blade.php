@@ -4,7 +4,7 @@
         {{$task->name}}
     </td>
     <td>
-        {{ $project->name }}
+        {{ $project->description }}
     </td>
     <td>
         {{$task->start_date}}
@@ -14,10 +14,10 @@
     </td>
     @role('project-leader')
     <td>
-        <a href="{{ route('tasks.edit', ['id' => $task->project_id, 'task' => $task->id]) }}" class="btn btn-sm btn-default">
+        <a href="{{ route('tasks.edit', ['id' => $task->project_id, 'task' => $task->id]) }}"
+            class="btn btn-sm btn-default">
             <i class="fas fa-edit"></i>
         </a>        
-               
         <form method="POST" action="{{ route('tasks.destroy', ['id' => $task->project_id, 'task' => $task->id]) }}" style="display: inline-block;">
             @csrf
             @method('DELETE')

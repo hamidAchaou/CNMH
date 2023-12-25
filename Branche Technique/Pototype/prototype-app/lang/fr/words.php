@@ -85,4 +85,8 @@ return [
     'Sign_out' => 'se déconnecter',
     'profile' => 'Profil',
 
+    // footer 
+    "Prototype_Version" => "Version prototype",
+    "Copyright" => "Droits d'auteur",
+    "All_rights_reserved." => "Tous droits réservés."
 ];

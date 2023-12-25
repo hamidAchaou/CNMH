@@ -27,19 +27,19 @@ class TasksController extends AppBaseController
     // public function index(Request $request, $id)
     // {
     //     $projects = $this->ProjectRepository->getData();
-    //     $project = $this->ProjectRepository->find($id);
+        // $project = $this->ProjectRepository->find($id);
 
     //     $tasksQuery = $project->tasks();
 
-    //     if ($request->ajax()) {
+        // if ($request->ajax()) {
             
-    //         $searchTask = $request->get('searchTask');
-    //         $searchTask = str_replace(" ", "%", $searchTask);
+        //     $searchTask = $request->get('searchTask');
+        //     $searchTask = str_replace(" ", "%", $searchTask);
 
-    //         $tasksQuery->where(function ($query) use ($searchTask) {
-    //             $query->where('name', 'like', '%' . $searchTask . '%')
-    //                 ->orWhere('description', 'like', '%' . $searchTask . '%');
-    //         });
+        //     $tasksQuery->where(function ($query) use ($searchTask) {
+        //         $query->where('name', 'like', '%' . $searchTask . '%')
+        //             ->orWhere('description', 'like', '%' . $searchTask . '%');
+        //     });
 
     //         $tasks = $tasksQuery->paginate(3);
 
@@ -53,18 +53,35 @@ class TasksController extends AppBaseController
 
     public function index(Request $request, $id)
     {
+        // if ($request->ajax()) {
+        //     // dd($request->get('searchValue'));
+        //     $seachQuery = $request->get('searchValue');
+        //     $seachQuery = str_replace(' ', '%', $seachQuery);
+        //     $tasks = $this->TaskRepository->searchTasks($seachQuery);
+
+
+        //     $projectId = $request->get('criteria');
+        //     if ($projectId) {
+        //         $tasks = $this->TaskRepository->getByProjectId($projectId);
+        //     }
+        //     return view('tasks.search', compact('tasks'))->render();
+        // }
+        // $project = $this->ProjectRepository->find($id);
+
         if ($request->ajax()) {
-            // dd($request->get('searchValue'));
-            $seachQuery = $request->get('searchValue');
-            $seachQuery = str_replace(' ', '%', $seachQuery);
-            $tasks = $this->TaskRepository->searchTasks($seachQuery);
-            
-            
-            $projectId = $request->get('criteria');
-            if ($projectId) {
-                $tasks = $this->TaskRepository->getByProjectId($projectId);
-            }
-            return view('tasks.search', compact('tasks'))->render();
+
+            // $tasksQuery = $project->tasks();
+            $searchTask = $request->get('searchValue');
+            $searchTask = str_replace(" ", "%", $searchTask);
+
+            Task::where(function ($query) use ($searchTask) {
+                $query->where('name', 'like', '%' . $searchTask . '%')
+                    ->orWhere('description', 'like', '%' . $searchTask . '%');
+            })->paginate(3);
+
+            // $tasks = $tasksQuery->paginate(3);
+
+            return view('task.search', compact('tasks', 'project'))->render();
         }
     
         $projects = $this->ProjectRepository->getData();
