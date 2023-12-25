@@ -29,11 +29,11 @@ class TaskRepository extends BaseRepository{
     }
 
     
-    public function searchTasks($searchValue, $perPage = 4)
+    public function searchTasks($searchTask, $perPage = 4)
     {
-        return $this->model
-            ->where('name', 'LIKE', '%' . $searchValue . '%')
-            ->orWhere('description', 'LIKE', '%' . $searchValue . '%')
-            ->paginate($perPage);
+        return Task::where(function ($query) use ($searchTask) {
+            $query->where('name', 'like', '%' . $searchTask . '%')
+                ->orWhere('description', 'like', '%' . $searchTask . '%');
+        })->paginate($perPage);
     }
 }
