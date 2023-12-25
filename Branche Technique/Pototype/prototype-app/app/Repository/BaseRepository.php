@@ -15,7 +15,7 @@ abstract class BaseRepository {
     abstract public function getFieldData(): array;
     abstract public function model(): string;
 
-    public function getData($perPage = 10)
+    public function getData($perPage = 4)
     {
         return $this->model->paginate($perPage);
     }
@@ -46,6 +46,7 @@ abstract class BaseRepository {
    
     public function destroy($id){    
       
+        dd($this->model->destroy($id));
         return $this->model->destroy($id);
     }
     
